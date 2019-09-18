@@ -1,0 +1,87 @@
+@charset "UTF-8";
+
+.href a:link {text-decoration: none; color: grey;}
+.href a:visited {text-decoration: none; color: grey;}
+.href a:active {text-decoration: none; color: grey;}
+.href a:hover {text-decoration: underline; color: #886e45;}
+
+.join_title_div {margin-top: 30px; width: 960px; height: 90px;}
+.join_title_left {float: left; width: 150px; height: 90px; line-height: 170px; vertical-align: bottom;}
+.join_title_right {float: right; height: 90px;}
+
+.joinTable {padding-top: 20px; line-height: 25px;}
+.joinTable input {border: 1px solid #d5d5d5; height: 23px; font-size: 10pt;}
+.joinTable table {margin-top: 10px; font-family: 맑은고딕; border-collapse: collapse;}
+.joinTable tr {border-bottom: 1px solid #d5d5d5; border-top: 1px solid #d5d5d5; text-align: left; height: 45px;}
+.joinTable th {background-color: #fafafa; width: 150px; padding-left: 10px}
+.joinTable td {padding-left: 10px; width: 700px;}
+.joinTable_select {font-size: 10pt; height: 22px;}
+.joinTable_sub_title {font-size: 14pt; font-weight: bold; font-family: 맑은고딕;}
+.join_ok_btn {color: #555555; background-color: #d1d1d1; border: 1px solid #d5d5d5; height: 40px; width: 120px; font-size: 13pt; font-weight: bold; cursor: pointer;}
+.join_ok_btn:hover {color: #555555; background-color: #fafafa; border: 2px solid #d5d5d5; height: 40px; width: 120px; font-size: 13pt; font-weight: bold; cursor: pointer;}
+.join_cancel_btn {color: #555555; background-color: #fafafa; border: 1px solid #d5d5d5; height: 40px; width: 120px; font-size: 13pt; font-weight: bold; cursor: pointer;}
+.join_cancel_btn:hover {border: 2px solid #d5d5d5;}
+
+.findIdTable table {margin-top: 20px; font-size: 10pt; border-collapse: collapse;}
+.findIdTable tr {border-bottom: 1px solid #d5d5d5; border-top: 1px solid #d5d5d5; text-align: left; height: 45px;}
+.findIdTable th {background-color: #fafafa; width: 150px; padding-left: 10px}
+.findIdTable td {padding-left: 10px; width: 700px;}
+
+.findPwdTable table {margin-top: 20px; font-size: 10pt; border-collapse: collapse;}
+.findPwdTable tr {border-bottom: 1px solid #d5d5d5; border-top: 1px solid #d5d5d5; text-align: left; height: 45px;}
+.findPwdTable th {background-color: #fafafa; width: 150px; padding-left: 10px}
+.findPwdTable td {padding-left: 10px; width: 700px;}
+
+#join_agree {margin: 0 auto; width: 960px;}
+#join_agree .join_up_div {width: 960px; border-bottom: 2px solid #000; height: 95px; margin-top: 20px;}
+#join_agree .join_up_div .left_div {float: left; height: 50px; padding-top: 40px;}
+#join_agree .join_up_div .right_div {float: right;}
+
+.agree_last_box .agree_ok_btn {color: #555555; background-color: #d1d1d1; border: 1px solid #d5d5d5; height: 40px; width: 120px; font-size: 13pt; font-weight: bold; cursor: pointer;}
+.agree_last_box .agree_ok_btn:hover {color: #555555; background-color: #fafafa; border: 2px solid #d5d5d5; height: 40px; width: 120px; font-size: 13pt; font-weight: bold; cursor: pointer;}
+.agree_last_box .agree_cancel_btn {color: #555555; background-color: #fafafa; border: 1px solid #d5d5d5; height: 40px; width: 120px; font-size: 13pt; font-weight: bold; cursor: pointer;}
+.agree_last_box .agree_cancel_btn:hover {border: 2px solid #d5d5d5;}
+.agree_more_btn {background-color: #fafafa; border: 1px solid #d1d1d1; cursor: pointer; height: 27px; width: 80px;}
+.agree_more_btn:hover {background-color: #fafafa; border: 1px solid #d5d5d5; cursor: pointer; height: 23px;}
+
+.agree_all_div {font-family: 맑은고딕;}
+.agree_title {margin-top: 20px; padding-left: 10px;}
+.agree_main_box {border-bottom: 1px solid #d1d1d1; border-top: 2px solid #d1d1d1; width: 960px; padding: 20px; margin-top: 10px; font-size: 12pt;}
+.agree_sub_box {width: 960px; padding: 15px; padding-left: 35px; margin-bottom: 15px; font-size: 10pt;}
+.agree_additional_box {width: 960px; padding: 15px; padding-left: 35px; margin-bottom: 15px; font-size: 10pt;}
+.agree_last_box {width: 960px; padding: 10px; margin-top: 30px; text-align: center; border-top: 2px solid #d1d1d1;}
+
+.login_div {width: 940px; border: 5px solid #f8f8f8; height: 350px; font-family: 맑은고딕; margin-top: 30px; margin-left: 10px;}
+.login_left_div {float: left; width: 430px; padding: 70px 40px 30px 70px;}
+.login_right_div {float: left; padding: 30px;}
+.login_under_div {padding-left: 70px; padding-bottom: 5px; clear: both; margin-top: 30px;}
+.href {clear: both; text-align: right; padding-right: 10px; font-size: 10pt;}
+.login_message {color: #ea5759; font-weight: bold; margin-bottom: 10px;}
+
+.login_btn {height: 100px; width: 100px; color: white; background-color: #886e45; border: none; font-size: 18px; font-weight: bold;}
+#text_pwd2 {color: red;}
+
+.find_id ul, li{margin: 0; font-size: 10pt;}
+.find_id a {color: black; text-decoration: none;}
+.find_id a:hover {color: #886e45; text-decoration: underline;}
+.find_id_okBtn {color: white; background-color: #af9883; border: 1px solid #af9883; width: 80px; height: 30px; cursor: pointer; font-weight: bold;}
+.find_id_okBtn:hover {color: white; background-color: #af9883; border: 1px solid #947558; font-weight: bold;}
+.find_id_to_login {color: white; background-color: #af9883; border: 1px solid #af9883; width: 80px; height: 30px; cursor: pointer; font-weight: bold;}
+.find_id_to_login:hover {color: white; background-color: #af9883; border: 1px solid #947558; font-weight: bold;}
+.find_id_cancelBtn {color: white; background-color: #d5d5d5; border: 1px solid #d5d5d5; width: 80px; height: 30px; cursor: pointer; font-weight: bold;}
+.find_id_cancelBtn:hover {color: white; background-color: #d5d5d5; border: 1px solid #d1d1d1; width: 80px; height: 30px; cursor: pointer; font-weight: bold;}
+.finded_id {font-size: 11pt; color: #DE7110; font-weight: bold; display: block; clear: both; margin-bottom: 20px; margin-top: 20px;}
+
+.find_pwd ul, li{margin: 0; font-size: 10pt;}
+.find_pwd a {color: black; text-decoration: none;}
+.find_pwd a:hover {color: #886e45; text-decoration: underline;}
+.find_pwd_okBtn {color: white; background-color: #af9883; border: 1px solid #af9883; width: 80px; height: 30px; cursor: pointer; font-weight: bold;}
+.find_pwd_okBtn:hover {color: white; background-color: #af9883; border: 1px solid #947558; font-weight: bold;}
+.find_pwd_cancelBtn {color: white; background-color: #d5d5d5; border: 1px solid #d5d5d5; width: 80px; height: 30px; cursor: pointer; font-weight: bold;}
+.find_pwd_cancelBtn:hover {color: white; background-color: #d5d5d5; border: 1px solid #d1d1d1; width: 80px; height: 30px; cursor: pointer; font-weight: bold;}
+.joinTable_select {font-size: 10pt; height: 22px;}
+.find_pwd_back {color: white; background-color: #af9883; border: 1px solid #af9883; width: 100px; height: 30px; cursor: pointer; font-weight: bold; display: block; text-decoration: none; line-height: 20pt; margin: 0 auto;}
+.find_pwd_back a{text-decoration: none; color: white;}
+.find_pwd_back:hover {text-decoration: none; color: white;}
+.findPwdTable_div {text-align: center;}
+

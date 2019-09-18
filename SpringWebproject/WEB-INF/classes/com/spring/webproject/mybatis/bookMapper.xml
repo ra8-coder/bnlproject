@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="bookMapper">
+
+	<!-- 카테고리 아이디 가져오기 -->
+	<select id="getCategoryId" parameterType="String"
+		resultType="int">
+		select categoryId from booksections where isbn = #{isbn}
+	</select>
+
+	<!-- 이전 리뷰 데이터 가져오기 -->
+	<select id="preReadReviewData" parameterType="map"
+		resultType="com.spring.webproject.dto.ReviewDTO">
+		select rownum , data.* , users.username from(
+		
+	<![CDATA[
+		select * from review where isbn = #{isbn} and REVIEWID > #{reviewId} order
+		by reviewId asc) data LEFT JOIN users on data.userid = users.userid
+		where rownum =1 and sentence is null
+	]]>
+	</select>
+
+	<!-- 이후 리뷰 데이터 가져오기 -->
+	<select id="nextReadReviewData" parameterType="map"
+		resultType="com.spring.webproject.dto.ReviewDTO">
+		select rownum , data.* , users.username from(
+		<![CDATA[
+		select * from review where isbn = #{isbn} and REVIEWID < #{reviewId} order by reviewId
+		desc) data LEFT JOIN users on data.userid = users.userid
+		where rownum = 1 and sentence is null
+		]]>
+	</select>
+
+
+	<!-- 한개의 책 데이터 가져오기 -->
+	<select id="getReadBookData" parameterType="String"
+		resultType="com.spring.webproject.dto.BooksDTO">
+		select A.authorId, A.translatorId, A.publisher,
+		A.bookTitle, A.bookPrice, A.isbn, TO_CHAR(A.publishDate,'YYYY-MM-DD')
+		publishDate, A.introduction, A.page, A.subTitle, A.bookSize,
+		A.tableOfContents, B.authorname from books A, author B where isbn =
+		#{isbn} and B.authorid = (select authorid from books where isbn =
+		#{isbn})
+	</select>
+
+	<!-- 작가 정보 가져오기 -->
+	<select id="getReadAuthorData" parameterType="String"
+		resultType="com.spring.webproject.dto.AuthorDTO">
+		select authorname, nationality, category, introduction,
+		image from author where authorid = (select authorid from books where
+		isbn = #{isbn})
+	</select>
+
+	<!-- 미리보기 이미지 가져오기 -->
+	<select id="getReadBookList" parameterType="String"
+		resultType="com.spring.webproject.dto.BooksImageDTO">
+		select * from(
+		select rownum rnum, data.* from(
+		select isbn,
+		bookImage from bookImage where isbn = #{isbn}
+		and bookimage not like('%cover%')
+		order by bookImage asc)
+		data)
+
+	</select>
+
+	<!-- 커버 이미지 가져오기 -->
+	<select id="getReadBookImage" parameterType="String"
+		resultType="String">
+		select bookimage from bookImage where isbn = #{isbn} and
+		BOOKIMAGE like '%cover%'
+	</select>
+
+	<!-- 전체 리뷰 테이블 가져오기 -->
+	<select id="getReadReviewList" parameterType="map"
+		resultType="com.spring.webproject.dto.ReviewDTO">
+		select * from(
+		select rownum rnum, data.* from (
+		select R.isbn,
+		R.reviewId, R.userId, R.reviewTitle,
+		to_char(R.created,'YYYY-MM-DD') as
+		created, R.contents, R.sentence,
+		R.hitCount, U.USERNAME,
+		S.RATE,T.thumbup from review R
+		left join USERS
+		U on
+		U.userid = R.userid
+		left join RATING S on S.USERID = R.USERID and
+		R.isbn = S.isbn
+		left join
+		thumbup T on T.userid = R.userid and
+		R.reviewId = T.reviewId
+		where
+		R.isbn =#{isbn} and R.contents is not
+		null) data)
+		<![CDATA[
+		where rnum >= #{start} and rnum <= #{end}
+	]]>
+	</select>
+
+	<!-- 한개의 리뷰 테이블 가져오기 -->
+	<select id="getReadReviewData" parameterType="int"
+		resultType="com.spring.webproject.dto.ReviewDTO">
+		select R.isbn, R.reviewId, R.userId, R.reviewTitle,
+		to_char(R.created,'YYYY-MM-DD') as created, R.contents, R.sentence,
+		R.hitCount, U.USERNAME, S.RATE,T.thumbup from review R
+		left join USERS
+		U on
+		U.userid = R.userid
+		left join RATING S on S.USERID = R.USERID and
+		S.isbn = R.isbn
+		left join
+		thumbup T on T.userid = R.userid and
+		T.reviewId = R.reviewId
+		where R.reviewId =#{reviewId}
+
+	</select>
+
+	<!-- 간단평 가져오기 -->
+	<select id="getReadSimpleReviewList" parameterType="String"
+		resultType="com.spring.webproject.dto.SimpleReviewDTO">
+		select r.sentence, r.reviewId, r.userName as userName,
+		t.thumbUp from
+		(select r.sentence, r.reviewId, u.userName
+		from (select
+		isbn,reviewId, userid, reviewtitle, contents, sentence,
+		hitcount from
+		review where isbn = #{isbn} and contents is null) r,
+		users u where
+		r.userId = u.userId(+) ) r,
+		thumbup t
+		where
+		r.reviewId = t.reviewId(+)
+
+	</select>
+
+
+
+	<!-- 간단평 입력하기 -->
+	<insert id="insertSimpleReviewData"
+		parameterType="com.spring.webproject.dto.ReviewDTO">
+		insert into review(isbn, reviewId, userId, reviewTitle,
+		created, contents, sentence, hitCount)
+		values(#{isbn}, #{reviewId},
+		#{userId}, null, sysdate, null, #{sentence}, 0)
+	</insert>
+
+	<!-- 간단평 입력2 -->
+	<insert id="insertSimpleReviewData2" parameterType="map">
+		insert into
+		thumbup(userId, reviewId, thumbUp)
+		values(#{userId},#{reviewId},0)
+	</insert>
+
+
+
+	<!-- 리뷰테이블 전체 개수 가져오기 -->
+	<select id="getReviewDataCount" parameterType="String"
+		resultType="int">
+		select nvl(count(*),0) from review where isbn = #{isbn} and
+		contents is not null
+	</select>
+
+	<!-- 간단평 전체 개수 가져오기 -->
+	<select id="getSimpleReivewDataCount" parameterType="String"
+		resultType="int">
+		select nvl(count(*),0) from review where isbn = #{isbn} and
+		sentence is null
+	</select>
+
+	<!-- 리뷰 테이블 num 최대값 가져오기 -->
+	<select id="getReadMaxNum" resultType="int">
+		select nvl(max(reviewId),
+		0) from review
+	</select>
+
+	<!-- 리뷰 입력하기 -->
+	<insert id="insertReviewData"
+		parameterType="com.spring.webproject.dto.ReviewDTO">
+		insert into review(isbn, reviewId, userId, reviewTitle,
+		created, contents, sentence, hitcount)
+		values(#{isbn},#{reviewId},
+		#{userId}, #{reviewTitle}, sysdate, #{contents}, null ,0)
+	</insert>
+
+	<!-- 리뷰 평점 입력하기 -->
+	<insert id="insertReviewRateData" parameterType="map">
+		insert into
+		rating(isbn, userId, rate) values(#{isbn}, #{userId}, #{rate})
+	</insert>
+
+	<insert id="insertReviewThumbUpData" parameterType="map">
+		insert into
+		thumbup(userId, reviewId, thumbUp) values(#{userId}, #{reviewId},0)
+	</insert>
+
+
+	<!-- 도서 재고 정보 가져오기 -->
+	<select id="getWareHouseList" parameterType="String"
+		resultType="com.spring.webproject.dto.WareHouseDTO">
+		select A,B,C,D,E,F,G,H,I,J,K,L,M
+		from quantitylist where
+		isbn =#{isbn}
+	</select>
+
+	<!-- 조회수 수정 -->
+	<update id="updateHitCount" parameterType="int">
+		update review set
+		hitCount = hitCount + 1 where reviewId = #{reviewId}
+	</update>
+
+
+	<!-- 공감수 증가 -->
+	<update id="updateThumbUp" parameterType="int">
+		update thumbup set
+		thumbup = thumbup +1 where reviewId = #{reviewId}
+	</update>
+
+	<!-- 리뷰 작성 확인 -->
+	<select id="getReviewCheck" parameterType="map" resultType="int">
+		select count(*) from review where isbn = #{isbn} and userid =
+		#{userId} and
+		contents is not null
+	</select>
+
+	<!-- 간단평 작성 확인 -->
+	<select id="getSimpleReviewCheck" parameterType="map" resultType="int">
+		select count(*) from review where isbn = #{isbn} and userid =
+		#{userId} and
+		sentence is not null
+	</select>
+
+	<!-- 전체데이터 -->
+	<select id="getLists" parameterType="hashMap"
+		resultType="com.spring.webproject.dto.BookSectionsDTO">
+		select * from (
+		select rownum rnum, data.* from (
+		select * from
+		bookSections
+		where categoryId between ${sort1st } and ${sort2nd }
+		order
+		by soldBookCnt desc
+		) data)
+	<![CDATA[
+	where rnum >= #{start } and rnum <= #{end }
+	]]>
+	</select>
+
+	<!-- getListSort1 -->
+	<select id="getListsSort1" parameterType="hashMap"
+		resultType="com.spring.webproject.dto.BookSectionsDTO">
+		select * from (
+		select rownum rnum, data.* from (
+		select * from
+		bookSections
+		where categoryId between ${sort1st } and ${sort2nd }
+		order
+		by publishDate desc
+		) data)
+	<![CDATA[
+	where rnum >= #{start } and rnum <= #{end }
+	]]>
+	</select>
+
+	<!-- getListSort2 -->
+	<select id="getListsSort2" parameterType="hashMap"
+		resultType="com.spring.webproject.dto.BookSectionsDTO">
+		select * from (
+		select rownum rnum, data.* from (
+		select * from
+		bookSections
+		where categoryId between ${sort1st } and ${sort2nd }
+		)
+		data)
+	<![CDATA[
+	where rnum >= #{start } and rnum <= #{end }
+	]]>
+	</select>
+
+	<!-- getListSort3 -->
+	<select id="getListsSort3" parameterType="hashMap"
+		resultType="com.spring.webproject.dto.BookSectionsDTO">
+		select * from (
+		select rownum rnum, data.* from (
+		select * from
+		bookSections
+		where categoryId between ${sort1st } and ${sort2nd }
+		order
+		by rate desc
+		) data)
+	<![CDATA[
+	where rnum >= #{start } and rnum <= #{end }
+	]]>
+	</select>
+
+	<!-- getListSort4 -->
+	<select id="getListsSort4" parameterType="hashMap"
+		resultType="com.spring.webproject.dto.BookSectionsDTO">
+		select * from (
+		select rownum rnum, data.* from (
+		select * from
+		bookSections
+		where categoryId between ${sort1st } and ${sort2nd }
+		order
+		by reviewCnt desc
+		) data)
+	<![CDATA[
+	where rnum >= #{start } and rnum <= #{end }
+	]]>
+	</select>
+
+	<!-- 카테고리 정보 가져오기 -->
+	<select id="getReadCate" parameterType="int"
+		resultType="com.spring.webproject.dto.CateDTO">
+		select * from BOOKSCATEGORYLIST where categoryId =
+		#{categoryId}
+	</select>
+
+
+	<!-- 카테고리 정보1 가져오기 -->
+	<select id="getReadCateList" parameterType="int"
+		resultType="com.spring.webproject.dto.CateDTO2">
+		select b.CATEGORYID as CATEGORYID_2, b.CATEGORYNAME as
+		CATEGORYNAME_2,a.categoryId as CATEGORYID_3, a.categoryname as
+		CATEGORYNAME_3 from BOOKSCATEGORYLIST b
+		full outer join
+		BOOKSCATEGORYLIST a on a.parentsid = #{categoryId} where
+		b.CATEGORYID =
+		#{categoryId}
+	</select>
+
+	<!-- 카테고리 정보2 가져오기 -->
+	<select id="getReadCateList2" parameterType="int"
+		resultType="com.spring.webproject.dto.CateDTO2">
+		select * from BOOKSCATEGORYLIST where parentsId =
+		#{categoryId}
+	</select>
+
+	<!-- 카테고리 정보3 가져오기 -->
+	<select id="getReadCateList3" parameterType="int"
+		resultType="com.spring.webproject.dto.CateDTO">
+		select * from BOOKSCATEGORYLIST where parentsId =
+		#{categoryId}
+	</select>
+
+	<!-- 카테고리별 베스트 셀러 데이터 -->
+	<select id="getLists_Best" parameterType="hashMap"
+		resultType="com.spring.webproject.dto.BookSectionsDTO">
+		select * from (
+		select rownum rnum, data.* from (
+		select * from
+		bookSections
+		where categoryId between #{cateStart} and #{cateEnd }
+		order by soldBookCnt desc
+		) data)
+	<![CDATA[
+	where rnum >= 1 and rnum <= 10
+	]]>
+	</select>
+
+	<!-- 카테고리별 베스트 셀러(3개) 데이터 -->
+	<select id="getLists_Best3" parameterType="hashMap"
+		resultType="com.spring.webproject.dto.BookSectionsDTO">
+		select * from (
+		select rownum rnum, data.* from (
+		select * from
+		bookSections
+		where categoryId between #{cateStart} and #{cateEnd }
+		order by soldBookCnt desc
+		) data)
+	<![CDATA[
+	where rnum >= 1 and rnum <= 3
+	]]>
+	</select>
+
+	<!-- 카테고리별 새로 나온책 데이터 -->
+
+	<select id="getLists_New" parameterType="hashMap"
+		resultType="com.spring.webproject.dto.BookSectionsDTO">
+		select * from (
+		select rownum rnum, data.* from (
+		select * from
+		bookSections
+		where categoryId between #{cateStart} and #{cateEnd } and
+		publishDate
+		between
+		(trunc(sysdate,'MM')-3) and (LAST_DAY (TRUNC
+		(SYSDATE)) + 1 /
+		24)
+		order by
+		soldBookCnt desc
+		) data)
+	<![CDATA[
+	where rnum >= 1 and rnum <= 10
+	]]>
+	</select>
+
+	<!-- 카테고리별 할인 도서 -->
+	<select id="getLists_Discount" parameterType="hashMap"
+		resultType="com.spring.webproject.dto.BookSectionsDTO">
+		select * from (
+		select rownum rnum, data.* from (
+		select * from
+		bookSections
+		where categoryId between #{cateStart} and #{cateEnd }
+		and
+		discountRate between ${fromDiscount } and ${toDiscount }
+		order by
+		soldBookCnt desc
+		) data)
+	<![CDATA[
+	where rnum >= #{start } and rnum <= #{end }
+	]]>
+	</select>
+
+	<!-- 2) 카테고리별 새로나온도서 개수 -->
+	<select id="getLists_New_Num" parameterType="hashMap"
+		resultType="int">
+		select count(*) from (
+		select rownum rnum, data.* from (
+		select * from
+		bookSections
+		where categoryId between #{cateStart} and
+		#{cateEnd } and publishDate
+		between
+		(trunc(sysdate,'MM')-5) and
+		(LAST_DAY (TRUNC (SYSDATE)) + 1 /
+		24)
+		order by
+		soldBookCnt desc
+		) data)
+
+	</select>
+
+	<!-- 3) 카테고리별 할인도서 개수 -->
+	<select id="getLists_Discount_Num" parameterType="hashMap"
+		resultType="int">
+		select count(*) from (
+		select rownum rnum, data.* from (
+		select * from bookSections
+		where categoryId between #{cateStart} and
+		#{cateEnd }
+		and discountRate between ${fromDiscount } and ${toDiscount
+		}
+		order by soldBookCnt desc
+		) data)
+
+	</select>
+	<!-- 카테고리 마지막 값 가져오기 -->
+	<select id="getCateEnd" parameterType="int" resultType="int">
+		select
+		nvl(MAX(CATEGORYID),#{categoryId}) from BOOKSCATEGORYLIST where
+		parentsid = #{categoryId }
+	</select>
+
+
+
+</mapper>

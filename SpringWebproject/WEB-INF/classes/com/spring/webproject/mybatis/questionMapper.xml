@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="questionMapper">  
+  
+  <!--typeId==0,전체 데이터 갯수  -->
+  <select id="getDataCount" parameterType="hashMap"
+  resultType="int">
+  	select nvl(count(*),0) from questions 
+  	where ${searchKey} like '%' || #{searchValue} || '%'
+  </select>
+  
+  <!--typeId!=0,전체 데이터 갯수  -->
+  <select id="getDataCount2" parameterType="hashMap"
+  resultType="int">
+  	select nvl(count(*),0) from questions a, consultationtype b
+  	where a.${searchKey} like '%' || #{searchValue} || '%' 
+  	 and a.typeId = b.typeId and b.parentsTypeId =#{parentsTypeId}
+  </select>  
+  
+  <!--좌측 자주 찾는 질문 FAO / typeId, type불러오기-->
+  <select id="getList" parameterType="hashMap"
+  resultType="com.spring.webproject.dto.QuestionDTO">
+  select distinct parentsTypeName,parentsTypeId from consultationType where parentstypeId >0
+  </select>  
+  
+  <!--typeId서치 - subTypeId -->
+  <select id="getSubTypeId" parameterType="hashMap"
+  resultType="com.spring.webproject.dto.QuestionDTO">
+  select distinct typeId,typeName from consultationtype where parentsTypeId = #{parentsTypeId} 
+  </select>
+  
+  <!-- FAO게시글 TypeId별로 번호,질문유형,제목,내용 불러오기  -->
+  <select id="getTypeList" parameterType="hashMap"
+   resultType="com.spring.webproject.dto.QuestionDTO">
+  select * from(
+  select rownum rnum,data.* from(
+   select a.questionId, b.parentsTypeName, b.parentsTypeId, b.typeName, b.typeId, a.subject, a.content 
+   from questions a, consultationtype b   
+  where a.${searchKey} like '%' || #{searchValue} || '%' 
+  and a.typeId = b.typeId and b.parentsTypeId = #{parentsTypeId} 
+  order by a.questionId desc) data) 
+  <![CDATA[
+  	where rnum>=#{start} and rnum<=#{end}  
+  ]]>
+  </select>
+  
+  <!-- FAO게시글 TypeId=0,질문유형,제목,내용 불러오기  -->
+  <select id="getType0List" parameterType="hashMap"
+   resultType="com.spring.webproject.dto.QuestionDTO">
+  select * from(
+  select rownum rnum,data.* from(
+  select a.questionId, b.parentsTypeName, b.parentsTypeId, b.typeName, b.typeId, a.subject, a.content 
+  from questions a, consultationtype b 
+  where a.${searchKey} like '%' || #{searchValue} || '%' 
+  and a.typeId = b.typeId
+  order by a.questionId desc) data) 
+  <![CDATA[
+  	where rnum>=#{start} and rnum<=#{end}  
+  ]]>
+  </select>  	
+  
+  <!-- FAO리스트 출력 번호, 질문유형, 제목 (subTypeId서치)  -->
+  <select id="getSubTypeList" parameterType="hashMap"
+  resultType="com.spring.webproject.dto.QuestionDTO">
+  select a.questionId, b.parentsTypeName, b.parentsTypeId, b.typeName, b.typeId, a.subject, a.content 
+	from questions a, consultationtype b
+	where a.typeId = b.typeId and b.typeId = #{typeId}
+  </select>  
+  
+  <!-- 조회수 증가 -->
+  <update id="updateHitCount" parameterType="int">
+  update questions set hitCount=hitCount + 1 where questionId=#{questionId}
+  </update>   
+  
+  <!-- 조회수 TOP10 -->
+  <select id="topView" parameterType="hashMap"
+  resultType="com.spring.webproject.dto.QuestionDTO">	
+  select b.typeId, a.questionId, b.parentsTypeId,a.subject from
+  ( select *  from questions order by hitcount desc) a, consultationType b
+  <![CDATA[
+   where a.typeid = b.typeid and rownum <= 10
+  ]]>
+  </select>
+  
+  <!-- 최근등록 top10 -->
+  <select id="topDate" parameterType="hashMap"
+  resultType="com.spring.webproject.dto.QuestionDTO">
+  select b.typeId, a.questionId, b.parentsTypeId,a.subject from
+  ( select *  from questions order by createDate desc) a, consultationType b
+  <![CDATA[
+  where a.typeId = b.typeId and rownum <= 10
+  ]]>
+  </select>
+  
+  <!--  -->
+  <!--consultId 최대값(1:1상담)  -->
+  <select id="maxNum" resultType="int">
+  	select nvl(max(consultId),0) from consultation
+  </select>
+  
+  <!-- 상담신청 -->
+  <insert id="insertCounsel" parameterType="com.spring.webproject.dto.CounselDTO">
+  	insert into consultation (consultId, userId, userName, email, subject, contents, consultationDate, typeId)
+  	values (#{consultId}, #{userId}, #{userName}, #{email}, #{subject}, #{contents}, sysdate, #{parentsTypeId})
+  </insert>
+  
+  </mapper>
+   

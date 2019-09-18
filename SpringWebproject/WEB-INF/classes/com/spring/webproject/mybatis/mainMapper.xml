@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mainMapper">
+
+<!-- 유사 카테고리 책 -->
+<select id="similCate" parameterType="java.lang.String" resultType="com.spring.webproject.dto.MainDTO">
+	select bookTitle,bookImage.isbn,authorName,bookImage from (
+	select bookTitle,isbn,b.authorName from (
+	select authorId,bookTitle,a.isbn from books a,
+	(select isbn from bookCategory where 
+	categoryId=(select categoryId from bookCategory where isbn=#{isbn}) and isbn!=#{isbn}) b
+	where a.isbn=b.isbn) a, (select authorName,authorId from author) b where a.authorId=b.authorId) a,
+	bookImage where a.isbn=bookImage.isbn and bookImage like '%cover%'
+</select>
+
+<!-- 기대 신간도서(최근 6개월내) -->
+<select id="newBook" parameterType="int" resultType="com.spring.webproject.dto.MainDTO">
+	select * from
+	(select rownum listNum, a.* from
+	(select a.isbn,bookTitle,authorName,bookImage,publishDate from bookImage a,
+	(select isbn,bookTitle,authorName,publishDate from author a,
+	(select a.isbn,bookTitle,authorId,publishDate from books a,
+	(select distinct a.categoryId,isbn,categoryName from bookCategory a,
+	(select distinct a.categoryId, a.categoryName from booksCategoryList a,
+	(select * from (
+	select level, LPAD('',2*(level-1)) || categoryName as categoryName,categoryId as categoryId,connect_by_isleaf as leaf from 
+	booksCategoryList start with parentsId is null and categoryId=#{categoryId} connect by prior categoryId = parentsId) 
+	where leaf=1) b where a.categoryId=b.categoryId) b where a.categoryId=b.categoryId) b 
+	where a.isbn=b.isbn and publishDate>sysdate-180) b where a.authorId=b.authorId) b 
+<![CDATA[ 
+	where a.isbn=b.isbn and bookImage like '%cover%' order by publishDate desc) a) where listNum<=25
+]]>
+</select>
+
+<!-- 기대 신간도서 전체(최근 3개월내) -->
+<select id="newBookAll" resultType="com.spring.webproject.dto.MainDTO">
+	select * from
+	(select rownum listNum, a.* from
+	(select a.isbn,bookTitle,authorName,bookImage,publishDate from bookImage a,
+	(select isbn,bookTitle,authorName,publishDate from author a,
+	(select a.isbn,bookTitle,authorId,publishDate from books a,
+	(select distinct a.categoryId,isbn,categoryName from bookCategory a,
+	(select distinct a.categoryId, a.categoryName from booksCategoryList a,
+	(select * from (
+	select level, LPAD('',2*(level-1)) || categoryName as categoryName,categoryId as categoryId,connect_by_isleaf as leaf from 
+	booksCategoryList start with parentsId is null connect by prior categoryId = parentsId) 
+	where leaf=1) b where a.categoryId=b.categoryId) b where a.categoryId=b.categoryId) b 
+	where a.isbn=b.isbn and publishDate>sysdate-30) b where a.authorId=b.authorId) b 
+<![CDATA[ 
+	where a.isbn=b.isbn and bookImage like '%cover%' order by publishDate desc) a) where listNum<=25
+]]>
+</select>
+
+<!-- 이슈북 -->
+<select id="issueBook" resultType="com.spring.webproject.dto.MainDTO">
+	select bookTitle,authorName,bookImage,a.isbn from bookImage a,
+	(select bookTitle,isbn,authorName from author a,
+	(select a.* from books a,
+	(select * from bookCategory where categoryId=619) b where a.isbn=b.isbn) b 
+	where a.authorId=b.authorId) b 
+	where a.isbn=b.isbn and bookImage like '%cover%'
+</select>
+
+<!-- 베스트셀러 -->
+<select id="bestSeller" resultType="com.spring.webproject.dto.MainDTO">
+	select rownum listNum,isbn,bookTitle,bookImage from (
+	select a.isbn,bookTitle,bookImage,selCnt from bookImage a,(
+	select a.isbn,bookTitle,selCnt from books a,(
+	select sum(quantity) selCnt,isbn from orderBooks group by isbn) b 
+	where a.isbn=b.isbn) b where a.isbn=b.isbn and bookImage like '%cover%' order by selCnt desc, bookTitle)
+<![CDATA[
+	where rownum<=10
+]]>
+</select>
+
+<!-- temp 책 정보 가져오기 -->
+<select id="tempBook" resultType="com.spring.webproject.dto.MainDTO">
+	select bookTitle,a.isbn,authorName,bookImage from bookImage a,
+	(select bookTitle,isbn,authorName from author a,
+	(select * from books where isbn=#{isbn}) b where a.authorid=b.authorid) b where a.isbn=b.isbn and bookImage like '%cover%'
+</select>
+
+<!-- 오늘 본 상품 책 정보 -->
+<select id="todayView" parameterType="java.lang.String" resultType="com.spring.webproject.dto.MainDTO">
+	select a.isbn,bookTitle,authorName,bookImage from bookImage a,
+	(select isbn,bookTitle,authorName from author a,
+	(select * from books where isbn=#{isbn}) b where a.authorId=b.authorId) b where a.isbn=b.isbn and bookImage like '%cover%'
+</select>
+
+<!-- 매장정보 가져오기 -->
+<select id="storeInfo" parameterType="java.lang.Integer" resultType="com.spring.webproject.dto.StoreDTO">
+	select * from warehouse where warehouseId=#{warehouseId}
+</select>
+
+<!-- 매장 이미지 가져오기 -->
+<select id="storeImage" parameterType="java.lang.Integer" resultType="com.spring.webproject.dto.StoreDTO">
+	select image from warehouseImage where warehouseId=#{warehouseId}
+</select>
+
+<!-- 로그인시 오늘 본 상품 -->
+<select id="todayLogin" parameterType="java.lang.String" resultType="com.spring.webproject.dto.MainDTO">
+	select b.*, bookImage from bookImage a,
+	(select isbn,bookTitle,authorName from author a,
+	(select a.isbn,bookTitle,authorId from books a,
+	(select isbn from recentList where userId=#{userId} and viewDate>to_char(sysdate,'YYYY-MM-DD') order by viewDate desc) b 
+	where a.isbn=b.isbn) b where a.authorId=b.authorId) b 
+	where a.isbn=b.isbn and bookImage like '%cover%'
+</select>
+
+<!-- 로그인시 최근 본 상품 -->
+<select id="recentLogin" parameterType="java.lang.String" resultType="com.spring.webproject.dto.MainDTO">
+	select b.*, bookImage from bookImage a,
+	(select isbn,bookTitle,authorName from author a,
+	(select a.isbn,bookTitle,authorId from books a,
+	(select isbn from recentList where userId=#{userId} order by viewDate desc) b 
+	where a.isbn=b.isbn) b where a.authorId=b.authorId) b 
+	where a.isbn=b.isbn and bookImage like '%cover%'
+</select>
+
+<!-- 자주묻는 질문 -->  
+ <select id="topView" parameterType="hashMap" resultType="com.spring.webproject.dto.QuestionDTO">	
+	select b.typeId, a.questionId, b.parentsTypeId,a.subject from
+	( select *  from questions order by hitcount desc) a, consultationType b
+<![CDATA[
+	where a.typeid = b.typeid and rownum <= 6
+]]>
+</select>
+
+<!-- 정가인하 도서 2개뽑기 -->
+<select id="dcBook" resultType="com.spring.webproject.dto.BookSectionsDTO">
+	select * from (
+	select rownum rnum, data.* from (
+	select bookTitle,bookImage,authorName,isbn,bookPrice,discountedPrice from bookSections
+	order by dbms_random.value
+	) data)
+<![CDATA[
+	where rnum <= 2
+]]>
+</select>
+
+</mapper>

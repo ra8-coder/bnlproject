@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="searchMapper">
+
+<!-- 책 검색 리스트 -->
+<select id="getSearchBook" parameterType="hashMap" resultType="com.spring.webproject.dto.SearchDTO">
+ select * from(
+ select rownum rnum,data.* from(
+ select a.isbn,a.booktitle,a.subtitle,a.publisher,a.publishDate,a.bookprice,b.authorName, c.bookImage
+ from books a, author b, bookimage c
+ where a.booktitle like '%' || #{searchValue} || '%' and
+ b.authorId = a.authorId and c.bookimage like '%cover%' and a.isbn = c.isbn  ) data)
+ <![CDATA[
+ where rnum>=#{start} and rnum<=#{end}  
+ ]]>
+</select>
+
+<!-- 제목,카테고리 책 검색 리스트 -->
+<select id="getCategoryBook" parameterType="hashMap" resultType="com.spring.webproject.dto.SearchDTO">
+ select * from(
+ select rownum rnum,data.* from(
+ select a.isbn,a.booktitle,a.subtitle,a.publisher,a.publishDate,a.bookprice,b.authorName, c.bookImage
+ from books a, author b, bookimage c, bookcategory d
+ where a.booktitle like '%' || #{searchValue} || '%' and
+ b.authorId = a.authorId and c.bookimage like '%cover%' and  a.isbn = c.isbn 
+ and a.isbn = d.isbn and d.categoryid=#{categoryId} ) data)
+  <![CDATA[
+ where rnum>=#{start} and rnum<=#{end}  
+ ]]>
+</select>
+
+
+<!-- 책 검색 데이터 갯수 -->
+<select id="getBookCount" parameterType="hashMap"  resultType="int">
+ select nvl(count(*),0) from books 
+ where booktitle like '%' || #{searchValue} || '%'
+</select>
+
+<!--  -->
+<select id="getBookCount2" parameterType="hashMap"  resultType="int">
+  select nvl(count(*),0) from books a, bookcategory b
+ where a.booktitle like '%' || #{searchValue} || '%' 
+ and a.isbn = b.isbn and b.categoryid=#{categoryId}
+</select>
+
+
+<!-- 자동검색 -->
+<select id="getBookTitle" parameterType="hashMap" resultType="com.spring.webproject.dto.SearchDTO">
+ select booktitle,isbn from books
+ where booktitle like '%' || #{searchValue} || '%' 
+</select>
+
+
+<!--카테고리 리스트  -->
+<select id="getCategory" parameterType="hashMap" resultType="com.spring.webproject.dto.SearchDTO">
+select  c.categoryName,count(*) categortCount, c.categoryId from
+books a, bookCategory b, booksCategoryList c
+where a.bookTitle like '%' || #{searchValue} || '%' and a.isbn = b.isbn and b.categoryId = c.categoryId
+group by c.categoryname,c.categoryId
+</select>
+
+
+
+</mapper>

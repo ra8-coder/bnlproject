@@ -1,0 +1,165 @@
+/************************************************************************
+ * ÆÄÀÏ¸í      : base.css
+ * ¼³¸í        : 
+ * ÀÛ¼ºÀÚ      : ÀÌ¼ö¿¬
+ * ÀÛ¼ºÀÏ      : 2008.04.01
+************************************************************************/
+@import "layout.css";
+@import "class.css";
+@import "font.css";
+
+*		{margin:0; padding:0;}
+html	{height:100%; _overflow:hidden;}
+body	{width:100%; height:100%;}
+
+
+img			{border:0; vertical-align:top;}
+ul		{list-style:none; vertical-align:top;}
+li		{vertical-align:top;}
+li img		{vertical-align:top;}
+
+h1, h2, h3, 
+h4, h5, h6	{}
+
+/* form */
+form		{margin:0; padding:0;}
+input		{height:13px; border:1px solid #D0C3A9; padding:3px 12px 0 4px; vertical-align:middle;}
+input.chk	{width:12px; height:12px; border:0; background:transparent;}
+textarea	{border:1px solid #D0C3A9;}
+textarea.style01	 {padding:3px 8px}
+select		{vertical-align:middle;}
+
+button{border:0;cursor:pointer}
+
+/* rollover */
+a.rollover img				{display:inline;}
+a.rollover img.over			{display:none;} 
+a.rollover img.on			{display:none;} 
+a.rollover:hover			{border:0; cursor:pointer}
+a.rollover:hover img		{display:none;}
+a.rollover:hover img.over	{display:inline;}
+a.rollover:hover img.on		{display:none;}
+
+/* font */
+.t_sale	{text-decoration:line-through}
+
+/* letter-spacing */
+.lspM	{letter-spacing:-0.05em}
+
+/* Á¤·Ä */
+.fl_left	{float:left;}
+.fl_right	{float:right;}
+.fl_clear	{clear:both;}
+.fl_clear2	{clear:both; width:100%; overflow:auto; overflow:hidden}
+
+.al_left	{text-align:left}
+.al_center	{text-align:center}
+.al_right	{text-align:right}
+.al_top		{vertical-align:top;}
+.al_middle	{vertical-align: middle}
+.al_bottom	 {vertical-align:baseline}
+.al_btm		{vertical-align:bottom}
+
+.hand		{cursor:pointer}
+.overflow	{overflow:auto; overflow:hidden;}
+.none		{display:none;}
+.pos_rel	 {position:relative}
+
+/* margin * padding */
+.mt1m	{margin-top:-1px;}
+.mt8m	{margin-top:-8px;}
+.mt10m	{margin-top:-10px;}
+.mt23m	{margin-top:-23px;}
+.mt0	{margin-top:0px;}
+.mt1	{margin-top:1px}
+.mt2	{margin-top:2px}
+.mt3	{margin-top:3px}
+.mt5	{margin-top:5px;}
+.mt7	{margin-top:7px;}
+.mt10	{margin-top:10px;}
+.mt12	{margin-top:12px;}
+.mt15	{margin-top:15px;}
+.mt20	{margin-top:20px;}
+.mt25	{margin-top:25px;}
+.mt30	{margin-top:30px;}
+.mt35	{margin-top:35px;}
+.mt40	{margin-top:40px;}
+.mt50	{margin-top:50px;}
+.mt60	{margin-top:60px}
+.mt80	{margin-top:80px}
+
+.mb5	{margin-bottom:5px;}
+.mb7	{margin-bottom:7px;}
+.mb10	{margin-bottom:10px;}
+.mb15	{margin-bottom:15px;}
+.mb20	{margin-bottom:20px;}
+.mb25	{margin-bottom:25px;}
+.mb30	{margin-bottom:30px;}
+.mb40	{margin-bottom:40px;}
+
+.ml5	{margin-left:5px;}
+.ml10	{margin-left:10px;}
+.ml15	{margin-left:15px;}
+.ml20	{margin-left:20px;}
+.ml30	{margin-left:30px;}
+.ml35	{margin-left:35px;}
+.ml45	{margin-left:45px;}
+.ml50	{margin-left:50px}
+
+.mr0	{margin-right:0px;}
+.mr1	{margin-right:1px;}
+.mr3	{margin-right:3px;}
+.mr5	{margin-right:5px;}
+.mr10	{margin-right:10px;}
+.mr15	{margin-right:15px;}
+.mr20	{margin-right:20px;}
+.mr30	{margin-right:30px;}
+.mr40	{margin-right:40px;}
+
+.pt0	{padding-top:0px;}
+.pt3	{padding-top:3px;}
+.pt5	{padding-top:5px;}
+.pt10	{padding-top:10px;}
+.pt15	{padding-top:15px;}
+.pt20	{padding-top:20px;}
+.pt30	{padding-top:30px;}
+
+.pb5	{padding-bottom:5px;}
+.pb10	{padding-bottom:10px;}
+.pb15	{padding-bottom:15px;}
+.pb20	{padding-bottom:20px;}
+
+.pl5	{padding-left:5px;}
+.pl10	{padding-left:10px;}
+.pl15	{padding-left:15px;}
+.pl16	{padding-left:16px;}
+.pl20	{padding-left:20px;}
+.pl70	{padding-left:70px;}
+
+.pr5	{padding-right:5px;}
+.pr10	{padding-right:10px;}
+.pr15	{padding-right:15px;}
+.pr20	{padding-right:20px;}
+
+/* png */
+/*.png24 {tmp:expression(setPng24(this));}*/
+
+/* width */
+.w745	{width:745px;}
+.w750	{width:750px;}
+
+/* border */
+.bordB0	{border-bottom:0px;}
+
+.clfix:after	{content: "."; display: block; height: 0px; clear: both; visibility: hidden;}
+.clfix			{display: inline-block;}
+.clfix			{display: block;}
+* html .clfix	{height: 1%;} /* Hides from IE-mac */
+.clfix			{zoom:1;} /*for IE 5.5-7*/
+
+/*¾ÆÀÌÁÁ¾Æ,°ø°¨*/
+.ilike{display:inline-block;}
+.ilike .btn_ilike{display:inline-block;width:66px;height:19px;background:url(/bandi_blog/images/common/ico_ilike_comm.gif) no-repeat 0 2px;padding:0 0 0 14px;font:normal 12px µ¸¿ò; color:#777;vertical-align:top}
+.ilike .btn_ilike:hover{background:url(/bandi_blog/images/common/ico_ilike_comm_on.gif) no-repeat 0 2px;}
+.ilike .on{background:url(/bandi_blog/images/common/ico_ilike_comm_on.gif) no-repeat 0 2px;}
+.ilike .ilike_count{display:inline-block;font:normal 12px verdana,µ¸¿ò; color:#777;width:20px;height:19px;text-align:left;vertical-align:middle;}

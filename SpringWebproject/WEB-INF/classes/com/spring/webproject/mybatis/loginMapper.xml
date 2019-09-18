@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="loginMapper">
+
+<!-- 아이디 중복검사 -->
+<select id="idOverlapCheck" parameterType="java.lang.String" resultType="com.spring.webproject.dto.UserDTO">
+	select * from users where userId=#{userId}
+</select>
+
+<!-- 회원가입 성공 -->
+<insert id="joinMember" parameterType="com.spring.webproject.dto.UserDTO">
+	insert into users(userId,userPwd,userName,birth,phone,email,emailReception,smsReception,nickName,zipCode,address1,address2,addTel,memberGrade)
+	values(#{userId},#{userPwd},#{userName},#{birth},#{phone},#{email},#{emailReception},#{smsReception},#{nickName},#{zipCode},#{address1},#{address2},#{addTel},#{memberGrade})
+</insert>
+
+<!-- 로그인 -->
+<select id="login" parameterType="map" resultType="com.spring.webproject.dto.UserDTO">
+	select userId,userName,to_char(birth,'YYYY-MM-DD') birth, phone, email, emailReception, smsReception, nickName, zipCode, address1, address2, addTel, memberGrade 
+	from users where userId=#{userId} and userPwd=#{userPwd}
+</select>
+
+<!-- 최근 본 상품 중복 검색 -->
+<select id="checkRecentBook" parameterType="map" resultType="int">
+	select nvl(count(*),0) from recentlist where userId=#{userId} and isbn=#{isbn}
+</select>
+
+<!-- 로그인 시 최근 본 상품 쿠키+DB -->
+<insert id="recentBookAdd" parameterType="map">
+	insert into recentlist values(#{userId},#{isbn},systimestamp)
+</insert>
+
+<!-- 최근 본 상품 본 시간 update -->
+<update id="updateRecentBookTime" parameterType="map">
+	update recentlist set viewDate=systimestamp where userId=#{userId} and isbn=#{isbn}
+</update>
+
+<!-- 적립금 pointId 찾기 -->
+<select id="getPointId" resultType="int">
+	select nvl(max(pointId),0) from point
+</select>
+
+<!-- 신규가입 적립금 적립 -->
+<insert id="joinPointSaving" parameterType="map">
+	insert into point(userId, savingDate, expirationDate,value,pointItem,pointId,leftValue)
+	values(#{userId}, sysdate, to_date(to_char(sysdate+30,'YYYY-MM-DD ') || '23:59:59','YYYY-MM-DD HH24:MI:SS'),1000,#{pointItem},#{pointId},1000)
+</insert>
+
+<!-- 아이디 찾기 -->
+<select id="findUserId" parameterType="com.spring.webproject.dto.UserDTO" resultType="java.lang.String">
+	select userId from users where userName=#{userName} and to_char(birth,'YYYY-MM-DD')=#{birth} and phone=#{phone} and email=#{email}
+</select>
+
+<!-- 비밀번호 찾기 -->
+<select id="findUserPwd" parameterType="com.spring.webproject.dto.UserDTO" resultType="com.spring.webproject.dto.UserDTO">
+	select * from users where userId=#{userId} and userName=#{userName} and to_char(birth,'YYYY-MM-DD')=#{birth} and phone=#{phone} and email=#{email}
+</select>
+
+<!-- 임시 비밀번호 저장 -->
+<update id="tempPwd" parameterType="map">
+	update users set userPwd=#{userPwd} where userId=#{userId}
+</update>
+
+<!-- 적립금 불러오기 -->
+<select id="getPointValue" parameterType="java.lang.String" resultType="int">
+	select nvl(sum(leftValue),0) from point where userId=#{userId}
+</select>
+
+<!-- 상담내역 가져오기 -->
+<select id="getCounselCount" parameterType="java.lang.String" resultType="int">
+	select nvl(count(*),0) from consultation where userId=#{userId} and consultationdate between sysdate-14 and sysdate
+</select>
+
+<!-- 핸드폰 중복 검사 -->
+<select id="phoneOverlapCheck" parameterType="java.lang.String" resultType="int">
+	select count(*) from users where phone=#{phone}
+</select>
+
+</mapper>

@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="myShopping">
+
+<!-- 적립금 불러오기 -->
+<select id="getPointValue" parameterType="java.lang.String" resultType="int">
+	select nvl(sum(leftValue),0) from point where userId=#{userId}
+</select>
+
+<!-- 위시리스트 권수 -->
+<select id="getWishCount" parameterType="java.lang.String" resultType="int">
+select nvl(count(*),0) from wishList where userId=#{userId}
+</select>
+
+<!-- 최근 본 상품 권수 -->
+<select id="getRecentCount" parameterType="java.lang.String" resultType="int">
+select nvl(count(*),0) from recentList where userId=#{userId}
+</select>
+
+<!-- 패스워드 검사 -->
+<select id="getUserPwd" parameterType="java.lang.String" resultType="java.lang.String">
+select userPwd from users where userId=#{userId}
+</select>
+
+<!-- 회원정보 수정 -->
+<update id="updateUserInfo" parameterType="com.spring.webproject.dto.UserDTO">
+update users set nickName=#{nickName}, zipCode=#{zipCode}, address1=#{address1}, address2=#{address2}, 
+email=#{email}, phone=#{phone}, addTel=#{addTel}, emailReception=#{emailReception}, smsReception=#{smsReception} where userId=#{userId}
+</update>
+
+<!-- 회원정보 검색 -->
+<select id="getUserInfo" parameterType="java.lang.String" resultType="com.spring.webproject.dto.UserDTO">
+select userId,userName,to_char(birth,'YYY-MM-DD') birth, phone, email, emailReception, smsReception, nickName, zipCode, address1, address2, addTel, memberGrade 
+from users where userId=#{userId}
+</select>
+
+<!-- 비밀번호 변경 -->
+<update id="updatePwd" parameterType="map">
+update users set userPwd=#{userPwd} where userId=#{userId}
+</update>
+
+<!-- 회원 탈퇴 전 주문상태 확인 -->
+<select id="checkOrderStatus" parameterType="java.lang.String" resultType="int">
+select nvl(count(*),0) from orders where orderstatuscode in (1,2,4) and userId=#{userId}
+</select>
+
+<!-- 회원 탈퇴 -->
+<delete id="memberOut" parameterType="java.lang.String">
+delete users where userId=#{userId}
+</delete>
+
+<!-- 주문/배송 조회 리스트 count -->
+<select id="getCountOrderListNormal" parameterType="java.lang.String" resultType="int">
+select nvl(count(*),0) from orderList where userId=#{userId} and (status='주문' or status='구매완료')
+</select>
+
+<!-- 주문/배송 조회 리스트 -->
+<select id="getOrderList" parameterType="map" resultType="com.spring.webproject.dto.OrderListDTO">
+select * from (select rownum rnum, data.* from (select userid,orderid,orderprice,shipmentsstatuscode,to_char(HANDLINGDATE,'YYYY-MM-DD') HANDLINGDATE,to_char(EXPECTEDDATE,'YYYY-MM-DD') EXPECTEDDATE, status, mainTitle,quantity 
+from orderList where userid=#{userId} and (status='주문' or status='구매완료') order by orderid desc) data) <![CDATA[where rnum>=#{start} and rnum<=#{end}]]>
+</select>
+
+<!-- 주문/배송 조회 리스트 count (날짜 조건) -->
+<select id="getCountOrderListByDate" parameterType="map" resultType="int">
+select nvl(count(*),0) from orderList where userId=#{userId} and (status='주문' or status='구매완료') 
+and handlingdate between to_date(#{fromDate} || '000000', 'YYYY-MM-DD-HH24MISS') and to_date(#{toDate} || '235959' ,'YYYY-MM-DD-HH24MISS')
+</select>
+
+<!-- 주문/배송 조회 리스트 (날짜 조건) -->
+<select id="getOrderListByDate" parameterType="map" resultType="com.spring.webproject.dto.OrderListDTO">
+select * from (select rownum rnum, data.* from (select userId, orderId,orderPrice,shipmentsStatusCode,to_char(HANDLINGDATE,'YYYY-MM-DD') HANDLINGDATE,to_char(EXPECTEDDATE,'YYYY-MM-DD') EXPECTEDDATE, status, mainTitle,quantity 
+from orderList where userId=#{userId} and (status='주문' or status='구매완료') 
+and handlingdate between to_date(#{fromDate} || '000000', 'YYYY-MM-DD-HH24MISS') and to_date(#{toDate} || '235959' ,'YYYY-MM-DD-HH24MISS') order by orderId desc) data) <![CDATA[where rnum>=#{start} and rnum<=#{end}]]>
+</select>
+
+<!-- 주문/배송 조회 리스트 count (이름 및 isbn 조건) -->
+<select id="getCountOrderListByName" parameterType="map" resultType="int">
+select nvl(count(distinct orderId),0) from
+(select orderbooks.orderid, orderbooks.isbn from orderBooks,(select orderId from orderlist where userId=#{userId} and (status='주문' or status='구매완료')) orders where orderbooks.orderId=orders.orderId) userOrders
+inner join books on userOrders.isbn=books.isbn where books.isbn=#{searchValue} or booktitle like '%' || #{searchValue} || '%'
+</select>
+
+<!-- 주문/배송 조회 리스트 (이름 및 isbn 조건) -->
+<select id="getOrderListByName" parameterType="map" resultType="com.spring.webproject.dto.OrderListDTO">
+select * from(select rownum rnum, a.*, booktitle from
+(select orderbooks.isbn, b.* from orderbooks, (select userid,orderid,orderprice,shipmentsstatuscode,to_char(HANDLINGDATE,'YYYY-MM-DD') HANDLINGDATE,to_char(EXPECTEDDATE,'YYYY-MM-DD') EXPECTEDDATE, status, mainTitle,quantity from orderlist where userId=#{userId} and (status='주문' or status='구매완료'))b where orderbooks.orderid=b.orderid order by b.orderid desc)a
+inner join books on a.isbn=books.isbn where books.isbn=#{searchValue} or booktitle like '%' || #{searchValue} || '%') <![CDATA[where rnum>=#{start} and rnum<=#{end}]]>
+</select>
+
+<!-- 취소/반품/교환 내역 리스트 count -->
+<select id="getCountRetListNormal" parameterType="java.lang.String" resultType="int">
+select nvl(count(*),0) from orderList where userId=#{userId} and status not in('주문','구매완료')
+</select>
+
+<!-- 취소/반품/교환 내역 리스트 -->
+<select id="getRetList" parameterType="map" resultType="com.spring.webproject.dto.OrderListDTO">
+select * from (select rownum rnum, data.* from (select userid,orderid,orderprice,shipmentsstatuscode,to_char(HANDLINGDATE,'YYYY-MM-DD') HANDLINGDATE,to_char(EXPECTEDDATE,'YYYY-MM-DD') EXPECTEDDATE, status, mainTitle, quantity 
+from orderList where userid=#{userId} and status not in('주문','구매완료') order by orderid desc) data) <![CDATA[where rnum>=#{start} and rnum<=#{end}]]>
+</select>
+
+<!-- 취소/반품/교환 내역 리스트 count (날짜 조건) -->
+<select id="getCountRetListByDate" parameterType="map" resultType="int">
+select nvl(count(*),0) from orderList where userId=#{userId} and status not in('주문','구매완료') 
+and handlingdate between to_date(#{fromDate} || '000000', 'YYYY-MM-DD-HH24MISS') and to_date(#{toDate} || '235959' ,'YYYY-MM-DD-HH24MISS')
+</select>
+
+<!-- 취소/반품/교환 내역 리스트 (날짜 조건) -->
+<select id="getRetListByDate" parameterType="map" resultType="com.spring.webproject.dto.OrderListDTO">
+select * from (select rownum rnum, data.* from (select userId, orderId,orderPrice,shipmentsStatusCode,to_char(HANDLINGDATE,'YYYY-MM-DD') HANDLINGDATE,to_char(EXPECTEDDATE,'YYYY-MM-DD') EXPECTEDDATE, status, mainTitle,quantity 
+from orderList where userId=#{userId} and status not in('주문','구매완료') 
+and handlingdate between to_date(#{fromDate} || '000000', 'YYYY-MM-DD-HH24MISS') and to_date(#{toDate} || '235959' ,'YYYY-MM-DD-HH24MISS') order by orderId desc) data) <![CDATA[where rnum>=#{start} and rnum<=#{end}]]>
+</select>
+
+<!-- 소멸예정 적립금 조회 -->
+<select id="getExPoint" parameterType="java.lang.String" resultType="int">
+select nvl(sum(leftvalue),0) from point where userid=#{userId} and expirationdate between sysdate and sysdate+60
+</select>
+
+<!-- 적립금 리스트 count -->
+<select id="getCountPointList" parameterType="java.lang.String" resultType="int">
+select nvl(count(*),0) from point where userId=#{userId}
+</select>
+
+<!-- 적립금 리스트 -->
+<select id="getTotalPointList" parameterType="map" resultType="com.spring.webproject.dto.PointDTO">
+select * from (select rownum rnum, data.* from (select to_char(savingdate,'YYYY-MM-DD') savingdate,to_char(expirationdate,'YYYY-MM-DD') expirationdate,orderid,value,leftvalue,pointitem,pointid from point where userid=#{userId} order by savingdate desc, pointid desc) data) <![CDATA[where rnum>=#{start} and rnum<=#{end}]]>
+</select>
+
+<!-- 적립금 리스트 count (날짜 조건) -->
+<select id="getCountPointListByDate" parameterType="map" resultType="int">
+select nvl(count(*),0) from point where userId=#{userId} and savingdate between to_date(#{fromDate} || '000000', 'YYYY-MM-DD-HH24MISS') and to_date(#{toDate} || '235959' ,'YYYY-MM-DD-HH24MISS')
+</select>
+
+<!-- 적립금 리스트 (날짜 조건) -->
+<select id="getPointListByDate" parameterType="map" resultType="com.spring.webproject.dto.PointDTO">
+select * from(select rownum rnum, data.* from (select to_char(savingdate,'YYYY-MM-DD') savingdate,to_char(expirationdate,'YYYY-MM-DD') expirationdate,orderid,value,leftValue,pointitem,pointid from point where userId=#{userId} and savingdate between to_date(#{fromDate} || '000000', 'YYYY-MM-DD-HH24MISS') and to_date(#{toDate} || '235959' ,'YYYY-MM-DD-HH24MISS') order by savingdate desc, pointid desc) data) 
+<![CDATA[where rnum>=#{start} and rnum<=#{end}]]>
+</select>
+
+<!-- 적립금 리스트 count (날짜+적립내역) -->
+<select id="getCountSavePoint" parameterType="map" resultType="int">
+select nvl(count(*),0) from point where userId=#{userId} and <![CDATA[value>0]]> and savingdate between to_date(#{fromDate} || '000000', 'YYYY-MM-DD-HH24MISS') and to_date(#{toDate} || '235959' ,'YYYY-MM-DD-HH24MISS') 
+</select>
+
+<!-- 적립금 리스트 (날짜+적립내역) -->
+<select id="getSavePointList" parameterType="map" resultType="com.spring.webproject.dto.PointDTO">
+select * from(select rownum rnum, data.* from (select to_char(savingdate,'YYYY-MM-DD') savingdate,to_char(expirationdate,'YYYY-MM-DD') expirationdate,orderid,value,pointitem,pointid from point where userId=#{userId} and <![CDATA[ value>0 ]]> and savingdate between to_date(#{fromDate} || '000000', 'YYYY-MM-DD-HH24MISS') and to_date(#{toDate} || '235959' ,'YYYY-MM-DD-HH24MISS') order by savingdate desc, orderid desc, pointid desc) data) 
+<![CDATA[where rnum>=#{start} and rnum<=#{end}]]>
+</select>
+
+<!-- 적립금 리스트 count (날짜+사용내역) -->
+<select id="getCountUsePoint" parameterType="map" resultType="int">
+select nvl(count(*),0) from point where userId=#{userId} and <![CDATA[value<0]]> and savingdate between to_date(#{fromDate} || '000000', 'YYYY-MM-DD-HH24MISS') and to_date(#{toDate} || '235959' ,'YYYY-MM-DD-HH24MISS') 
+</select>
+
+<!-- 적립금 리스트 (날짜+사용내역) -->
+<select id="getUsePointList" parameterType="map" resultType="com.spring.webproject.dto.PointDTO">
+select * from(select rownum rnum, data.* from (select to_char(savingdate,'YYYY-MM-DD') savingdate,to_char(expirationdate,'YYYY-MM-DD') expirationdate,orderid,value,pointitem,pointid from point where userId=#{userId} and <![CDATA[value<0]]> and savingdate between to_date(#{fromDate} || '000000', 'YYYY-MM-DD-HH24MISS') and to_date(#{toDate} || '235959' ,'YYYY-MM-DD-HH24MISS') order by savingdate desc, pointid desc) data)
+ <![CDATA[where rnum>=#{start} and rnum<=#{end}]]>
+</select>
+
+<!-- 주문 상세내역 -->
+<select id="getOrderDetailList" parameterType="java.lang.String" resultType="com.spring.webproject.dto.OrderDetailDTO">
+select orderid, orderbooks.isbn, booktitle, quantity, price, (bookprice*0.05)as point from orderbooks, books where orderbooks.isbn=books.isbn and orderid=#{orderId}
+</select>
+
+<!-- 주문 상세내역 -->
+<select id="getOrderDetailInfo" parameterType="java.lang.String" resultType="com.spring.webproject.dto.OrderListDTO">
+select orderId, orderPrice, point, shipmentsStatusCode, handlingDate, to_char(expectedDate,'YYYY-MM-DD') expectedDate, status, zipCode, address1, address2, recipientName,booksPrice from orderList where orderId=#{orderId}
+</select>
+
+<!-- 주문 취소 -->
+<update id="cancelOrder" parameterType="java.lang.String">
+update orders set orderStatusCode=7 where orderId=#{orderId}
+</update>
+
+<!-- 반품 신청 -->
+<update id="returnOrder" parameterType="java.lang.String">
+update orders set orderStatusCode=2 where orderId=#{orderId}
+</update>
+
+<!-- 구매 완료 -->
+<update id="confirmOrder" parameterType="java.lang.String">
+update orders set orderStatusCode=6 where orderId=#{orderId}
+</update>
+
+<!-- 구매 완료시 적립금 적립 -->
+<insert id="savePoint" parameterType="map">
+insert into point values(#{userId}, sysdate, to_date(to_char(sysdate+365,'YYYY-MM-DD ') || '23:59:59','YYYY-MM-DD HH24:MI:SS'),#{orderId},#{value},'도서구입',#{pointId},#{leftValue})
+</insert>
+
+<!-- 교환 신청 -->
+<update id="exchangeOrder" parameterType="java.lang.String">
+update orders set orderStatusCode=4 where orderId=#{orderId}
+</update>
+
+<!-- 소멸 예정 포인트 리스트 count -->
+<select id="expPointCount" parameterType="java.lang.String" resultType="int">
+select nvl(count(*),0) from point where userid=#{userId} and expirationdate between sysdate and sysdate+60
+</select>
+
+<!-- 소멸 예정 포인트 리스트 -->
+<select id="expPointList" parameterType="map" resultType="com.spring.webproject.dto.PointDTO">
+select * from (select rownum rnum, point.* from (select userid,to_char(savingdate,'YYYY-MM-DD') savingdate, to_char(expirationdate,'YYYY-MM-DD') expirationdate	,orderid,value,pointitem,pointid,leftvalue from point where userid=#{userId} and leftvalue!=0 and expirationdate between sysdate and sysdate+60 order by expirationdate, pointid)point) <![CDATA[where rnum>=#{start} and rnum<=#{end}]]>
+</select>
+
+<!-- 리뷰를 기다리는 책 count -->
+<select id="readyReviewCount" parameterType="java.lang.String" resultType="int">
+select nvl(count(*),0) from (select a.isbn, booktitle from (select distinct isbn from (select orderid from orderlist where userid=#{userId} order by orderid desc) orderlist, orderbooks where orderlist.orderid=orderbooks.orderid) a inner join books on a.isbn=books.isbn
+ minus select b.isbn, booktitle from (select isbn from review where userid=#{userId} and reviewtitle is not null) b inner join books on b.isbn=books.isbn) c, 
+ (select * from bookimage where bookimage like '%cover%') d where c.isbn=d.isbn
+</select>
+
+<!-- 리뷰를 기다리는 책 리스트 -->
+<select id="readyReviewList" parameterType="map" resultType="com.spring.webproject.dto.MyReviewDTO">
+select * from (select rownum rnum, c.*, booktitle, bookimage from (select a.isbn, b.reviewid,b.reviewtitle,b.sentence from (select distinct isbn from(select * from orderbooks) a inner join (select orderid from orderlist where userid=#{userId} order by orderid desc)b on a.orderid=b.orderid
+minus select isbn from (select isbn, nvl(count(isbn),0) reviewcount from review where userid=#{userId} group by isbn) where reviewcount=2) a left join (select * from review where userid=#{userId}) b on a.isbn=b.isbn) c left join
+(select books.isbn,booktitle,bookimage from books left join (select isbn, bookimage from bookimage where bookimage like '%cover%') bookimage on books.isbn=bookimage.isbn) d on c.isbn=d.isbn) <![CDATA[where rnum>=#{start} and rnum<=#{end}]]>
+</select>
+
+<!-- 최근 본 상품 리스트  -->
+<select id="LatesBooksList" parameterType="map" resultType="com.spring.webproject.dto.MainDTO">
+select * from (select rownum rnum, a.* from
+(select * from (select a.isbn,booktitle, authorName, publisher, bookimage, discountedPrice, discountRate, viewdate from
+ (select isbn,to_char(viewdate, 'YYYY-MM-DD HH24:MI:SS.FF6') viewdate from recentList where userId=#{userId}) a, booksections where a.isbn=booksections.isbn order by viewDate desc)) a) 
+<![CDATA[where rnum>=#{start} and rnum<=#{end}]]>
+</select>
+
+<!-- 최근 본 상품 삭제하기 -->
+<delete id="deleteLatesBooks" parameterType="map">
+delete recentList where userId=#{userId} and isbn=#{isbn}
+</delete>
+
+<!-- 리뷰가 있는 책 count -->
+<select id="myReviewCount" parameterType="java.lang.String"  resultType="int">
+select nvl(count(*),0) from review where userId=#{userId} and reviewTitle is not null
+</select>
+
+<!-- 리뷰가 있는 책 리스트 가져오기 -->
+<select id="myReviewList" parameterType="map" resultType="com.spring.webproject.dto.MyReviewDTO">
+select * from (select rownum rnum,a.*, bookTitle,authorName,publisher,publishDate,bookImage from (select a.isbn,a.reviewId,reviewTitle,created,contents,hitCount, thumbup from 
+(select isbn,reviewId,userId,reviewTitle,created,contents,hitCount from review where userId=#{userId} and sentence is null order by created desc) a left join (select reviewid, nvl(sum(thumbup),0) as thumbup  from thumbup group by reviewId)b on a.reviewId=b.reviewId) a,
+booksections where a.isbn=booksections.isbn) <![CDATA[where rnum>=#{start} and rnum<=#{end}]]>
+</select>
+
+<!-- 하나의 리뷰&간단평 가져오기 -->
+<select id="getReviewArticle" parameterType="int" resultType="com.spring.webproject.dto.MyReviewDTO">
+select a.*, bookTitle,authorName,publisher,publishDate,bookImage from (select a.isbn,a.reviewId,reviewTitle,created,contents,hitCount, thumbup,sentence from 
+(select isbn,reviewId,userId,reviewTitle,created,contents,hitCount,sentence from review where reviewId=#{reviewId} order by created desc) a left join (select reviewid, nvl(count(thumbup),0) as thumbup  from thumbup group by reviewId)b on a.reviewId=b.reviewId) a,booksections where a.isbn=booksections.isbn
+</select>
+
+<!-- 리뷰 수정하기 -->
+<update id="reviewUpdate" parameterType="map">
+update review set reviewTitle=#{reviewTitle}, contents=#{contents} where reviewId=#{reviewId}
+</update>
+
+<!-- 위시리스트 가져오기(Default : 최근순) -->
+<select id="getWishListDefault" parameterType="map" resultType="com.spring.webproject.dto.MainDTO">
+select * from (select rownum rnum, a.isbn,booktitle, authorName, publisher, bookimage, discountedPrice, discountRate,wishDate from (select isbn,wishDate from wishList where userId=#{userId}) a, booksections where a.isbn=booksections.isbn order by wishDate desc) <![CDATA[where rnum>=#{start} and rnum<=#{end}]]>
+</select>
+
+<!-- 위시리스트 가져오기(oldDate : 오래된순) -->
+<select id="getWishListOld" parameterType="map" resultType="com.spring.webproject.dto.MainDTO">
+select * from (select rownum rnum, a.isbn,booktitle, authorName, publisher, bookimage, discountedPrice, discountRate,wishDate from (select isbn,wishDate from wishList where userId=#{userId}) a, booksections where a.isbn=booksections.isbn order by wishDate) <![CDATA[where rnum>=#{start} and rnum<=#{end}]]>
+</select>
+
+<!-- 위시리스트 가져오기(Name : 상품명순) -->
+<select id="getWishListName" parameterType="map" resultType="com.spring.webproject.dto.MainDTO">
+select * from (select rownum rnum, a.isbn,booktitle, authorName, publisher, bookimage, discountedPrice, discountRate,wishDate from (select isbn,wishDate from wishList where userId=#{userId}) a, booksections where a.isbn=booksections.isbn order by bookTitle) <![CDATA[where rnum>=#{start} and rnum<=#{end}]]>
+</select>
+
+<!-- 위시리스트 가져오기(HighPrice : 높은가격순) -->
+<select id="getWishListHighPrice" parameterType="map" resultType="com.spring.webproject.dto.MainDTO">
+select * from (select rownum rnum, a.isbn,booktitle, authorName, publisher, bookimage, discountedPrice, discountRate,wishDate from (select isbn,wishDate from wishList where userId=#{userId}) a, booksections where a.isbn=booksections.isbn order by discountedprice desc) <![CDATA[where rnum>=#{start} and rnum<=#{end}]]>
+</select>
+
+<!-- 위시리스트 가져오기(LowPrice : 낮은가격순) -->
+<select id="getWishListLowPrice" parameterType="map" resultType="com.spring.webproject.dto.MainDTO">
+select * from (select rownum rnum, a.isbn,booktitle, authorName, publisher, bookimage, discountedPrice, discountRate,wishDate from (select isbn,wishDate from wishList where userId=#{userId}) a, booksections where a.isbn=booksections.isbn order by discountedprice) <![CDATA[where rnum>=#{start} and rnum<=#{end}]]>
+</select>
+
+<!-- 위시리스트 가져오기(Buy : 구매한 상품만) count -->
+<select id="getWishBuyCount" parameterType="java.lang.String" resultType="int">
+select nvl(count(*),0) from(select rownum rnum,c.isbn,authorname,booktitle,publisher,publishDate,bookimage,discountedPrice,discountRate from(
+select a.isbn from (select isbn from wishlist where userid=#{userId})a inner join (select distinct isbn from orderbooks inner join orders on orderbooks.orderid=orders.orderid where userid=#{userId})b on a.isbn=b.isbn) c inner join booksections on c.isbn=booksections.isbn)
+</select>
+
+<!-- 위시리스트 가져오기(NoBuy : 구매하지 않은 상품만) count -->
+<select id="getWishNoBuyCount" parameterType="java.lang.String" resultType="int">
+select nvl(count(*),0) from (select rownum rnum, a.isbn,authorname,booktitle,publisher,publishDate,bookimage,discountedPrice,discountRate from (
+select isbn from wishlist where userid=#{userId} minus select distinct isbn from orderbooks inner join orders on orderbooks.orderid=orders.orderid where userid=#{userId}) a inner join booksections on a.isbn=booksections.isbn)
+</select>
+
+<!-- 위시리스트 가져오기(Buy : 구매한 상품만) -->
+<select id="getWishListBuy" parameterType="map" resultType="com.spring.webproject.dto.MainDTO">
+select * from(select rownum rnum,c.isbn,authorname,booktitle,publisher,publishDate,bookimage,discountedPrice,discountRate from(
+select a.isbn from (select isbn from wishlist where userid=#{userId})a inner join (select distinct isbn from orderbooks inner join orders on orderbooks.orderid=orders.orderid where userid=#{userId})b on a.isbn=b.isbn) c inner join booksections on c.isbn=booksections.isbn) <![CDATA[where rnum>=#{start} and rnum<=#{end}]]>
+</select>
+
+<!-- 위시리스트 가져오기(NoBuy : 구매하지 않은 상품만) -->
+<select id="getWishListNoBuy" parameterType="map" resultType="com.spring.webproject.dto.MainDTO">
+select * from (select rownum rnum, a.isbn,authorname,booktitle,publisher,publishDate,bookimage,discountedPrice,discountRate from (
+select isbn from wishlist where userid=#{userId} minus select distinct isbn from orderbooks inner join orders on orderbooks.orderid=orders.orderid where userid=#{userId}) a inner join booksections on a.isbn=booksections.isbn) <![CDATA[where rnum>=#{start} and rnum<=#{end}]]>
+</select>
+
+<!-- 위시리스트 중복 검사 -->
+<select id="wishOverlapCheck" parameterType="map" resultType="java.lang.String">
+select isbn from wishList where userId=#{userId} and isbn=#{isbn}
+</select>
+
+<!-- 위시리스트 넣기 -->
+<select id="addWish" parameterType="map">
+insert into wishList(userId,isbn,wishDate) values(#{userId},#{isbn},sysdate)
+</select>
+
+<!-- 위시리스트 삭제 -->
+<delete id="deleteWish" parameterType="map">
+delete wishList where userId=#{userId} and isbn=#{isbn}
+</delete>
+
+<!-- 리뷰&간단평 삭제 -->
+<delete id="deleteReview" parameterType="int">
+delete review where reviewId=#{reviewId}
+</delete>
+
+<!-- 간단평 리스트 count -->
+<select id="sentenceCount" parameterType="java.lang.String" resultType="int">
+select nvl(count(*),0) from review where userId=#{userId} and reviewTitle is null
+</select>
+
+<!-- 간단평 리스트 가져오기 -->
+<select id="getSentenceList" parameterType="map" resultType="com.spring.webproject.dto.MyReviewDTO">
+select * from (select rownum rnum,a.*, bookTitle,authorName,publisher,publishDate,bookImage from (select a.isbn,a.reviewId,created,sentence, thumbup from 
+(select isbn,reviewId,userId,created,sentence from review where userId=#{userId} and reviewTitle is null order by created desc) a left join (select reviewid, nvl(count(thumbup),0) as thumbup  from thumbup group by reviewId)b on a.reviewId=b.reviewId) a,
+booksections where a.isbn=booksections.isbn) <![CDATA[where rnum>=#{start} and rnum<=#{end}]]>
+</select>
+
+<!-- 책 1권 정보 -->
+<select id="readBook" parameterType="java.lang.String" resultType="com.spring.webproject.dto.MyReviewDTO">
+select bookImage, isbn, bookTitle, authorName, publisher, publishDate from booksections where isbn=#{isbn}
+</select>
+
+<!-- reviewId 가져오기 -->
+<select id="getReviewId" resultType="int">
+select nvl(max(reviewId),0)+1 from review
+</select>
+
+<!-- 간단평 등록하기 -->
+<insert id="createSentence" parameterType="map">
+insert into review(isbn,reviewId,userId,created,sentence,hitcount) values(#{isbn},#{reviewId},#{userId},sysdate,#{sentence},0)
+</insert>
+
+<!-- 간단평 수정하기 -->
+<update id="updateSentence" parameterType="map">
+update review set sentence=#{sentence} where reviewId=#{reviewId}
+</update>
+
+<!-- 사용할 포인트 리스트 불러오기 -->
+<select id="getLeftPoint" parameterType="java.lang.String" resultType="hashmap">
+select pointId,leftValue from (select rownum rnum, point.* from (select * from point where userId=#{userId} and leftValue!=0 order by expirationdate, pointid) point) where rnum=1
+</select>
+
+<!-- 포인트 사용 update -->
+<update id="pointUseUpdate" parameterType="map">
+update point set leftValue=${leftValue} where pointId=#{pointId}
+</update>
+
+<!-- 포인트 사용내역 insert -->
+<insert id="usedPointInsert" parameterType="map">
+insert into point(userId,savingdate,expirationdate,orderid,value,pointitem,pointid,leftvalue) 
+values(#{userId},sysdate,sysdate,#{orderId},#{value},'상품구입시 사용',#{pointId},0)
+</insert>
+
+<!-- 주문 취소 포인트 회수 insert -->
+<insert id="canceledOrderPoint" parameterType="map">
+insert into point(userId,savingdate,expirationdate,orderid,value,pointitem,pointid,leftvalue) 
+values(#{userId},sysdate,sysdate,#{orderId},#{value},'주문취소',#{pointId},0)
+</insert>
+
+<!-- 포인트(point table) = pointId(maxNum)  -->
+<select id="maxPointId" resultType="Integer">
+	select nvl(max(pointId),0) from point
+</select>
+
+<!-- 책 결제완료 후 적립금 적립 -->
+<insert id="purchasingPoint" parameterType="map">
+	insert into point(userId, savingDate, expirationDate, orderId, value, pointItem, pointId, leftValue)
+	values(#{userId}, sysdate, to_date(to_char(sysdate+365,'YYYY-MM-DD ') || '23:59:59','YYYY-MM-DD HH24:MI:SS'), #{orderId}, #{value} ,'도서구입 적립', #{pointId}, ${leftValue})
+</insert>
+
+<!-- 배송테이블,상품준비중(shipments table) -->
+<select id="maxShipmentsId" resultType="Integer">
+	select nvl(max(shipmentsId),0) from shipments
+</select>
+
+<!-- 배송테이블 상품준비중 -->
+<insert id="shipmentsStatus" parameterType="map">
+	insert into shipments(shipmentsId, orderId, shipmentsStatusCode, expectedDate)
+	values(#{shipmentsId}, #{orderId}, '상품준비중', to_date(to_char(sysdate+3,'YYYY-MM-DD ') || '23:59:59','YYYY-MM-DD HH24:MI:SS'))
+</insert>
+
+<!-- 1:1 상담내역 리스트 count (all) -->
+<select id="getAllCounselCount" parameterType="java.lang.String" resultType="int">
+select nvl(count(*),0) from consultation where userId=#{userId}
+</select>
+
+<!-- 1:1 상담내역 리스트 (all) -->
+<select id="getAllCounselList" parameterType="map" resultType="com.spring.webproject.dto.CounselDTO">
+select * from (select rownum rnum, consultid,userid,email,subject,contents,to_char(consultationdate,'YYYY-MM-DD') consultationDate,answercheck,typeName as typeid from(
+select * from (select consultId,userId,email,subject,contents,consultationdate, answercheck,typeid 
+from consultation where userId=#{userId} order by consultationdate, consultid desc)a inner join consultationtype on a.typeid=consultationtype.typeid order by consultationdate desc, consultid desc))
+<![CDATA[where rnum>=#{start} and rnum<=#{end}]]>
+</select>
+
+<!-- 1:1상담내역 count (날짜+all) -->
+<select id="getCounselCountByDate" parameterType="map" resultType="int">
+select nvl(count(*),0) from consultation where userId=#{userId} and consultationdate between #{fromDate} and #{toDate}
+</select>
+
+<!-- 1:1상담내역 리스트 (날짜+all) -->
+<select id="getCounselListByDate" parameterType="map" resultType="com.spring.webproject.dto.CounselDTO">
+select * from (select rownum rnum, consultid,userid,email,subject,contents,to_char(consultationdate,'YYYY-MM-DD') consultationDate,answercheck,typeName as typeid from(
+select * from (select consultId,userId,email,subject,contents,consultationdate, answercheck,typeid 
+from consultation where userId=#{userId} and consultationdate between #{fromDate} and #{toDate} order by consultationdate, consultid desc)a inner join consultationtype on a.typeid=consultationtype.typeid order by consultationdate desc, consultid desc))
+<![CDATA[where rnum>=#{start} and rnum<=#{end}]]>
+</select>
+
+<!-- 1:1상담내역 count (답변내역) -->
+<select id="getCounselCountYes" parameterType="map" resultType="int">
+select nvl(count(*),0) from consultation where userId=#{userId} and answercheck is not null and consultationdate between #{fromDate} and #{toDate}
+</select>
+
+<!-- 1:1상담내역 리스트 (답변내역) -->
+<select id="getCounselListYes" parameterType="map" resultType="com.spring.webproject.dto.CounselDTO">
+select * from (select rownum rnum, consultId,userid,email,subject,contents,to_char(consultationdate,'YYYY-MM-DD') consultationDate,answercheck,typeName as typeid from(
+select * from (select consultId,userId,email,subject,contents,consultationdate, answercheck,typeid 
+from consultation where userId=#{userId} and answercheck is not null and consultationdate between #{fromDate} and #{toDate} order by consultationdate, consultid desc)a inner join consultationtype on a.typeid=consultationtype.typeid order by consultationdate desc, consultid desc))
+<![CDATA[where rnum>=#{start} and rnum<=#{end}]]>
+</select>
+<!-- 1:1상담내역 count (미답변내역) -->
+<select id="getCounselCountNo" parameterType="map" resultType="int">
+select nvl(count(*),0) from consultation where userId=#{userId} and answercheck is null and consultationdate between #{fromDate} to #{toDate}
+</select>
+
+<!-- 1:1상담내역 리스트 (미답변내역) -->
+<select id="getCounselListNo" parameterType="map" resultType="com.spring.webproject.dto.CounselDTO">
+select * from (select rownum rnum, consultId,userid,email,subject,contents,to_char(consultationdate,'YYYY-MM-DD') consultationDate,answercheck,typeName as typeid from(
+select * from (select consultId,userId,email,subject,contents,consultationdate, answercheck,typeid 
+from consultation where userId=#{userId} and answercheck is null and consultationdate between #{fromDate} and #{toDate} order by consultationdate, consultid desc)a inner join consultationtype on a.typeid=consultationtype.typeid order by consultationdate desc, consultid desc))
+<![CDATA[where rnum>=#{start} and rnum<=#{end}]]>
+</select>
+
+<!-- 1:1상담내역 내용 가져오기 -->
+<select id="getCounselContents"	parameterType="int" resultType="com.spring.webproject.dto.CounselDTO">
+select * from consultation where consultId=#{consultId}
+</select>
+
+<!-- 포인트id 찾기 -->
+<select id="getSavePointId" parameterType="java.lang.String" resultType="int">
+select pointId from point where orderid=#{orderId} <![CDATA[and value>0]]>
+</select>
+<select id="getUsedPointId" parameterType="java.lang.String" resultType="hashmap">
+select pointId,value from point where orderid=#{orderId} and <![CDATA[leftvalue=0 and value<0]]>
+</select>
+
+<!-- 구매 취소 후 적립금 다시 적립 -->
+<insert id="reSavePoint" parameterType="map">
+insert into point values(#{userId}, sysdate, to_date(to_char(sysdate+365,'YYYY-MM-DD ') || '23:59:59','YYYY-MM-DD HH24:MI:SS'),#{orderId},#{value},'주문취소',#{pointId},#{leftValue})
+</insert>
+
+</mapper>

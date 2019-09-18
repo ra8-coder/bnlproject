@@ -1,0 +1,1065 @@
+/************************************************************************
+ * 파일명      : class.css
+ * 설명        : 공통 CSS
+ * 작성자      : 이수연
+ * 작성일      : 2008.04.04
+************************************************************************/
+
+/* location */
+.location	{position:relative; width:960px; height:45px; background:url('/bandi_blog/images/common/bg_location.gif') no-repeat; z-index:20;}
+.location	a:link		{color:#888888; font:11px 돋움; text-decoration:none;}
+.location	a:visited	{color:#888888; font:11px 돋움; text-decoration:none;}
+.location	a:hover		{color:#8F6A24; font:11px 돋움; text-decoration:underline;}
+.location	a:active	{color:#888888; font:11px 돋움; text-decoration:none;}
+
+.location	a.on:link	{color:#555555; font-weight:bold; text-decoration:none;} 
+.location	a.on:visited	{color:#555555; font-weight:bold; text-decoration:none;}
+.location	a.on:hover		{color:#8F6A24; font-weight:bold; text-decoration:none;}
+.location	a.on:active		{color:#555555; font-weight:bold; text-decoration:none;}
+
+.location	a.over:link		{color:#888888; text-decoration:underline;}
+.location	a.over:visited	{color:#888888; text-decoration:underline;} 
+.location	a.over:hover	{color:#8F6A24; text-decoration:underline;}
+.location	a.over:active	{color:#888888; text-decoration:underline;}	
+
+.location	a.overOn:link	{color:#555555; font-weight:bold; text-decoration:underline;} 
+.location	a.overOn:visited{color:#555555; font-weight:bold; text-decoration:underline;}
+.location	a.overOn:hover	{color:#8F6A24; font-weight:bold; text-decoration:underline;}
+.location	a.overOn:active	{color:#555555; font-weight:bold; text-decoration:underline;}
+
+.location	h1	{float:left; width:195px; margin-top:15px; text-align:center;}
+.location	li			{float:left; margin-top:16px;}
+.location	.ico01		{float:left; margin:16px 0 0 8px;}
+.location	.ico02		{float:left; margin:18px 0 0 5px;}
+
+*html .location	.search	{float:right; margin:12px 7px 0 0;}
+.location	.search		{float:right; margin:12px 16px 0 0;}
+.location	.search	p	{float:left; margin-top:0px;}
+.location	.search	.tit		{padding:6px 9px 0 0;}
+.location	.search	.inputL		{width:4px; height:18px; margin-top:2px; background:url('/bandi_blog/images/common/bg_searchInput_L.gif') no-repeat;}
+.location	.search	input		{width:108px; height:18px; background:url('/bandi_blog/images/common/bg_searchInput.gif') repeat-x; border:0px;}
+:root .location	.search	input	{margin-top:2px;}
+.location	.search	.inputR		{width:18px; height:18px; margin-top:2px; background:url('/bandi_blog/images/common/bg_searchInput_R.gif') no-repeat right 0;}
+
+.location	.sublay	{position:absolute; top:32px; border:2px solid #B7A676; background:#FFFFFF; padding:6px 0 6px 0; z-index:20;}
+.location	.sublay	ul		{float:left; padding-right:20px; border-right:1px solid #E8E4DB;}
+.location	.sublay	ul.alt	{border-right:0px;}
+.location	.sublay	li		{float:none; margin-top:0px; padding:0 0 3px 10px; letter-spacing:-0.05em}
+.location	.sublay	li.alt	{padding-bottom:0px;}
+.location	.sublay	a:link		{color:#555555; font-size:11px;}
+.location	.sublay	a:visited	{color:#555555; font-size:11px;}
+.location	.sublay	a:hover		{color:#8F6A24; font-size:11px; text-decoration:underline;}
+.location	.sublay	a:active	{color:#555555; font-size:11px;}
+
+/* wise cart */
+.wiseCart	{background:url('/bandi_blog/images/common/bg_wiseCart.gif') repeat-y;}
+.wiseCart_body	{width:960px; height:282px; background:url('/bandi_blog/images/common/bg_wiseCart_top.gif') no-repeat 0 top; padding:2px 0 8px 8px;}
+
+#tabAccount	{float:left; background:none; height:28px;}
+#tabAccount	li	{float:left; background:url('/bandi_blog/images/common/bg_wiseCartTab.gif') no-repeat;}
+#tabAccount	li	a	{display:block; height:20px; padding-top:8px; color:#FFFFFF; text-align:center; background:url('/bandi_blog/images/common/bg_wiseCartTabR.gif') no-repeat right 0;}
+#tabAccount	li	a:hover	{text-decoration:none;}
+#tabAccount	li.on	{background:url('/bandi_blog/images/common/bg_wiseCartTab_on.gif') no-repeat; margin-left:-2px;}
+#tabAccount	li.on	a	{background:url('/bandi_blog/images/common/bg_wiseCartTabR_on.gif') no-repeat right 0; color:#A98949;}
+#tabAccount	li.on	a:hover	{text-decoration:none;}
+#tabAccount	li.alt	{margin-left:0px;}
+#tabAC_1	{width:177px;}
+#tabAC_2	{width:135px;}	
+#tabAC_3	{width:155px;}
+#tabAC_4	{width:160px;}
+#tabAC_5	{width:129px;}
+#tabAccount	.on	a	img	{display:none}
+#tabAccount	.on	a	img.rollover	{display:inline}
+
+.wiseCart_body	.layTop	{position:relative; width:940px; height:28px;}
+.wiseCart_body	.layTop	.icon	{float:left; margin:5px 0 0 15px;}
+.wiseCart_body	.layTop	.btn_close	{position:absolute; top:5px; right:13px;}
+*html .wiseCart_body	.layTop	.btn	{margin-right:5px;}
+
+.wiseCart_body	.layCon	{width:100%; z-index:5}
+
+.wise_cart	div
+	{
+	scrollbar-face-color: #ffffff;
+	scrollbar-shadow-color: #ffffff;
+	scrollbar-highlight-color: #ffffff;
+	scrollbar-3dlight-color: #DBD0BA;
+	scrollbar-darkshadow-color: #DBD0BA;
+	scrollbar-track-color: #DED6B6;
+	scrollbar-arrow-color: #DBD0BA;
+	}
+.wise_cart	.btnC	{text-align:center; margin-top:10px;}
+.wise_cart	.top	{width:702px; height:24px; border-bottom:1px solid #EAE4D3; margin:8px 0 0 12px;}
+.wise_cart	.top	.cartlist	{float:left; margin-top:2px;}
+.wise_cart	.top	.cartlist	li	{float:left; height:10px; background:url('/bandi_blog/images/common/bg_lineGr.gif') no-repeat left 2px; padding:0 10px; font-size:11px; margin:0px;}
+*html .wise_cart	.top	.cartlist	li	{background:url('/bandi_blog/images/common/bg_lineGr.gif') no-repeat left 2px;}
+.wise_cart	.top	.cartlist	li.alt	{background:none;}
+.wise_cart	.top	.txt	{float:left; width:210px; margin:4px 0 0 5px;}
+.wise_cart	.top	.btnR	{float:left;}
+
+.wise_cart	li	{position:relative; float:left; margin-right:16px;}
+.wise_cart	li	.bookA	{width:99px; height:100%; margin-bottom:15px; overflow:auto; overflow:hidden;}
+.wise_cart	li	.bookA	.chkBox	{float:left; width:18px;}
+.wise_cart	li	.bookA	.bookImg	{float:left; width:65px; border:1px solid #BEBEBE;}
+
+.wise_cart	li	.bookB	{width:102px; text-align:center;}
+.wise_cart	li	.bookB	p.bookImg	{border:1px solid #BEBEBE; margin-bottom:10px;}
+.wise_cart	li	.bookB	p.booktit	{margin-bottom:10px;}
+.wise_cart	li	.bookB	p.booktit	a	{font-weight:normal;}
+.wise_cart	li	.bookB	p.won	{color:#555555; font-weight:bold; margin-bottom:5px;}
+.wise_cart	li	.bookB	p.sale	{margin-bottom:5px;}
+
+.wise_cart	.conS	{float:left; width:203px; padding-left:9px;}
+*html .wise_cart	.conS	{padding-left:6px;}
+.wise_cart	.conS	.bookCartR	{width:193px; height:213px; background:url('/bandi_blog/images/common/bg_bookCartR.gif') no-repeat; padding:18px 7px 0 7px;}
+.wise_cart	.conS	.bookCartR	.btnC	{padding-bottom:18px; margin-bottom:15px; background:url('/bandi_blog/images/common/bg_lineGr1.gif') no-repeat 0 bottom; text-align:center;}
+.wise_cart	.conS	.bookCartR	.exPay	{width:170px; margin-left:11px; padding-bottom:10px; border-bottom:1px solid #CFC3A1;}
+.wise_cart	.conS	.bookCartR	dt	{float:left; margin:0 2px 3px 0; font-weight:bold;}
+.wise_cart	.conS	.bookCartR	dd	{margin-bottom:3px;}
+.wise_cart	.conS	.bookCartR	.all	{margin:12px 0 0 11px; color:#7B5A2B; font-weight:bold;}
+.wise_cart	.conS	.t_white	{color:#FFFFFF; font-size:11px; margin:10px 5px 0 0; text-align:right;}
+
+.wise_cart	.conS	.wishListR	{width:193px; height:237px; padding:18px 7px 0 7px; background:url('/bandi_blog/images/common/bg_wishListR.gif') no-repeat;}
+.wise_cart	.conS	.wishListR	.lineGr	{padding-bottom:20px; background:url('/bandi_blog/images/common/bg_lineGr1.gif') no-repeat 0 bottom;}
+.wise_cart	.conS	.wishListR	.newfloder	{position:relative; margin:15px 0 0 15px;}
+.wise_cart	.conS	.wishListR	.proGo	{width:165px; margin:10px 0 0 15px;}
+.wise_cart	.conS	.wishListR	.proGo	.go	{float:left; width:29px; margin-left:4px;}
+
+.wise_cart	.conB	{float:left; width:728px;}
+.wise_cart	.conB	.bookCart	{width:726px; height:230px; background:url('/bandi_blog/images/common/bg_bookCartL.gif') no-repeat; padding:0 1px 1px 1px; overflow:auto; overflow:hidden;}
+.wise_cart	.conB	.bookCart	.Blist	{position:relative; width:691px; height:177px; padding:10px 10px 10px 25px; overflow:hidden; overflow-y:hidden; overflow-x:scroll;}
+.wise_cart	.conB	.expect	{margin-top:7px;}
+.wise_cart	.conB	.expect	dt	{float:left; width:67px;}
+.wise_cart	.conB	.expect	dd	{padding-top:2px; color:#504022; font-size:11px;}
+
+.wise_cart	.today	{width:942px; height:254px; padding:0 1px 1px 1px; background:url('/bandi_blog/images/common/bg_today.gif') no-repeat;}
+.wise_cart	.today	.bookBox	{position:relative; float:left; width:784px; height:220px; padding:25px 10px 10px 25px; overflow:hidden; overflow-y:hidden; overflow-x:scroll;}
+.wise_cart	.today	.btn	{float:left; margin:25px 0 0 20px;}
+.wise_cart	.today	.btn	img	{margin-bottom:5px;}
+
+.wise_cart	.wishList	{width:728px; height:255px; padding:0 1px 1px 1px; background:url('/bandi_blog/images/common/bg_wishList.gif') no-repeat; overflow:auto; overflow:hidden;}
+.wise_cart	.wishList	.bookBox	{position:relative; width:691px; height:201px; padding:10px 10px 10px 25px; overflow:hidden; overflow-y:hidden; overflow-x:scroll;}
+.wise_cart	.wishList	.top	.t_11	{float:left; width:480px; margin:3px 0 0 2px;}
+*html .wise_cart	.wishList	.top	.t_11	{width:475px;}
+
+.wise_cart	.favorite	{width:918px; height:247px; padding:8px 13px 0 13px; background:url('/bandi_blog/images/common/bg_favorite.gif') no-repeat; overflow:auto; overflow:hidden;}
+.wise_cart	.favorite	.searchCon	{height:26px; border-bottom:1px solid #EAE4D3; overflow:auto; overflow:hidden;}
+.wise_cart	.favorite	.searchCon	.sel	{float:left;}
+.wise_cart	.favorite	.searchCon	.sel	p	{float:left; padding:0 7px; margin:3px 0 0 0; background:url('/bandi_blog/images/common/bg_linebr.gif') no-repeat left 2px;}
+.wise_cart	.favorite	.searchCon	.sel	p.alt	{background:none;}
+.wise_cart	.favorite	.searchCon	.Bmark	{float:right;}
+.wise_cart	.favorite	.searchCon	.Bmark	dt	{float:left; width:66px;}
+.wise_cart	.favorite	.searchCon	.Bmark	dt	img	{margin-top:4px;}
+/*.wiseCart_body	.layCon	.favorite	ul	{width:914px; height:155px; margin-top:18px; background:url('/bandi_blog/images/common/bg_lineGr2.gif') no-repeat 0 top;}*/
+.wise_cart	.favorite	ul	{width:914px; height:155px; margin-top:18px;}
+.wise_cart	.favorite	li	{float:left; width:440px; margin:0 0 10px 15px; overflow:auto; overflow:hidden;}
+*html .wise_cart	.favorite	li	{width:432px;}
+.wise_cart	.favorite	li	.chktit	{float:left;}
+.wise_cart	.favorite	li	.date	{float:right; margin-right:25px;}
+*html .wise_cart	.favorite	li	.date	{margin-right:15px;}
+.wise_cart	.favorite	.pageBG	{width:914px; height:30px; margin-top:10px; background:url('/bandi_blog/images/common/bg_lineGr3.gif') no-repeat 0 top;}
+
+.wise_cart	.lineTit	{height:24px; border-bottom:1px solid #EAE4D3; overflow:auto; overflow:hidden;}
+.wise_cart	.lineTit	h2	{float:left; margin:4px 9px 0 7px;}
+.wise_cart	.quickinfoL	{float:left; width:280px; height:247px; margin-right:9px; padding:8px 12px 0 12px; background:url('/bandi_blog/images/common/bg_quickinfoL.gif') no-repeat;}
+.wise_cart	.quickinfoL	.myInfo	{height:86px; margin-top:29px; padding:0 0 38px 6px; border-bottom:1px solid #EAE4D3; overflow:auto; overflow:hidden;}
+.wise_cart	.quickinfoL	.myInfo	.photo	{float:left; width:100px;}
+.wise_cart	.quickinfoL	.myInfo	.photo	img	{width:84px; height:84px; border:1px solid #907943;}
+.wise_cart	.quickinfoL	.myInfo	.info	{float:left; padding-top:3px;}
+.wise_cart	.quickinfoL	.myInfo	.info	dt	{float:left; width:67px; margin-bottom:3px;}
+.wise_cart	.quickinfoL	.myInfo	.info	dd	{color:#9B8654; margin-bottom:3px;}
+
+.wise_cart	.quickinfoR	{float:left; width:601px; height:247px; padding:8px 17px 0 13px; background:url('/bandi_blog/images/common/bg_quickinfoR.gif') no-repeat;}
+.wise_cart	.quickinfoR	.fl_right	{overflow:auto; overflow:hidden;}
+.wise_cart	.quickinfoR	.fl_right	.total	{float:left; margin-left:18px; overflow:auto; overflow:hidden;}
+.wise_cart	.quickinfoR	.fl_right	.total	li	{float:left; padding:0 7px; margin:3px 0 0 0; background:url('/bandi_blog/images/common/bg_linebr.gif') no-repeat left 2px; color:#7B5A2B; font-family:돋움; font-size:11px;}
+.wise_cart	.quickinfoR	.fl_right	.total	li.alt	{background:none;}
+
+.wise_cart	.quickinfoR	.listCon	{margin-top:10px; overflow:auto; overflow:hidden;}
+.wise_cart	.quickinfoR	.listCon	.brownBox	{float:left; width:266px; height:180px; margin-right:10px; padding:19px 12px 0 12px; background:url('/bandi_blog/images/common/bg_brownBox.gif') no-repeat; color:#FFFFFF; font-size:11px; font-family:돋움}
+.wise_cart	.quickinfoR	.listCon	.brownBox	a:link		{text-decoration:none; color:#FFFFFF;}
+.wise_cart	.quickinfoR	.listCon	.brownBox	a:visited	{text-decoration:none; color:#FFFFFF;}
+.wise_cart	.quickinfoR	.listCon	.brownBox	a:hover		{text-decoration:underline; color:#FFFFFF;}
+.wise_cart	.quickinfoR	.listCon	.brownBox	a:active	{text-decoration:none; color:#FFFFFF;}
+.wise_cart	.quickinfoR	.listCon	.brownBox	dt	{font-weight:bold; padding:10px 0 5px 0; margin-top:15px; border-top:1px solid #D8CAB3;}
+.wise_cart	.quickinfoR	.listCon	.brownBox	dt.alt	{margin:0px; border:0px; padding-top:0px;}
+.wise_cart	.quickinfoR	.listCon	.brownBox	dd	{height:15px; overflow:auto; overflow:hidden; letter-spacing:-0.05em;}
+.wise_cart	.quickinfoR	.listCon	.brownBox	dd	li	{float:left; padding:0 7px; margin:0px; background:url('/bandi_blog/images/common/bg_linebr.gif') no-repeat left 2px;}
+.wise_cart	.quickinfoR	.listCon	.brownBox	dd	li.alt	{background:none; padding-left:0px;}
+
+#quickinfo	.lineTit	{height:24px; border-bottom:1px solid #EAE4D3; overflow:auto; overflow:hidden;}
+#quickinfo	.lineTit	h2	{float:left; margin:4px 9px 0 0;}
+#quickinfo	.total	{float:left; margin-left:18px; overflow:auto; overflow:hidden;}
+#quickinfo	.total	li	{float:left; padding:0 7px; margin:3px 0 0 0; background:url('/bandi_blog/images/common/bg_linebr.gif') no-repeat left 2px; color:#7B5A2B; font-family:돋움; font-size:11px;}
+#quickinfo	.total	li.alt	{background:none;}
+#quickinfo	.piece	{float:left; width:90px; height:199px; padding:0 5px 0 10px; border-left:1px solid #EAE4D3;}
+#quickinfo	.piece	.t_11	a:hover		{color:#555555; text-decoration:underline;}
+#quickinfo	.piece	.t_11gr	li	{clear:both; width:84px; padding-top:2px; margin-right:0px; letter-spacing:-0.05em;}
+#quickinfo	.board	{float:left; width:180px; height:199px; border-left:1px solid #EFEBE3;}
+#quickinfo	.board	.bodTit	{height:20px; margin-left:12px; font-size:11px;font-family:돋움}
+#quickinfo	.board	.bodList	{margin-left:12px;}
+#quickinfo	.board	.bodList	li	{clear:both; width:161px; padding:1px 0 0 7px; margin-right:0px; background:url('/bandi_blog/images/common/ico_dot.gif') no-repeat left 5px; font-size:11px; color:#888888; font-family:돋움}
+#quickinfo	.board	.bodList	li	a:link		{text-decoration:none; color:#888888;}
+#quickinfo	.board	.bodList	li	a:visited	{text-decoration:none; color:#888888;}
+#quickinfo	.board	.bodList	li	a:hover		{text-decoration:underline; color:#888888;}
+#quickinfo	.board	.bodList	li	a:active	{text-decoration:underline; color:#888888;}
+
+.wise_cart	.wishlistLogin	{width:944px; height:255px; background:url('/bandi_blog/images/global/bg_wiseCart_login.gif') no-repeat;}
+.wise_cart	.quickinfoLogin	{width:944px; height:255px; background:url('/bandi_blog/images/global/bg_wiseCart_quickinfoLogin.gif') no-repeat;}
+.wise_cart	.favoriteLogin	{width:944px; height:255px; background:url('/bandi_blog/images/global/bg_wiseCart_favoriteLogin.gif') no-repeat;}
+.wise_cart	.loginCon	{padding:105px 0 0 225px;}
+
+.wise_cart	.booklayer	{display:none; position:absolute; width:283px; top:7px; left:87px; z-index:20;}
+.wise_cart	.booklayer	.layerCon	{position:relative; width:271px; margin-left:6px; padding:15px 0 10px 0; border:3px solid #A38942; background:#FFFFFF; z-index:20;}
+.wise_cart	.booklayer	.layerCon	.alt	{position:absolute; top:23px; left:-9px;}
+.wise_cart	.booklayer	.conBox	{width:238px; margin-left:22px;}
+.wise_cart	.booklayer	.won	{color:#555555; font-weight:bold;}
+.wise_cart	.booklayer	.lineGr	{width:271px; padding-top:10px; margin-top:10px; background:url('/bandi_blog/images/global/bg_popuplineGr.gif') no-repeat 0 top;}
+.wise_cart	.booklayer	.lineGr	p	{margin:5px 15px 0 22px;}
+.wise_cart	.booklayer	.lineGr	.t_11gr2	{padding-left:10px; background:url('/bandi_blog/images/common/bul_arrow2.gif') no-repeat left 4px;}
+
+.wise_cart	.boxlayer	{display:none; position:absolute; border:3px solid #A38942; background:#FFFFFF; padding:10px; overflow:auto; overflow:hidden; z-index:10;}
+.wise_cart	.boxlayer	.close	{text-align:right;}
+.wise_cart	.boxlayer	dt	{float:left; color:#7B5A2B; font-weight:bold; padding:3px 10px 0 0;}
+.wise_cart	.topLeft1	{width:247px; top:-37px; left:-120px;}
+:root ..wise_cart	.topLeft1	{top:-27px; left:-119px;}
+.wise_cart	#add	{width:212px; top:-125px; left:560px;}
+
+#message1	{position:fixed; width:100%; left:0; z-index:100; display:none;}
+#message2	{position:fixed; width:100%; left:0; z-index:100; display:none;}
+*html #message1	{position:absolute;}
+*html #message2	{position:absolute;}
+:root #message1	{height:27px;}
+:root #message2	{height:27px;}
+.toplayer	{position:relative; width:960px; margin:0 auto; text-align:right; padding-right:26px;}
+.toplayer	span	{display: inline-block; padding:10px; border:3px solid #A38942; background:#FFFFFF;}
+.toplayer	.alt_btm	{position:absolute; bottom:-11px; right:182px;}
+:root .toplayer	.alt_btm	{bottom:-16px;}
+
+#floatWing	{position:fixed; _position:absolute; width:100%; height:50px; left:0; bottom:300px; z-index:100;}
+#floatWing	p	{float:right; font:bold 12px 돋움;}
+
+.toplayer2	{position:relative; width:986px; margin:0 auto; text-align:right;}
+.toplayer2	span	{display: inline-block; padding:10px; border:3px solid #A38942; background:#FFFFFF;}
+.toplayer2	.alt_btm	{position:absolute; bottom:-11px; right:162px;}
+:root .toplayer2	.alt_btm	{bottom:-16px;}
+
+.selectBody {position:relative; height:12px; background:#FFFFFF url('/bandi_blog/images/common/sel_arrow_02.gif') no-repeat right;border:1px solid #D0C3A9;padding:2px 0;cursor:pointer;color:#555555; z-index:5; font-size:11px; font-family:돋움}
+*html .selectBody	{height:10px; padding:0px; margin-top:1px;}
+.selectBody	span	{padding-left:5px}
+.select_Sub {position:absolute;display:none;width:100%;height:46px;top:16px;left:-1px;background:#fff;border:1px solid #D0C3A9;overflow-Y:auto;padding:3px 0;}
+.select_Sub p {clear:both; color:#888888; padding-left:5px; font-size:11px; font-family:돋움}
+
+.selectSub1 {position:absolute;display:none;width:100%;height:45px;top:16px;left:-1px;background:#fff;border:1px solid #D0C3A9;overflow-Y:auto;padding:3px 0;}
+*html .selectSub1	{height:42px;}
+.selectSub1 p {color:#888888; padding-left:5px; font-size:11px; font-family:돋움;float:none; margin-left:0px; display:block;}
+
+
+/* tab */
+.tabWrap	{position:relative;}
+.tabWrap	.tabR	{position:absolute; top:0; right:0}
+
+/*
+.basetab	{width:750px; height:30px; background:url('/bandi_blog/images/common/bg_baseTab.gif') repeat-x;}
+.basetab	li	{float:left; width:124px; height:20px; margin-right:1px; padding-top:10px; background:url('/bandi_blog/images/common/baseTab.gif') no-repeat; text-align:center;}
+.basetab	li.on	{width:125px; background:url('/bandi_blog/images/common/baseTab_on.gif') no-repeat;}
+.basetab	li.end	{margin-right:0px;}
+*/
+
+.detailtab	{width:100%; height:25px; background:url('/bandi_blog/images/common/bg_detailTab.gif') repeat-x; overflow:auto; overflow:hidden}
+.detailtab	li	{float:left; width:140px; height:25px; margin-right:1px; padding-top:0; background:url('/bandi_blog/images/common/detailTab.gif') no-repeat; text-align:center}
+.detailtab	li	a	{display:block; height:19px; padding-top:6px; text-decoration:none}
+.detailtab	li.on	{background:url('/bandi_blog/images/common/detailTab_on.gif') no-repeat;}
+.detailtab	span	{font-size:11px; color:#978157; font-weight:bold; }
+.detailtab	li	img	{vertical-align:-2px}
+
+/*
+.subtab		{width:745px; height:21px; background:url('/bandi_blog/images/common/bg_subTab.gif') repeat-x;}
+.subtab		li	{float:left; width:120px; height:16px; margin-right:1px; padding-top:5px; background:url('/bandi_blog/images/common/subTab.gif') no-repeat; text-align:center;}
+*html	.subtab		li	{height:13px; padding-top:8px}
+.subtab		li.on	{background:url('/bandi_blog/images/common/subTab_on.gif') no-repeat;}
+.subtab		span	{font-size:11px; color:#9E8964;}
+*/
+
+.minitab	{width:745px; height:21px; background:url('/bandi_blog/images/common/bg_miniTab.gif') repeat-x;}
+.minitab	li			{float:left; width:148px; margin-left:1px; background:url('/bandi_blog/images/common/bg_minitabB.gif') no-repeat;}
+.minitab	li	a		{display:block; height:21px;  padding-top:5px; background:url('/bandi_blog/images/common/bg_minitabBR.gif') no-repeat right 0; text-align:center; font-size:11px; font-weight:bold; cursor:pointer}
+.minitab	li	a:link		{text-decoration:none; color:#9E8964;}
+.minitab	li	a:visited	{text-decoration:none; color:#9E8964;}
+.minitab	li	a:hover		{text-decoration:none; color:#9E8964;}
+.minitab	li	a:active	{text-decoration:none; color:#9E8964;}
+.minitab	li.alt		{margin-left:0px;}
+.minitab	li.on		{width:149px; background:url('/bandi_blog/images/common/bg_minitabB_on.gif') no-repeat;}
+.minitab	li.on	a	{background:url('/bandi_blog/images/common/bg_minitabBR_on.gif') no-repeat right 0; font-size:11px; font-weight:bold;}
+.minitab	li.on	a:link		{text-decoration:none; color:#7B5A2B;}
+.minitab	li.on	a:visited	{text-decoration:none; color:#7B5A2B;}
+.minitab	li.on	a:hover		{text-decoration:none; color:#7B5A2B;}
+.minitab	li.on	a:active	{text-decoration:v; color:#7B5A2B;}
+
+.subtab	{width:745px; height:25px; background:url('/bandi_blog/images/common/bg_subTab.gif') repeat-x;}
+.subtab	li			{float:left; width:180px; height:25px; margin-left:1px; background:url('/bandi_blog/images/common/bg_subtabB.gif') no-repeat;}
+.subtab	li	a		{display:block; height:25px;  padding-top:7px; background:url('/bandi_blog/images/common/bg_subtabBR.gif') no-repeat right 0; text-align:center; font-size:11px; font-weight:bold;}
+.subtab	li	a:link		{text-decoration:none; color:#8B754B;}
+.subtab	li	a:visited	{text-decoration:none; color:#8B754B;}
+.subtab	li	a:hover		{text-decoration:none; color:#8B754B;}
+.subtab	li	a:active	{text-decoration:none; color:#8B754B;}
+.subtab	li.alt		{margin-left:0px;}
+.subtab	li.on		{width:180px; background:url('/bandi_blog/images/common/bg_subtabB_on.gif') no-repeat;}
+.subtab	li.on	a	{background:url('/bandi_blog/images/common/bg_subtabBR_on.gif') no-repeat right 0; font-size:11px; font-weight:bold;}
+.subtab	li.on	a:link		{text-decoration:none; color:#755617;}
+.subtab	li.on	a:visited	{text-decoration:none; color:#755617;}
+.subtab	li.on	a:hover		{text-decoration:none; color:#755617;}
+.subtab	li.on	a:active	{text-decoration:none; color:#755617;}
+.subtab	span	{font-size:11px; color:#978157; font-weight:bold;}
+
+.subTab
+	li	a	img					{display:inline}
+	li	a	img.rollover		{display:none}
+	li.on	a	img				{display:none}
+	li.on	a	img.rollover	{display:inline}
+
+.tab	{height:30px; background:url('/bandi_blog/images/common/bg_baseTab.gif') repeat-x;}
+.tab	li			{float:left; width:150px; margin-left:1px; background:url('/bandi_blog/images/common/bg_tabB.gif') no-repeat}
+.tab	li	a		{display:block; height:20px;  padding-top:10px; background:url('/bandi_blog/images/common/bg_tabBR.gif') no-repeat right 0; text-align:center}
+.tab	li	a:link, .tab	li	a:visited, .tab	li	a:hover, .tab	li	a:active	{color:#998B62; text-decoration:none}
+.tab	li.alt		{margin-left:0px;}
+.tab	li.on		{background:url('/bandi_blog/images/common/bg_tabB_on.gif') no-repeat;}
+.tab	li.on	a	{background:url('/bandi_blog/images/common/bg_tabBR_on.gif') no-repeat right 0;}
+
+.tab	li.tabOR	a	{padding-top:0}
+
+.tab	li		.tabRImg	{height:22px;  padding-top:8px; background:url('/bandi_blog/images/common/bg_tabBR.gif') no-repeat right 0; text-align:center}
+.tab	li.on	.tabRImg	{background:url('/bandi_blog/images/common/bg_tabBR_on.gif') no-repeat right 0;}
+
+/*
+.tab	li.tabR		{position:absolute; right:0; background:url('/bandi_blog/images/common/bg_tabO.gif') no-repeat;}
+.tab	li.tabR	a	{background:url('/bandi_blog/images/common/bg_tabOR.gif') no-repeat right 0;}
+.tab	li.tabR.on		{background:url('/bandi_blog/images/common/bg_tabO_on.gif') no-repeat;}
+.tab	li.tabR.on	a	{background:url('/bandi_blog/images/common/bg_tabOR_on.gif') no-repeat right 0;}
+*/
+
+
+/* cart */
+.cartLay	{width:46px; height:17px; margin:0 auto}
+.cartLay	input	{float:left; width:22px; height:13px; font-size:11px; color:#888888; font-family:돋움; text-align:right; padding:2px 6px 0 0;}
+.cartLay	.btn	{float:left; width:15px; height:16px; border-top:1px solid #D0C3A9; border-right:1px solid #D0C3A9;}
+.cartLay	p	{width:15px; height:7px; border-bottom:1px solid #D0C3A9; font-size:0px; line-height:0px;}
+
+/* board*/
+.boardList01	{}
+.boardList01	th.thS	{height:31px; background:url('/bandi_blog/images/common/boardTH01_S.gif') no-repeat  left 0}
+.boardList01	th.thE	{height:31px; background:url('/bandi_blog/images/common/boardTH01_E.gif') no-repeat  right 0}
+.boardList01	th		{height:31px; background:url('/bandi_blog/images/common/boardTH01_M.gif') repeat-x; vertical-align:top;}
+.boardList01	th	img	{margin-top:8px}
+.boardList01	td		{text-align:center; padding:7px 0 5px}
+.boardList01	td.line	{background:#E9E4DC; height:1px; padding:0;}
+
+.boardList02	{}
+.boardList02	th.thS	{height:31px; background:url('/bandi_blog/images/common/boardTH02_S.gif') no-repeat  left 0}
+.boardList02	th.thE	{height:31px; background:url('/bandi_blog/images/common/boardTH02_E.gif') no-repeat  right 0}
+.boardList02	th		{height:31px; font:normal 11px 돋움; color:#fff;background:url('/bandi_blog/images/common/boardTH02_M.gif') repeat-x;}
+.boardList02	th	a:link,		
+.boardList02	th	a:visited,
+.boardList02	th	a:hover		{color:#fff;}
+.boardList02	th	a.on		{text-decoration:underline}
+.boardList02	td		{text-align:center; padding:5px 0 3px}
+.boardList02	td.line	{background:#E9E4DC; height:1px; padding:0;}
+
+.boardList03	{}
+.boardList03	th		{height:31px; background:url('/bandi_blog/images/common/boardTH03_M.gif') repeat-x;}
+.boardList03	td		{text-align:center; height:49px;}
+.boardList03	td.line	{background:#E2D4C1; height:1px; padding:0;}
+
+.boardList04	{border-collapse:collapse; border-bottom:1px solid #E2D4C1;}
+.boardList04	th		{height:26px; padding-top:3px; background:#FAF6EC url('/bandi_blog/images/common/boardTH03_M.gif') repeat-x;} :root .boardList04	th	{height:29px; padding-top:2px}
+.boardList04	th.row	{border-right:1px solid #E2D4C1; background:#FAF6EC url('/bandi_blog/images/common/boardTH03_M2.gif') repeat-x;}
+.boardList04	th.sub	{border-top:1px solid #E2D4C1; border-right:1px solid #E2D4C1; background:#FBF9F1; font-weight:normal}
+.boardList04	th.alt	 {border-right:0 none}
+.boardList04	td		{text-align:center; padding:8px 0 6px; border-top:1px solid #E9E5DD; border-right:1px solid #E9E5DD}
+/*.boardList04	td		{text-align:center; height:24px; border-top:1px solid #E9E5DD; border-right:1px solid #E9E5DD}*/
+.boardList04	td.alt	{border-right:0}
+.boardList04	.h50	td	{height:49px}
+.boardList04	tfoot	tr	{border-color:#E2D4C1}
+.boardList04	tfoot	td	{height:25px; background:#FBF9F1; border-top:1px solid #E2D4C1; border-right:1px solid #E2D4C1}
+.boardList04	tfoot	tr.total	td	{background:white; border-right:0 none}
+
+.boardList05	{}
+.boardList05	th		{height:40px; background:url('/bandi_blog/images/common/boardTH05_M.gif') repeat-x;}
+.boardList05	td		{text-align:center; padding:8px 0 5px; line-height:1.5em}
+.boardList05	td.btn	img	{margin-right:-1px}
+.boardList05	td.line	{background:#E2D4C1; height:1px; padding:0;}
+
+.boardList06	{border-collapse:collapse}
+.boardList06	th		{height:26px; padding-top:3px; background:#FBF9F4; color:#7B5A2B; font:normal 12px 돋움; text-align:center;}
+.boardList06	td		{text-align:center; padding:8px 0 6px;}
+
+table	td.td_Left	{text-align:left}
+table	td.td_L10	{text-align:left; padding-left:10px;}
+table	td.td_L15	{text-align:left; padding-left:15px;}
+table	td.td_L20	{text-align:left; padding-left:20px;}
+table	td.td_L30	{text-align:left; padding-left:30px;}
+table	td.td_L35	{text-align:left; padding-left:35px;}
+table	td.td_R5	{text-align:right; padding-right:5px;}
+table	td.td_R15	{text-align:right; padding-right:15px;}
+table	td.td_input	{padding-top:10px; padding-bottom:10px}
+
+table	th.td_Left	{text-align:left}
+
+.boardRegister	{border-top:1px solid #DFD0AF; border-bottom:1px solid #DFD0AF}
+.boardRegister	th	{text-align:left;}
+.boardRegister	th.bgBr	{border-right:1px solid #DFD0AF; background:#FAF6EC}
+.boardRegister	th	img	{margin-left:34px;}
+.boardRegister	th	.thr{margin-left:18px;}
+.boardRegister	td		{padding:4px 0}
+.boardRegister	td	img	{vertical-align:middle}
+.boardRegister	td.line	{background:#F1EAD8; height:1px; padding:0;}
+.boardRegister	td.line_right	{border-right:1px solid #F1EAD8}
+.boardRegister	caption	{padding-bottom:10px; text-align:right}
+
+/* btn */
+.btnL	{padding:5px 0 0 10px; text-align:left}
+.btnR	{padding:5px 10px 0 0; text-align:right}
+.btnR1	{padding:10px 0 0 0; text-align:right}
+.btnC	{text-align:center}
+.flag_style01	 {position:absolute; left:0; top:0}
+
+/* sub navi */ 
+.subNavi	{width:206px; margin-left:2px; background:url('/bandi_blog/images/common/bg_subNavi.gif') no-repeat 0 0}
+.subNavi	.con	{width:173px; padding:33px 0 51px 33px; background:url('/bandi_blog/images/common/bg_subNavi_btm.gif') no-repeat 0 bottom}
+.subNavi	h2	{margin-bottom:18px; line-height:0; font-size:0;}
+.subNavi	h2	span	{font:bold 12px 굴림;}
+.subNavi	h2	img	{vertical-align:-2px}
+
+.subNavi	.sn2List	{width:155px;} 
+.subNavi	.sn2List	li	{font-weight:bold}
+.subNavi	.sn2List	.sn3List	{margin:10px 0 20px}
+.subNavi	.sn2List	li.alt	.sn3List	{margin:12px 0 0}
+
+.subNavi	.sn3List	{width:155px;} 
+.subNavi	.sn3List	li		{padding:0 0 2px 9px; font-weight:normal; background:url('/bandi_blog/images/common/ico_dot.gif') no-repeat 0 5px}
+.subNavi	.sn3List	li.on a	{color:#8F6A24;}
+
+/* right list box */
+.recBook_right1	{width:200px; margin-bottom:5px; background:url('/bandi_blog/images/recmdBook/bg_recBook_todayTop.gif') no-repeat 0 29px}
+.recBook_right1	.subtit	 {position:relative; width:200px; height:29px; background:url('/bandi_blog/images/recmdBook/bg_recBook_todayTitle.gif') no-repeat}
+.recBook_right1	.subtit	h3	 {position:absolute; left:20px; top:9px;}
+.recBook_right1	.subtit	.more	{position:absolute; right:15px; top:6px;}
+.recBook_right1	.con	{margin:0; padding:17px 18px 8px 21px; background:url('/bandi_blog/images/recmdBook/bg_recBook_todayBtm.gif') no-repeat 0 bottom}
+.recBook_right1	.con1	{margin:0; padding:17px 18px 8px 21px; background:url('/bandi_blog/images/recmdBook/bg_recBook_todayBtm.gif') no-repeat 0 bottom}
+.recBook_right1	.con2	{margin:0; padding:0; background:url('/bandi_blog/images/recmdBook/bg_recBook_todayBtm.gif') no-repeat 0 bottom}
+
+.recBook_right1	.con1	{height:100%; margin:0; padding:17px 26px 8px 26px; background:url('/bandi_blog/images/recmdBook/bg_recBook_todayBtm.gif') no-repeat 0 bottom; overflow:auto; overflow:hidden;}
+.recBook_right1	.con1	h4	{text-align:center; margin-bottom:10px;}
+.recBook_right1	.con1	.book_ranking	{width:148px; margin-bottom:10px; overflow:auto; overflow:hidden;}
+.recBook_right1	.con1	.book_ranking	.btn	{float:left; width:20px; margin-top:30px;}
+.recBook_right1	.con1	.book_ranking	.bookList	{float:left; width:108px;}
+.recBook_right1	.con1	.book_ranking	.bookList	.thumbNail_type02	{width:108px;}
+.recBook_right1	.con1	.book_ranking	.bookList	.photo	{margin-left:18px;}
+
+.recBook_right1	ul	{margin:0; padding:0}
+.recBook_right1	li	{width:161px; margin-bottom:10px; padding:0; border:0 none}
+
+.recBook_right1	.thumbNail_type09	{overflow:auto; overflow:hidden;}
+.recBook_right1	.thumbNail_type09	.d_photo	{float:left; margin-right:9px; border:1px solid #BEBEBE}
+.recBook_right1	.thumbNail_type09	.info		{float:left; width:92px; margin-top:10px; font:normal 11px 돋움}
+.recBook_right1	.thumbNail_type09	.info	p	{margin-bottom:2px;}
+
+.promoBanner	{width:200px; margin:6px 0 0 5px}
+.promoBanner	li	{margin-bottom:5px;}
+
+/* reply */
+.reply01	{margin:25px 13px 20px; padding:10px 30px 12px; background:#F4F3EC; border:1px solid #E2D6BF}
+.reply01	.titReply	{width:; padding:0 0 10px 2px; border-bottom:1px solid #D5C7B4; color:#80684A}
+.reply01	li	{width:100%; padding:10px 0 8px; border-bottom:1px solid #EADFD3; vertical-align:top; overflow:auto; overflow:hidden}
+.reply01	.reply_writer	{float:left; width:96px; padding:0 0 0 5px;}
+.reply01	.reply_con		{float:left; width:540px; padding-top:1px;}
+.reply01	.reply_write	{margin:13px 0 0 0}
+.reply01	.reply_write	textarea	{margin-right:10px; padding:10px 15px; color:#9E8964}
+
+.reply01	li	.reply_master	{clear:both; width:100%; padding:10px 0 0 20px; overflow:auto; overflow:hidden}
+.reply01	li	.reply_master	.reply_writer	.t_11br1	{padding-left:15px; color:#9E8964; background:url('/bandi_blog/images/common/ico_reply.gif') no-repeat 0 0}
+.reply01	li	.reply_master	.reply_con	{color:#7B5A2B}
+
+/* review */
+.reviewWrite	{padding:11px 32px 13px;border:1px solid #E1DAC8; background:#F4F3EB}
+.reviewWrite	.titA	{position:relative;}
+.reviewWrite	.titA	h3	{margin-bottom:10px; line-height:0; font-size:0}
+.reviewWrite	.titA	.btnA	{position:absolute; right:0px; top:0px;}
+
+.reviewWrite	table	td	{padding:3px 0 1px}
+.reviewWrite	textarea	{padding:10px 20px; line-height:1.4em; color:#9E8A64}
+.reviewWrite	input	{height:15px; color:#9E8964}
+.reviewWrite	.btnA	{text-align:center; margin-top:10px;}
+.reviewWrite	.selectBox	p	{margin-top:-2px}
+
+.reviewDetail	{width:723px; margin-bottom:7px; background:url('/bandi_blog/images/common/bg_review.gif') repeat-y 0 0}
+.reviewDetailT	{width:723px; background:url('/bandi_blog/images/common/bg_reviewTop.gif') no-repeat 0 0}
+.reviewDetailB	{width:693px; padding:15px 15px 15px; background:url('/bandi_blog/images/common/bg_reviewBtm.gif') no-repeat 0 bottom}
+
+.reviewDetail	li	{border-bottom:1px solid #E9E4DC}
+.reviewDetail	.info	{padding:0 6px 7px 0; font:normal 11px 돋움; text-align:right; color:#CDCDCD}
+.reviewDetail	.title	{padding:12px 0 10px 13px}
+.reviewDetail	.contents	{padding:15px 0 25px 13px}
+.reviewDetail	.contents	.url	{margin-bottom:20px; font:normal 11px 돋움; color:#888}
+.reviewDetail	.contents	.url	a	{color:#888}
+.reviewDetail	.btnA	{margin:10px 0 20px; padding-right:8px; text-align:right;}
+.reviewDetail	.btnA1	{margin-top:10px; padding-right:8px; text-align:right;}
+
+.reviewDetail	.reply01	{margin:0; padding:10px 19px 12px; background:#F4F3EC; border:1px solid #E2D6BF}
+.reviewDetail	.reply01	.reply_writer	{float:left; width:96px; padding:0 0 0 5px;}
+.reviewDetail	.reply01	.reply_con		{float:left; width:540px; padding-top:1px;}
+
+/* 이전글/다음글 */
+.listRN	{border-top:1px solid #DFD0AF; border-bottom:1px solid #DFD0AF}
+.listRN	li	{position:relative; padding:9px 0 7px; border-bottom:1px solid #F0E7D5} /* line-height:0 */
+.listRN	li	img	{margin:0 7px 0 20px}
+.listRN	li.alt	{border:0}
+.listRN	li	p	{position:absolute; right:20px; top:5px}
+
+/* page */
+.pageBG	{position:relative; height:35px; background:url('/bandi_blog/images/common/bg_pageA.gif') repeat-x 0 0; z-index:1}
+.pageBG	.page	{padding-top:10px;}
+.pageBG	.pageConL	{position:absolute; top:10px; left:20px;}
+.pageBG	.pageConR	{position:absolute; top:8px; right:14px;}
+.pageBGNone	 {background:0 none}
+.pageBGNone02	 {margin-top:-1px; padding-top:10px; border-top:1px solid #E2D7C7; background:0 none}
+
+.page				{text-align:center}
+.page	img			{vertical-align:top; margin:3px 4px 0}
+.page	.pageNum	{margin:0 5px 0 7px; font:normal 10px verdana; color:#7D705A; letter-spacing:2px;}
+.page	.pageNum	a,
+.page	.pageNum	a:visited	{color:#7D705A;}
+.page	.pageNum	a:hover		{color:#8F6A24; text-decoration:none}
+.page	.pageNum	.on			{color:#8F6A24; font-weight:bold}
+
+/* box */
+.grayBox	{height:26px; padding:9px 0 0 20px; background:url('/bandi_blog/images/common/bg_grayBox.gif') repeat-x 0 0}
+.grayBox	p	{float:left;}
+.grayBox	img	{vertical-align:middle}
+
+.grayBox	.fl_left	{margin:3px 0 0 -5px; display:inline}
+.grayBox	.fl_right	{margin-right:15px; display:inline}
+.grayBox	.fl_right	.yList	{float:left; padding-top:4px;}
+.grayBox	.fl_right	.yList	li	{float:left; width:50px; padding-left:10px; color:#7B5A2B; line-height:1.4em; font:bold 11px 돋움; background:url('/bandi_blog/images/common/bg_barLine.gif') no-repeat right 0}
+.grayBox	.fl_right	.yList	li	a	{color:#7B5A2B;}
+.grayBox	.fl_right	p	{float:left; margin-left:-1px;}
+
+.grayBox	.search	dt	{float:left; margin-top:2px; padding-right:7px; font-weight:bold}
+.grayBox	.search	dd	{float:left; padding-right:15px;}
+.grayBox	.search	p	{margin-right:5px;}
+:root .grayBox	.mt1m {margin-top:0px;}
+
+.grayBox2	{padding:9px 10px; border-top:1px solid #BDB8AE; border-bottom:1px solid #E6E3DF; background:#F1F0ED}
+.grayBox3	{width:100%; padding:8px 0; border:1px solid #E5E2DF; background:#F1F0ED; overflow:auto; overflow:hidden}
+.grayBox4	{padding:0 10px; border-top:1px solid #BDB8AE; border-bottom:1px solid #E6E3DF; background:#F1F0ED}
+
+.noticeBox	{width:560px; background:url('/bandi_blog/images/common/box_noticeTop.gif') no-repeat 0 0}
+.noticeBox	.con	{width:560px; background:url('/bandi_blog/images/common/box_noticeBtm.gif') no-repeat 0 bottom}
+.noticeBox	.con	.dotList	{width:528px; padding:11px 16px 8px;}
+
+.brBox	{border:5px solid #D1C5AA;}
+.brBox2	{border:1px solid #DBD0BA}
+.brBox3	{border:3px solid #DBD0BA}
+.brBox4	{border:1px solid #E2D7C7}
+.brBox5	{border:5px solid #D1C5AB}
+
+.boxBrown168	{width:168px; background:url('/bandi_blog/images/common/boxBrown168.gif') no-repeat}
+.boxBrown168	.con	{display:inline-block; width:; background:url('/bandi_blog/images/common/boxBrown168Btm.gif') no-repeat 0 bottom; overflow:auto; overflow:hidden}
+.boxBrown198	{width:198px; background:url('/bandi_blog/images/common/box_brown198.gif') no-repeat}
+.boxBrown198	.con	{display:inline-block; width:; background:url('/bandi_blog/images/common/box_brown198Btm.gif') no-repeat 0 bottom; overflow:auto; overflow:hidden}
+.boxBrown282	{width:282px; background:url('/bandi_blog/images/common/box_brown282.gif') no-repeat}
+.boxBrown282	.con	{display:inline-block; width:; background:url('/bandi_blog/images/common/box_brown282Btm.gif') no-repeat 0 bottom; overflow:auto; overflow:hidden}
+.boxBrown370	{width:370px; background:url('/bandi_blog/images/common/box_brown370.gif') no-repeat}
+.boxBrown370	.con	{display:inline-block; width:; background:url('/bandi_blog/images/common/box_brown370Btm.gif') no-repeat 0 bottom; overflow:auto; overflow:hidden}
+.boxBrown560	{width:560px; background:url('/bandi_blog/images/common/box_brown560.gif') no-repeat}
+.boxBrown560	.con	{display:inline-block; width:; background:url('/bandi_blog/images/common/box_brown560Btm.gif') no-repeat 0 bottom; overflow:auto; overflow:hidden}
+.boxBrown720	{width:721px; background:url('/bandi_blog/images/common/box_brown720.gif') no-repeat}
+.boxBrown720	.con	{display:inline-block; width:; background:url('/bandi_blog/images/common/box_brown720Btm.gif') no-repeat 0 bottom; overflow:auto; overflow:hidden}
+.boxBrown745	{width:745px; background:url('/bandi_blog/images/common/box_brown745.gif') no-repeat}
+.boxBrown745	.con	{display:inline-block; width:; background:url('/bandi_blog/images/common/box_brown745Btm.gif') no-repeat 0 bottom; overflow:auto; overflow:hidden}
+.boxBrown745_2	{width:745px; background:url('/bandi_blog/images/common/box_brown745_2.gif') no-repeat}
+.boxBrown745_2	.con	{display:inline-block; width:; background:url('/bandi_blog/images/common/box_brown745_2Btm.gif') no-repeat 0 bottom; overflow:auto; overflow:hidden}
+.boxBrown755	{width:755px; background:url('/bandi_blog/images/common/box_brown755.gif') no-repeat}
+.boxBrown755	.con	{display:inline-block; width:; background:url('/bandi_blog/images/common/box_brown755Btm.gif') no-repeat 0 bottom; overflow:auto; overflow:hidden}
+.boxBrown370	textarea	{padding:3px 8px}
+.boxShadowBr750	{width:750px; background:url('/bandi_blog/images/usedBook/boxShadowBr750.gif') no-repeat}
+.boxShadowBr750	.con	{display:inline-block; padding:10px 30px 15px 20px; background:url('/bandi_blog/images/usedBook/boxShadowBr750Btm.gif') no-repeat 0 bottom; overflow:auto; overflow:hidden}
+.boxShadowBr960	{width:960px; background:url('/bandi_blog/images/common/boxShadowBr960.gif') no-repeat}
+.boxShadowBr960	.con	{display:inline-block; background:url('/bandi_blog/images/common/boxShadowBr960Btm.gif') no-repeat 0 bottom; overflow:auto; overflow:hidden}
+
+.pad5	{padding:5px}
+.pad10	{padding:10px}
+.pad10_2	{padding:10px 15px}
+.pad12		{padding:12px}
+.pad14	{padding:14px 0}
+.pad14_2	{padding:14px 12px}
+.pad15_2	{padding:15px 25px}
+.pad20		{padding:20px}
+.pad20_2	{padding:20px 15px}
+.pad25		{padding:25px}
+.pad30		{padding:30px}
+.pad30_2	{padding:30px 40px}
+.pad30_3	{padding:30px 60px}
+.pad35		{padding:35px 0}
+.pad35_2	{padding:35px 0 20px}
+
+.rnBox	{width:35px; height:44px; background:#7C5D35; font:bold 9px verdana; color:#fff; text-align:center;}
+.rnBox	span img	{margin-top:4px}
+
+.frameBox	{width:750px; background:url('/bandi_blog/images/common/box_frame750.gif') no-repeat 0 0} 
+.frameBox	.con	{width:735px; padding:5px 10px 10px 5px; background:url('/bandi_blog/images/common/box_frame750_btm.gif') no-repeat 0 bottom}
+.frameBox	.con	h2	{width:720px; padding:12px 0 25px 15px; margin:0px; font-size:0; background:url('/bandi_blog/images/common/bg_frameBox_line.gif') no-repeat 0 bottom;}
+
+.selectBox	{position:relative; width:100px; height:15px; line-height:1.2em; padding-top:3px; background:#FFFFFF url('/bandi_blog/images/common/sel_arrow_03.gif') no-repeat right; border:1px solid #C7BEA2; cursor:pointer; font-size:11px; color:#9E8A64; z-index:1;}
+.selectBox	p	{padding-left:5px; margin-top:0px;}
+
+.selectSub	{position:absolute; display:none; width:100px; top:18px; left:-1px; background:#FFFFFF; border:1px solid #C9C0A5; padding:2px 0 0;}
+.selectSub	ul	{width:100px;}
+.selectSub	li	a	{display:block; width:91px; height:15px; text-align:left; padding:1px 0 0 9px; line-height:0; font-size:0}
+.selectSub	li	a:hover	{background:#F4EED7;}
+
+.boxPaper	{position:relative; width:745px; background:url('/bandi_blog/images/common/bg_paper.gif') no-repeat 0 bottom}
+
+/* popup */
+.popupWrap800	{width:800px;}
+.popupWrap800	.popupHead	{position:relative; width:800px; height:40px; background:url('/bandi_blog/images/common/bg_popup_title800.gif') no-repeat right 0}
+.popupWrap800	.popupHead	h2	img	{margin:11px 0 0 20px}
+.popupWrap800	.btnClose	{position:absolute; top:12px; right:12px}
+
+.popupWrap800	.popupBody	{padding:25px 18px 40px 18px;}
+.popupWrap800	.popupBody	.titBox	{width:740px; height:52px; border:2px solid #B4A183; padding:19px 0 0 20px; margin-left:2px; overflow:auto; overflow:hidden;}
+.popupWrap800	.popupBody	.titBox	.conLeft	{float:left; width:377px;}
+.popupWrap800	.popupBody	.titBox	.conLeft	h3	{font-size:12px; font-weight:bold; padding-bottom:5px;}
+.popupWrap800	.popupBody	.titBox	.conRight	{float:left; height:34px; background:url('/bandi_blog/images/global/bg_lineGr1.gif') no-repeat left 0; margin-left:13px; padding-left:25px;}
+.popupWrap800	.popupBody	.titBox	.conRight	img	{margin-top:5px;}
+
+.popupWrap800	.popupBody	.con	{height:100%; background:url('/bandi_blog/images/common/bg_popup_con.gif') repeat-y; overflow:auto; overflow:hidden; margin-top:18px;}
+.popupWrap800	.popupBody	.conTop	{background:url('/bandi_blog/images/common/bg_popup_conT.gif') no-repeat 0 top;}
+.popupWrap800	.popupBody	.conbtm	{position:relative; background:url('/bandi_blog/images/common/bg_popup_conB.gif') no-repeat 0 bottom; padding:32px 23px 25px 39px;}
+.popupWrap800	.popupBody	.pageBG	{height:31px;}
+.popupWrap800	.popupBody	.pageBG	.page	{height:31px; overflow:auto; overflow:hidden; padding-top:5px;}
+.popupWrap800	.popupBody	.pageBG	.pageConL	{position:absolute; top:0; left:10px;}
+.popupWrap800	.popupBody	.pageBG	.pageConR	{position:absolute; top:0; right:11px;}
+.popupWrap800	.popupBody	.bookImg	{width:702px; border:1px solid #E5E5E5; margin-bottom:10px;}
+.popupWrap800	.popupBody	.bookImg	img	{width:700px;}
+.popupWrap800	.popupBody	.conbtm	 .btn_prevPage	{position:absolute; left:29px; _left:-10px; top:415px}
+.popupWrap800	.popupBody	.conbtm	 .btn_nextPage	{position:absolute; right:12px; _right:14px; top:415px}
+
+.popupWrap600	{width:600px;}
+.popupWrap600	.popupHead	{position:relative; width:600px; height:40px; background:url('/bandi_blog/images/common/bg_popup_title600.gif') no-repeat right 0}
+.popupWrap600	.popupHead	h2	img	{margin:11px 0 0 20px}
+.popupWrap600	.btnClose	{position:absolute; top:12px; right:12px}
+
+.popupWrap600	.popupBody	{padding:27px 20px 20px;}
+.popupWrap600	.popupBody	.bLine	{padding-bottom:8px; background:url('/bandi_blog/images/common/bg_line.gif') repeat-x 0 bottom;}
+.popupWrap600	.popupBody	h3	{margin:0 0 10px 10px; font-size:0; line-height:0; font-weight:normal;}
+.popupWrap600	.popupBody	h3	img	{margin-right:7px; vertical-align:-2px}
+.popupWrap600	.popupBody	h3.none	 {display:none; height:0}
+.popupWrap600	.popupBody	.t_11br3	{margin-left:10px;}
+
+.popupWrap500	{width:500px;}
+.popupWrap500	.popupHead	{position:relative; width:500px; height:30px; background:url('/bandi_blog/images/common/bg_popup_title500.gif') no-repeat right 0}
+.popupWrap500	.popupHead	h2	img	{margin:7px 0 0 20px}
+.popupWrap500	.btnClose	{position:absolute; top:6px; right:15px}
+.popupWrap500	.popupBody	{padding:15px}
+
+.popupWrap400	{width:400px;}
+.popupWrap400	.popupHead	{position:relative; width:400px; height:30px; background:url('/bandi_blog/images/common/bg_popup_title400.gif') no-repeat right 0}
+.popupWrap400	.popupHead2	{position:relative; width:400px; height:40px; background:url('/bandi_blog/images/common/bg_popup_title420.gif') no-repeat right 0}
+.popupWrap400	.popupHead	h2	img	{margin:7px 0 0 20px}
+.popupWrap400	.popupHead2	h2	img	{margin:10px 0 0 20px}
+.popupWrap400	.btnClose	{position:absolute; top:6px; right:15px}
+.popupWrap400	.popupHead2	.btnClose	{position:absolute; top:12px; right:15px}
+.popupWrap400	.popupBody	{padding:15px}
+.popupWrap400	.popupBody	.h3Wrap	{position:relative; width:370px}
+.popupWrap400	.popupBody	h3	 {margin:0 0 15px 5px; font-size:12px; color:#7B5A2B}
+.popupWrap400	.popupBody	.btn_etc	{position:absolute; right:0; top:-2px}
+
+.popupWrap420	{width:420px;}
+.popupWrap420	.popupHead	{position:relative; width:420px; height:40px; background:url('/bandi_blog/images/common/bg_popup_title420.gif') no-repeat right 0}
+.popupWrap420	.popupHead	h2	img	{margin:10px 0 0 20px}
+.popupWrap420	.btnClose	{position:absolute; top:12px; right:15px}
+.popupWrap420	.popupBody	{padding:20px}
+.popupWrap420	.popupBody	.h3Wrap	{position:relative; width:380px; margin-bottom:20px}
+.popupWrap420	.popupBody	h3	 {margin:0 0 15px 5px; font-size:12px; color:#7B5A2B}
+.popupWrap420	.popupBody	.btn_etc	{position:absolute; right:0; top:-2px}
+.popupWrap420	.popupBody	h3.dot	{margin:0 0 10px 5px; padding-left:6px; font-size:0; background:url('/bandi_blog/images/common/ico_dot03.gif') no-repeat 0 4px}
+
+.couponWrap	{width:560px; margin-top:15px;}
+.couponWrap	.cateList	{float:left; width:138px; height:316px; border:1px solid #DFD0AF}
+.couponWrap	.cateList	 h4	{height:24px; margin:0; padding:15px 0 0 14px; font:bold 11px 돋움; background:url('/bandi_blog/images/myCart/bg_h4_line.gif') no-repeat 0 bottom}
+.couponWrap	.cateList	.clist	{width:115px; margin:8px 0 0 14px}
+.couponWrap	.cateList	.clist	li	{font:bold 11px 돋움; margin-bottom:5px; line-height:1.2em}
+.couponWrap	.cateList	.clist	li	.clistSub	{width:115px; margin-top:5px;}
+.couponWrap	.cateList	.clist	li	.clistSub	li {font-weight:normal; margin-bottom:3px; padding-left:7px; background:url('/bandi_blog/images/common/ico_dot.gif') no-repeat 0 3px}
+
+.couponWrap	.goodsList	{width:560px;}
+.couponWrap	.goodsList	h3	{padding:0; margin:0;}
+.couponWrap	.goodsList	.bookList	{width:560px; margin-top:10px; overflow:auto; overflow:hidden;}
+.couponWrap	.goodsList	.bookList	li	{float:left; width:133px; margin-left:9px; padding:0; text-align:center; border-bottom:0; overflow:hidden;}
+.couponWrap	.goodsList	.bookList	li.alt	{margin-left:0px;}
+.couponWrap	.goodsList	.bookList	.conA	.viewImg	img	{border:1px solid #BFBDBE;}
+.couponWrap	.goodsList	.bookList	.conB	{width:133px; margin-top:10px;}
+.couponWrap	.goodsList	.bookList	.conB	p	{margin-bottom:5px;}
+
+#layerPop_box	{position:relative; width:209px}
+#layerPop_box	.btnClose	{position:absolute; top:8px; right:11px}
+#layerPop_box	#layerPop_boxBg		{width:209 px; height:112px; background:url('/bandi_blog/images/common/bg_miniLayer.png') no-repeat 0 0}
+#layerPop_box	#layerPop_boxCon	{position:absolute; top:27px; left:13px; width:183px; height:58px; line-height:1.5em;}
+
+.laypop	{position:absolute; border:2px solid #B4A183; background:#fff;}
+.laypop	.btnClose	{position:absolute; top:18px; right:18px}
+.laypop	h3.mLine	{height:34px; padding:20px 0 0 5px; font:bold 12px 굴림; background:url('/bandi_blog/images/common/bg_laypopM_title.gif') no-repeat center bottom}
+.laypop	h3.BLine	{height:34px; padding:20px 0 0 5px; font:bold 12px 굴림; background:url('/bandi_blog/images/common/bg_laypopB_title.gif') no-repeat center bottom}
+.laypop	.laypopCon	{padding:0 20px 20px 20px; border:0 none}
+.laypop	.dot	{background:url('/bandi_blog/images/common/ico_dot03.gif') no-repeat left 5px; padding-left:8px; font-size:11px; color:#9E8964;}
+
+/* list */
+.dotList	li	{padding-left:9px; font:normal 11px 돋움; line-height:1.5em; color:#9E8964; background:url('/bandi_blog/images/common/notice_icon01.gif') no-repeat 0 6px}
+.dotList	li	a:link		{text-decoration:underline; color:#9E8964; font:normal 11px 돋움;}
+.dotList	li	a:visited	{text-decoration:underline; color:#9E8964; font:normal 11px 돋움;}
+.dotList	li	a:hover		{text-decoration:underline; color:#9E8964; font:normal 11px 돋움;}
+.dotList	li	a:active	{text-decoration:underline; color:#9E8964; font:normal 11px 돋움;}
+.dotList2	li	{padding-left:14px; line-height:1.6em; color:#9E8964; background:url('/bandi_blog/images/common/bul_dotGr02.gif') no-repeat 5px 8px}
+.dotList3	li	{padding-left:14px; line-height:1.6em; color:#9E8964; background:url('/bandi_blog/images/common/bul_dotGr03.gif') no-repeat 5px 8px}
+.barList	li	{padding-left:9px; font:normal 11px 돋움; line-height:1.5em; background:url('/bandi_blog/images/common/ico_bar.gif') no-repeat 0 6px}
+
+/* line */
+.hr_brown	{width:100%; border-bottom:1px solid #EAE2D1; font-size:0; line-height:0}
+.listTopAL	{width:100%; border-bottom:1px solid #DDDAD1; font-size:0; line-height:0}
+.listTopAL2	{width:100%; border-bottom:1px solid #DFD0AF; font-size:0; line-height:0}
+
+/* img */
+.d_imgLine	{border:1px solid #BEBEBE}
+
+.d_img200		{width:207px; text-align:left; background:url('/bandi_blog/images/common/bg_img200_con.gif') no-repeat 0 0}
+.d_img200	p	{width:200px; padding:1px 6px 6px 1px; background:url('/bandi_blog/images/common/bg_img200_btm.gif') no-repeat 0 bottom}
+
+.d_img123		{width:128px; text-align:left; background:url('/bandi_blog/images/common/bg_img123_con.gif') no-repeat 0 0}
+.d_img123	p	{width:123px; padding:1px 4px 4px 1px; background:url('/bandi_blog/images/common/bg_img123_btm.gif') no-repeat 0 bottom}
+
+.d_img95		{width:100px; text-align:left; background:url('/bandi_blog/images/common/bg_img95_con.gif') no-repeat 0 0}
+.d_img95	p	{width:95px; padding:1px 4px 4px 1px; background:url('/bandi_blog/images/common/bg_img95_btm.gif') no-repeat 0 bottom}
+
+.d_img90		{width:95px; text-align:left; background:url('/bandi_blog/images/common/bg_img90_con.gif') no-repeat 0 0}
+.d_img90	p	{width:90px; padding:1px 4px 4px 1px; background:url('/bandi_blog/images/common/bg_img90_btm.gif') no-repeat 0 bottom}
+
+.d_img71		{position:relative; width:76px; text-align:left; background:url('/bandi_blog/images/common/bg_img71_con.gif') no-repeat 0 0}
+.d_img71	p	{width:71px; padding:1px 4px 4px 1px; background:url('/bandi_blog/images/common/bg_img71_btm.gif') no-repeat  0 bottom}
+
+.d_img60		{width:65px; text-align:left; background:url('/bandi_blog/images/common/bg_img60_con.gif') no-repeat 0 0}
+.d_img60	p	{width:60px; padding:1px 4px 4px 1px; background:url('/bandi_blog/images/common/bg_img60_btm.gif') no-repeat 0 bottom}
+
+.d_img51		{width:56px; text-align:left; background:url('/bandi_blog/images/common/bg_img51_con.gif') no-repeat 0 0}
+.d_img51	p	{width:51px; padding:1px 4px 5px 1px; background:url('/bandi_blog/images/common/bg_img51_btm.gif') no-repeat 0 bottom}
+
+.d_img50		{width:55px; text-align:left; background:url('/bandi_blog/images/common/bg_img50_con.gif') no-repeat 0 0}
+.d_img50	p	{width:50px; padding:1px 4px 4px 1px; background:url('/bandi_blog/images/common/bg_img50_btm.gif') no-repeat 0 bottom}
+
+
+/* thumbNail */
+.thumbNail_type01	.photo	{float:left; margin:0 11px 5px 0;}
+.thumbNail_type01	.info	{float:left; margin-top:10px;}
+.thumbNail_type01	.info	p	{margin-bottom:10px;}
+
+.thumbNail_type02	{width:178px;}
+.thumbNail_type02	.photo	{margin:0 0 10px 39px;}
+.thumbNail_type02	.info	p	{text-align:center;}
+
+.thumbNail_type03	{overflow:auto; overflow:hidden;}
+.thumbNail_type03	.photo	{float:left; margin-right:6px;}
+.thumbNail_type03	.info		{float:left; margin-top:10px;}
+.thumbNail_type03	.info	p	{margin-bottom:2px;}
+.thumbNail_type03	.info	p.t_gr	{margin-bottom:10px;}
+
+.thumbNail_type04	{overflow:auto; overflow:hidden;}
+.thumbNail_type04	.photo	{float:left; margin-right:15px;}
+.thumbNail_type04	.info	{float:left; margin-top:10px;}
+.thumbNail_type04	.info	p	{margin-bottom:2px;}
+.thumbNail_type04	.info	p.t_gr	{margin-bottom:10px;}
+
+.thumbNail_type05	{overflow:auto; overflow:hidden;}
+.thumbNail_type05	.typeA	{padding-bottom:14px; overflow:auto; overflow:hidden;}
+.thumbNail_type05	.typeA	.img85	{float:left; width:85px; border:5px solid #B5A57A;}
+.thumbNail_type05	.typeA	.info	{float:left; margin:5px 0 0 10px;}
+.thumbNail_type05	.typeA	.info	p	{margin-bottom:2px;}
+.thumbNail_type05	.typeB	{clear:both; overflow:auto; overflow:hidden;}
+.thumbNail_type05	.typeB	.d_img95	{float:left; margin-right:6px;}
+.thumbNail_type05	.typeB	.info	{float:left; margin-top:9px;}
+.thumbNail_type05	.typeB	.info	p	{margin-bottom:2px;}
+.thumbNail_type05	.typeB	.t_br1	{margin-top:24px;}
+
+.thumbNail_type06	{width:100px;}
+.thumbNail_type06	.info	{margin-top:6px;}
+.thumbNail_type06	.info	p	{margin-bottom:2px; text-align:center;}
+.thumbNail_type06	.info	p.tit	{text-align:left;}
+
+.thumbNail_type07	{width:128px;}
+.thumbNail_type07	.info	{margin-top:6px;}
+.thumbNail_type07	.info	p	{text-align:center; margin-bottom:2px;}
+.thumbNail_type07	.info	p.won	{margin-top:6px;}
+
+.thumbNail_type08	{width:400px; padding-left:34px}
+.thumbNail_type08	.info	{}
+.thumbNail_type08	.info	p	{margin-bottom:15px;}
+.thumbNail_type08	.info	ul	{padding-top:5px}
+.thumbNail_type08	.dp_list	{position:absolute; left:500px; top:40px; width:450px; overflow:auto; overflow:hidden}
+.thumbNail_type08	.dp_list	p.btn_arrow	{float:left; margin-top:53px}
+.thumbNail_type08	.dp_list	ul	{float:left; width:375px; margin-left:24px; overflow:auto; overflow:hidden}
+.thumbNail_type08	.dp_list	li	{float:left; width:125px}
+.thumbNail_type08	.dp_list02	{position:absolute; left:510px; top:40px; width:450px; overflow:auto; overflow:hidden}
+.thumbNail_type08	.dp_list02	ul	{float:left; width:428px; overflow:auto; overflow:hidden}
+.thumbNail_type08	.dp_list02	li	{float:left; width:107px}
+
+
+/* 쿠폰 */
+.coupon	 {height:8px; padding:0 3px 0 2px; border:1px solid #64AD6E; background:#6EB87C; color:white; font:normal 10px verdana; cursor:pointer}
+.coupon	 img	{padding-left:2px; vertical-align:middle}
+
+
+/* 랭킹 */
+.rankin1	{position:absolute; top:0; left:4px;}
+.rankin2	{position:absolute; top:-3px; left:4px;}
+
+.listTopA	{width:100%; margin:10px 0 8px; overflow:auto; overflow:hidden;} *html .listTopA	{margin-top:5px;}
+.listTopA	.fl_left	{margin-left:20px; display:inline}
+.listTopA	.fl_right	{margin-right:15px; display:inline}
+.listTopA	.fl_right	p	{float:left; margin-left:5px; display:inline;}
+
+.listTopB	{width:100%; margin:10px 0 8px; padding-top:10px; border-top:1px solid #DED9D0;}
+.listTopB	.fl_left	{margin-left:20px; display:inline}
+.listTopB	.fl_left	p	{float:left; margin:0 5px 0 0;}
+.listTopB	.fl_right	{margin-right:15px; display:inline}
+.listTopB	.fl_right	p	{float:left; margin-left:5px;}
+
+/* view simple */
+.viewSimple	.bookList	{width:724px; height:100%; margin-left:10px; overflow:auto; overflow:hidden;}
+.viewSimple	.bookList	li	{float:left; height:277px; padding:20px 0 30px 0; border-bottom:1px solid #E3D4C1; overflow:hidden;}
+.viewSimple	.bookList	.bookView	{float:left; width:116px;}
+.viewSimple	.bookList	.bookView	.viewA	{width:100px;}
+.viewSimple	.bookList	.bookView	.viewImg	.btnA	{margin:10px 0 7px}
+.viewSimple	.bookList	.ranking	{float:left; width:35px; margin:15px 10px 0 20px;}
+*html .viewSimple	.bookList	.ranking	{margin:15px 10px 0 10px;}
+.viewSimple	.bookList	.ranking	.chk	{margin-top:10px; text-align:center;}
+
+/* view detail */
+.viewDetail	 .bookList	.bookView	{width:670px; _width:665px; overflow:auto; overflow:hidden}
+.viewDetail	 .ranking	 {_margin-top:0; _padding-top:15px}
+.viewDetail	 .bookList	.bookView	{_margin-top:-15px}
+.viewDetail	 .bookList	.bookView	.viewA	{width:435px}
+.viewDetail	 .bookList	.bookView	.viewInfo	{width:317px}
+
+
+/* book list */
+.bookList	{}
+.bookList	li	{padding:20px 15px 9px 20px; border-bottom:1px solid #E2D4C1}
+.bookList	.listTit	{width:100%; margin-bottom:5px; overflow:auto; overflow:hidden}
+.bookList	.listTit	p	{float:left}
+
+.bookList	.bookView	{width:100%; padding-bottom:10px; background:url('/bandi_blog/images/common/bg_bookView.gif') no-repeat right 0; overflow:auto; overflow:hidden}
+
+.bookView	.viewA	{float:left; width:445px; margin-top:15px; overflow:auto; overflow:hidden}
+.bookView	.viewImg	{position:relative; float:left; width:97px; margin-right:20px;}
+.bookView	.viewImg	.d_imgLine	{border:1px solid #ccc}
+.bookView	.viewImg	.btnA		{margin-top:15px;}
+.bookView	.viewImg	.btnA	img	{margin:0 -3px 2px 0 ;}
+
+.bookView	.viewA	.viewInfo	{float:left}
+.bookView	.viewA	.viewInfo	li	{border:0; padding:0 0 13px 0;}
+.bookView	.viewA	.viewInfo	.v_title	p	{color:#222222; font-weight:bold; margin-bottom:5px;}
+.bookView	.viewA	.viewInfo	.v_story	{color:#777}
+.bookView	.viewA	.viewInfo	.v_flag	img	{margin-right:3px}
+.bookView	.viewA	.viewInfo	.v_flag	span	{margin-right:10px;}
+.bookView	.viewA	.viewInfo	.v_series	a.t_11br1	{font-weight:bold; text-decoration:underline; color:#7B5A2B}
+.bookView	.viewA	.viewInfo	.v_event	a	{color:#9E8964}
+.bookView	.viewA	.viewInfo	.v_priceA	img	{vertical-align:0px}
+:root	.bookView	.viewA	.viewInfo	.v_priceA	.v_price	img	{vertical-align:-6px}
+:root	.bookView	.viewA	.viewInfo	.v_priceA	p	{margin-top:3px;}
+
+.bookView	.viewB	{float:right}
+.bookView	.viewBox	{width:198px; margin-top:5px; background:url('/bandi_blog/images/common/box_brown198.gif') no-repeat}
+.bookView	.viewBox	.con	{width:186px; padding:13px 6px 10px 6px; text-align:center; background:url('/bandi_blog/images/common/box_brown198Btm.gif') no-repeat 0 bottom}
+.bookView	.viewBox	.con	.boxA	{width:100%; overflow:auto; overflow:hidden; padding-bottom:12px; margin-bottom:12px; border-bottom:1px solid #F0E9E0}
+.bookView	.v_price	{color:#623F15; font-weight:bold}
+.bookView	.v_price	img	{margin-right:-4px; vertical-align:-1px}
+.bookView	.v_price	.comma	{margin-left:2px; vertical-align:-3px;}
+.bookView	.viewBox	.con	.boxA	p	{margin-top:8px}
+.bookView	.viewBox	.con	.boxA	p	img {vertical-align:0px}
+
+.bookView	.viewBox	.con	.boxB	.v_grade	img	{margin-right:-3px;}
+.bookView	.viewBox	.con	.boxB	img	{margin-right:-3px;}
+.bookView	.viewBox	.con	.boxB	p	{margin-top:15px; color:#B5A488; font:normal 11px 돋움; line-height:1.7em}
+.bookView	.viewBox	.con	.boxB	p	a	{color:#B5A488;}
+.bookView	.viewB	.btnA	{margin-top:15px; text-align:center}
+
+.p_bestSeller	.bookList	.bookView	{float:left; width:671px;}
+.p_bestSeller	.bookList	.bookView	.viewA	{width:445px;}
+.p_bestSeller	.bookList	.bookView	.viewInfo	{width:328px;}
+
+.bookList	.ranking	{float:left; width:35px; margin:15px 10px 0 0;}
+.bookList	.ranking	.chk	{margin-top:10px; text-align:center;}
+
+
+/* book simpleList */
+.simpleList	{}	
+.simpleList	li	{width:100%; padding:35px 0 35px 30px; border-bottom:1px solid #E3D4C1; overflow:auto; overflow:hidden;}
+.simpleList	li	.list	li	{float:left; width:163px; margin-right:18px; padding:0px; border-bottom:0px; overflow:auto; overflow:hidden;}
+.simpleList	li	.list	.conA	{width:142px; overflow:auto; overflow:hidden;}
+.simpleList	li	.list	.conA	.ranking	{float:left; width:35px; text-align:center;}
+.simpleList	li	.list	.conA	.ranking	.rnBox	{margin-bottom:10px;}
+.simpleList	li	.list	.conA	.viewImg	{position:relative; float:right; width:95px; margin-bottom:5px; border:1px solid #BFBDBE;}
+.simpleList	li	.list	.conA	.viewImg	.go_ico {display:none; z-index:10;}
+.simpleList	li	.list	.conA	.viewImg	.flag	{position:absolute; left:15px; top:55px; z-index:10}
+.simpleList	li	.list	.conB	{width:139px; margin-left:24px;}
+.simpleList	li	.list	.conB	p	{margin-top:5px; text-align:center;}
+.simpleList	li	.list	.conB	.btnA	{width:97px; margin-left:22px;}
+.simpleList	li	.list	.conB	.btnB	{width:97px; margin-left:22px;}
+
+/* over img */
+.go_ico	{position:absolute; left:5px; bottom:-1px; width:85px; height:22px; padding-top:21px;}
+*html .go_ico	{bottom:-6px;}
+.go_ico	.icoLay	{position:relative; width:84px; height:20px; border-top:1px solid #BFBFBF; border-bottom:1px solid #BFBFBF; border-left:1px solid #BFBFBF; padding:0px; margin:0px;}
+.go_ico	.icoLay	p	{float:left; width:21px; height:20px; padding:0px; margin:0px; border:0px;}
+.go_ico .layerNone	{position:absolute; display:none; z-index:10; top:0px; left:0;}
+
+
+/* Right Banner */
+.bookR_banner	img	{margin-bottom:5px;}
+
+.rolling_banner	{position:relative; width:200px;}
+.rolling_banner	.btn	{position:absolute; top:212px; right:14px;}
+.rolling_banner	.btn	p	{float:left; width:15px; height:15px; padding-left:3px;}
+
+.rolling_banner	.btn01	{position:absolute; top:289px; right:14px;}
+.rolling_banner	.btn01	p	{float:left; width:15px; height:15px; padding-left:3px;}
+
+/* gnb */
+#flash_feather	{position:absolute; left:708px; top:85px; z-index:30}
+#flash_gnb	{position:absolute; left:0; top:0; z-index:10}
+
+.gnbMenu	{position:absolute; top:10px; right:12px; z-index:10}
+.gnbMenu	li	{float:left; margin-left:8px;}
+
+.gnbSearch	{position:absolute; top:97px; left:278px; width:455px; z-index:20}
+
+.seachType	{position:relative; float:left; width:71px; margin-right:5px; background:#FBF8EF; border:1px solid #806C33; cursor:pointer;  z-index:25}
+.seachType	.con	{padding:7px 0 2px 0px;}
+.seachType	.con	p	{height:14px; padding-left:14px;}
+.seachType	.seachTypeSub		{position:absolute; left:-1px; width:71px; padding-bottom:4px; display:none; background:#FBF8EF; border:1px solid #806C33; border-top:0; z-index:30}
+.seachType	.seachTypeSub	li	{width:71px;  font-size:0; line-height:0}
+.seachType	.seachTypeSub	li	a	{display:block; padding:4px 0 4px 14px;}
+.seachType	.seachTypeSub	li	a:hover	{background:#E1D4B6}
+
+/*
+.seachType	{position:relative; float:left; width:73px; margin-right:5px; background:url('/bandi_blog/images/common/bg_searchType.gif') no-repeat 0 0; z-index:25}
+.seachType	.con	{padding:8px 0 3px 0px; background:url('/bandi_blog/images/common/bg_searchType_btm.gif') no-repeat 0 bottom}
+.seachType	.con	p	{height:14px; padding-left:14px;}
+.seachType	.seachTypeSub		{position:absolute; width:73px; padding-bottom:4px; display:none; background:url('/bandi_blog/images/common/bg_searchType_btm02.gif') no-repeat 0 bottom; z-index:30}
+.seachType	.seachTypeSub	li	{width:73px;  font-size:0; line-height:0}
+.seachType	.seachTypeSub	li	a	{display:block; padding:4px 0 4px 14px;}
+.seachType	.seachTypeSub	li	a:hover	{background:url('/bandi_blog/images/common/bg_searchType_on.gif') no-repeat 0 0}
+*/
+
+.seachType	.btnA	{position:absolute; top:9px; right:7px}
+
+.formA		{float:left;}
+.formA	.inputA	{float:left; width:261px; height:25px; margin-right:3px; display:inline}
+.formA	.inputA	input	{width:218px; height:18px; margin-top:-1px; border:0; padding:7px 0 0 10px; font:bold 12px 굴림; color:#725A1F; background:url('/bandi_blog/images/common/bg_gnbSearch.gif') no-repeat 0 0} 
+:root .formA	.inputA	input	{margin-top:0}
+.formA	.btnA	{float:left;}
+:root .formA	.btnA	{float:left; margin-top:1px;}
+
+#layerPop_SRBox	{position:absolute; left:356px; top:122px;  width:434px; height:236px; z-index:10}
+#layerPop_SRBoxBg	{width:434px; height:236px; background:url('/bandi_blog/images/common/bg_gnbSR.png') no-repeat 0 0}
+#layerPop_SRBoxCon	{position:absolute; left:8px; top:10px; width:412px;}
+
+.layerPop_SR	.titA	{position:relative; margin-bottom:5px; }		
+.layerPop_SR	.titA	h2	{padding-left:3px; font:normal 11px 돋움; color:#775A28;}
+.layerPop_SR	.titA	p	{position:absolute; top:0; right:4px; font:normal 11px 돋움; color:#87713C}
+.layerPop_SR	.titA	p	img	{vertical-align:-4px}
+.layerPop_SR	.titA	p	a,
+.layerPop_SR	.titA	p	a:hover	{text-decoration:none; color:#88723C}
+.layerPop_SR	.titA	p.close	{top:-2px; right:-27px;}
+.layerPop_SR	.SRWrap	{width:412px; overflow:auto; overflow:hidden}
+.layerPop_SR	.SRWrap	.listA	{float:left; width:269px; height:181px; margin-right:4px; padding:5px; border:1px solid #D7CFB6; background:url('/bandi_blog/images/common/bg_gnbSRList.gif') repeat-x 0 bottom; }
+.layerPop_SR	.SRWrap	.listA	.con	{width:269px; height:181px; overflow:auto; overflow-x:hidden;
+	scrollbar-face-color: #E6DCC9; scrollbar-shadow-color: #E6DCC9; scrollbar-highlight-color: #E6DCC9; scrollbar-3dlight-color: #E6DCC9;
+	scrollbar-darkshadow-color: #FFFFFF; scrollbar-track-color: #FFFFFF; scrollbar-arrow-color: #8B7150;}
+.layerPop_SRn	.SRWrap	.listA	.con	ul	{width:260px;}
+.layerPop_SR	.SRWrap	.listA	.con	li	{}
+.layerPop_SR	.SRWrap	.listA	.con	li	a	{display:block; padding:4px 0 3px 5px; width:260px}
+.layerPop_SR	.SRWrap	.listA	.con	li	a:hover	{background:#F1ECDF; text-decoration:none}
+
+.layerPop_SR	.t_point	{color:#9F731D}
+.layerPop_SR	.SRWrap	.bookA	{float:left; width:115px; height:181px; padding:5px; border:1px solid #D7CFB6;}
+.layerPop_SR	.SRWrap	.bookA	.thumbNail_type02	{width:115px;}
+.layerPop_SR	.SRWrap	.bookA	.thumbNail_type02	.photo	{margin:10px 0 7px 0;  text-align:center}
+.layerPop_SR	.SRWrap	.bookA	.thumbNail_type02	.info	{font:normal 11px 돋움; text-align:center; line-height:1.3em}
+
+#layerPop_SRFBox	{position:absolute; left:356px; top:122px;  width:315px; height:119px; z-index:10}
+#layerPop_SRFBoxBg	{width:315px; height:119px; background:url('/bandi_blog/images/common/bg_gnbSRF.png') no-repeat 0 0}
+#layerPop_SRFBoxCon	{position:absolute; left:8px; top:10px; width:293px;}
+
+.layerPop_SR	.noticeBox	{width:293px; height:56px; padding-top:20px; text-align:center; font:normal 11px 돋움; line-height:1.8em; background:url('/bandi_blog/images/common/bg_gnbSR_notice.gif') no-repeat 0 0}
+
+#layerPop_SRDBox	{position:absolute; left:217px; top:122px; width:575px; height:267px; z-index:10}
+#layerPop_SRDBoxBg	{width:577px; height:207px; background:url('/bandi_blog/images/common/bg_gnbSRD.png') no-repeat 0 0}
+#layerPop_SRDBoxCon	{position:absolute; left:8px; top:10px; width:526px;}
+#layerPop_SRDBoxCon	.SRWrap	{position:relative; width:539px; padding:12px 0 0 12px; overflow:auto; overflow:hidden;}
+#layerPop_SRDBoxCon	.SRWrap	dl dt	{clear:both; float:left; width:50px; margin-top:4px;}
+#layerPop_SRDBoxCon	.SRWrap	dl dd	{float:left; width:380px; margin:2px 0 3px 0; font-family:돋움; font-size:11px; color:#826F4E;} :root #layerPop_SRDBoxCon	.SRWrap	dl dd	{margin-bottom:4px}
+#layerPop_SRDBoxCon	.SRWrap	dl	dd.alt	{padding-top:5px;}
+#layerPop_SRDBoxCon	.SRWrap	dl dd	input,
+#layerPop_SRDBoxCon	.SRWrap	dl dd	img	{vertical-align:middle}
+
+#layerPop_SRDBoxCon	.SRWrap	.fl_left	{width:192px;}
+#layerPop_SRDBoxCon	.SRWrap	.fl_left	dl	{width:183px;}
+#layerPop_SRDBoxCon	.SRWrap	.fl_left	dl	dt	{clear:both; float:left; width:43px;}
+#layerPop_SRDBoxCon	.SRWrap	.fl_left	dl	dd	{float:left; width:140px; margin-top:0}
+
+#layerPop_SRDBoxCon	.SRWrap	.fl_right	{width:340px;}
+#layerPop_SRDBoxCon	.SRWrap	.fl_right	dl	{width: 333px;}
+#layerPop_SRDBoxCon	.SRWrap	.fl_right	dl	dt	{clear:both; float:left; width:43px; }
+#layerPop_SRDBoxCon	.SRWrap	.fl_right	dl	dd	{width:290px; margin-top:0; color:#7B5A2B; font:normal 11px 돋움;}
+
+#layerPop_SRDBoxCon	.SRWrap	.fl_right	p	{float:left; margin-right:3px; line-height:1.5em;}
+#layerPop_SRDBoxCon	.SRWrap	.fl_right	.selectA	{width:280px; overflow:auto; overflow:hidden}
+#layerPop_SRDBoxCon	.SRWrap	.fl_right	.selectBtnA	{margin:2px 0 5px 0}
+#layerPop_SRDBoxCon	.SRWrap	.fl_right	.selectBtnA	img	{margin-right:-1px}
+
+#layerPop_SRDBoxCon	.SRWrap	.btnA	{position:absolute; right:20px; top:112px}
+
+
+
+/* iframe */
+.iframe_rules	{width:368px; height:417px; border:1px solid #D0C3A9}
+.iframe_rules02	{width:718px; height:645px; border:1px solid #D0C3A9}
+
+.v_grade	img	{margin-right:-4px;}
+
+/* */
+.winnerDetail	{width:613px; padding:15px 0}
+.winnerDetail	dl	{width:613px; border-top:1px solid #E6DFD3; overflow:auto; overflow:hidden}
+.winnerDetail	dt	{float:left; width:73px; padding:7px 0 6px 17px; border-right:1px solid #E6DFD3; border-bottom:1px solid #E6DFD3; background:#F4F1EB; color:#9E8964; font:bold 12px 돋움}
+.winnerDetail	dd	 {float:left; width:505px; padding:7px 0 6px 17px; background:#FBFAF8; border-bottom:1px solid #E6DFD3; color:#9E8964; font:normal 12px 돋움}
+.winnerDetail	.con	{margin:18px 15px; color:#555;}
+.winnerDetail	.brBox	{padding:14px 19px}
+.winnerDetail	.brBox	ul	{width:580px; margin-top:10px; overflow:auto; overflow:hidden} 
+.winnerDetail	.brBox	li	{float:left; width: 131px; padding-top:4px; color:#7B5A2B; font:normal 11px 돋움}
+
+/* footer */
+.footerBox	{position:relative; float:left; width:943px; height:31px; border:1px solid #E5E5E5; padding-left:15px; margin-bottom:9px;}
+.footerBox	ul	{float:left;}
+.footerBox	li	{float:left; height:10px; margin-top:10px; padding:0 18px 0 16px; background:url('/bandi_blog/images/common/bg_lineGr_footer.gif') no-repeat left 0;}
+.footerBox	li.alt	{background:none;}
+.footerBox	.shop_close	{position:absolute; right:34px; top:7px; width:130px; height:14px; padding-top:4px; background:url('/bandi_blog/images/global/bg_boxShop.gif') no-repeat; text-align:center;}
+.footerBox	#shopOpen	{position:absolute; right:34px; top:-169px; width:130px; height:194px;}
+.footerBox	#shopOpen	.shop_open	{width:130px; height:18px; background:url('/bandi_blog/images/global/bg_boxShop.gif') no-repeat; text-align:center;}
+.footerBox	#shopOpen	.shop_open	img	{margin-top:4px;}
+.footerBox	#shopOpen	.shopBox	{width:112px; height:164px; margin-bottom:1px; padding:11px 0 0 18px; background:url('/bandi_blog/images/global/bg_boxShop_big.gif') no-repeat;}
+.footerBox	#shopOpen	.shopBox	li	{float:none; height:10px; margin:0px; padding:0 0 6px 0;}
+*html .footerBox	#shopOpen	.shopBox	li	{ padding:0 0 2px 0;}
+.copyright	{float:left; padding:0 13px 0 0;}
+.copyright	p	{float:left;}
+.copyright	p.logo	{margin:5px 14px 0 0;}
+.copyright	p.fl_right	{float:right;}

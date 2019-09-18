@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="bookSectionsMapper">
+
+<!-- 전체데이터  -->
+<select id="getLists" parameterType="hashMap" resultType="com.spring.webproject.dto.BookSectionsDTO">
+	select * from (
+	select rownum rnum, data.* from (
+	select * from bookSections
+	where categoryId between ${sort1st } and ${sort2nd }
+	order by soldBookCnt desc
+	) data)
+	<![CDATA[
+	where rnum >= #{start } and rnum <= #{end }
+	]]>
+</select>
+
+<!-- getListSort1  -->
+<select id="getListsSort1" parameterType="hashMap" resultType="com.spring.webproject.dto.BookSectionsDTO">
+	select * from (
+	select rownum rnum, data.* from (
+	select * from bookSections
+	where categoryId between ${sort1st } and ${sort2nd }
+	order by publishDate desc
+	) data)
+	<![CDATA[
+	where rnum >= #{start } and rnum <= #{end }
+	]]>
+</select>
+
+<!-- getListSort2  -->
+<select id="getListsSort2" parameterType="hashMap" resultType="com.spring.webproject.dto.BookSectionsDTO">
+	select * from (
+	select rownum rnum, data.* from (
+	select * from bookSections
+	where categoryId between ${sort1st } and ${sort2nd }
+	) data)
+	<![CDATA[
+	where rnum >= #{start } and rnum <= #{end }
+	]]>
+</select>
+
+<!-- getListSort3  -->
+<select id="getListsSort3" parameterType="hashMap" resultType="com.spring.webproject.dto.BookSectionsDTO">
+	select * from (
+	select rownum rnum, data.* from (
+	select * from bookSections
+	where categoryId between ${sort1st } and ${sort2nd }
+	order by rate desc
+	) data)
+	<![CDATA[
+	where rnum >= #{start } and rnum <= #{end }
+	]]>
+</select>
+
+<!-- getListSort4  -->
+<select id="getListsSort4" parameterType="hashMap" resultType="com.spring.webproject.dto.BookSectionsDTO">
+	select * from (
+	select rownum rnum, data.* from (
+	select * from bookSections
+	where categoryId between ${sort1st } and ${sort2nd }
+	order by reviewCnt desc
+	) data)
+	<![CDATA[
+	where rnum >= #{start } and rnum <= #{end }
+	]]>
+</select>
+
+<!-- 전체 데이터 갯수  -->
+<select id="getDataCount" resultType="Integer">
+	select nvl(count(*),0) from bookSections
+</select>
+
+ 
+<!-- 새로 나온 책  -->
+<select id="booksOfTheMonth" parameterType="hashMap" resultType="com.spring.webproject.dto.BookSectionsDTO">
+	select * from (
+	select rownum rnum, data.* from (
+	select * from bookSections
+	where categoryId between ${sort1st } and ${sort2nd } and publishDate between (trunc(sysdate,'MM')) and (LAST_DAY (TRUNC (SYSDATE)) + 1 / 24)
+	order by soldBookCnt desc
+	) data)
+	<![CDATA[
+	where rnum >= #{start } and rnum <= #{end }
+	]]>
+</select>
+
+<!-- 새로 나온 책 getListSort1  -->
+<select id="booksOfTheMonthSort1" parameterType="hashMap" resultType="com.spring.webproject.dto.BookSectionsDTO">
+	select * from (
+	select rownum rnum, data.* from (
+	select * from bookSections
+	where categoryId between ${sort1st } and ${sort2nd } and publishDate between (trunc(sysdate,'MM')) and (LAST_DAY (TRUNC (SYSDATE)) + 1 / 24)
+	order by publishDate desc
+	) data)
+	<![CDATA[
+	where rnum >= #{start } and rnum <= #{end }
+	]]>
+</select>
+
+<!-- 새로 나온 책 getListSort2  -->
+<select id="booksOfTheMonthSort2" parameterType="hashMap" resultType="com.spring.webproject.dto.BookSectionsDTO">
+	select * from (
+	select rownum rnum, data.* from (
+	select * from bookSections
+	where categoryId between ${sort1st } and ${sort2nd } and publishDate between (trunc(sysdate,'MM')) and (LAST_DAY (TRUNC (SYSDATE)) + 1 / 24)
+	) data)
+	<![CDATA[
+	where rnum >= #{start } and rnum <= #{end }
+	]]>
+</select>
+
+<!-- 새로 나온 책 getListSort3  -->
+<select id="booksOfTheMonthSort3" parameterType="hashMap" resultType="com.spring.webproject.dto.BookSectionsDTO">
+	select * from (
+	select rownum rnum, data.* from (
+	select * from bookSections
+	where categoryId between ${sort1st } and ${sort2nd } and publishDate between (trunc(sysdate,'MM')) and (LAST_DAY (TRUNC (SYSDATE)) + 1 / 24)
+	order by rate desc
+	) data)
+	<![CDATA[
+	where rnum >= #{start } and rnum <= #{end }
+	]]>
+</select>
+
+<!-- 새로 나온 책 getListSort4  -->
+<select id="booksOfTheMonthSort4" parameterType="hashMap" resultType="com.spring.webproject.dto.BookSectionsDTO">
+	select * from (
+	select rownum rnum, data.* from (
+	select * from bookSections
+	where categoryId between ${sort1st } and ${sort2nd } and publishDate between (trunc(sysdate,'MM')) and (LAST_DAY (TRUNC (SYSDATE)) + 1 / 24)
+	order by reviewCnt desc
+	) data)
+	<![CDATA[
+	where rnum >= #{start } and rnum <= #{end }
+	]]>
+</select>
+
+<!-- 전체 데이터 갯수  -->
+<select id="getDataCountForNewBooks" resultType="Integer">
+	select nvl(count(*),0) from bookSections where publishDate between (trunc(sysdate,'MM')) and (LAST_DAY (TRUNC (SYSDATE)) + 1 / 24)
+</select>
+
+<!-- 신간도서 슬라이드 광고 랜덤 뽑기   -->
+<select id="slideAd" parameterType="hashMap" resultType="com.spring.webproject.dto.BookSectionsDTO">
+	select * from (
+	select rownum rnum, data.* from (
+	select * from bookSections
+	where categoryId between ${sort1st } and ${sort2nd } and publishDate between (trunc(sysdate,'MM')) and (LAST_DAY (TRUNC (SYSDATE)) + 1 / 24)
+	order by dbms_random.value
+	) data)
+	<![CDATA[
+	where rnum <= 20
+	]]>
+</select>
+
+<!-- 정가인하 슬라이드 6개 랜덤 뽑기 // 아직 discountdate가 안나와서 전체에서 6개 임의 추출   -->
+<select id="dcSixSlide" resultType="com.spring.webproject.dto.BookSectionsDTO">
+	select * from (
+	select rownum rnum, data.* from (
+	select * from bookSections
+	<!-- where discountrate >= 30
+	where categoryId between ${sort1st } and ${sort2nd } -->
+	order by dbms_random.value
+	) data)
+	<![CDATA[
+	where rnum <= 6
+	]]>
+</select>
+
+<!-- category별 rownum을 줘서 1번을 랜덤으로 출력  -->
+<select id="dcRnumSlide" parameterType="hashMap" resultType="com.spring.webproject.dto.BookSectionsDTO">
+select * from (
+select rownum rnum, data.* from (
+select * from (select  row_number() over(partition by categoryid order by categoryid, dbms_random.value) as rankNum, A.*
+from BookSections A) B where B.rankNum=1
+) data)
+<![CDATA[
+where rnum >= #{start } and rnum <= #{end }
+]]>
+</select>
+
+<!-- category별 total count  -->
+<select id="getDataCountForEachRnum" resultType="Integer">
+select nvl(count(*), 0) from (select * from (select  row_number() over(partition by categoryid order by categoryid, dbms_random.value) as rankNum, A.*
+from BookSections A) B where B.rankNum=1)
+</select>
+
+<!-- 이달의 정가인하 by inputDCDate 8개 임의 추출   -->
+<select id="dcOfTheMonth" resultType="com.spring.webproject.dto.BookSectionsDTO">
+	select * from (
+	select rownum rnum, data.* from (
+	select * from bookSections
+	where categoryId between ${sort1st } and ${sort2nd } and inputDCDate between (trunc(sysdate,'MM')) and (LAST_DAY (TRUNC (SYSDATE)) + 1 / 24)
+	) data)
+	<![CDATA[
+	where rnum <= 8
+	]]>
+</select>
+
+<!-- 베스트셀러 bookTitle만 10위까지  -->
+<select id="bestSellerTop10" resultType="com.spring.webproject.dto.BookSectionsDTO">
+	select * from (
+	select rownum rnum, data.* from (
+	select * from bookSections
+	where categoryid between 1 and 99
+	order by dbms_random.value) data)
+	<![CDATA[
+	where rnum <= 10
+	]]>
+</select>
+
+<!-- 정가할인도서 분야별 전체  -->
+<select id="dcLists" parameterType="hashMap" resultType="com.spring.webproject.dto.BookSectionsDTO">
+	select * from (
+	select rownum rnum, data.* from (
+	select * from bookSections
+	where categoryId between ${sort1st } and ${sort2nd } and discountRate between ${fromDiscount } and ${toDiscount }
+	order by soldBookCnt desc
+	) data)
+	<![CDATA[
+	where rnum >= #{start } and rnum <= #{end }
+	]]>
+</select>
+
+<!-- 정가할인도서Sort1  -->
+<select id="dcListsSort1" parameterType="hashMap" resultType="com.spring.webproject.dto.BookSectionsDTO">
+	select * from (
+	select rownum rnum, data.* from (
+	select * from bookSections
+	where categoryId between ${sort1st } and ${sort2nd } and discountRate between ${fromDiscount } and ${toDiscount }
+	order by publishDate desc
+	) data)
+	<![CDATA[
+	where rnum >= #{start } and rnum <= #{end }
+	]]>
+</select>
+
+<!-- 정가할인도서Sort2  -->
+<select id="dcListsSort2" parameterType="hashMap" resultType="com.spring.webproject.dto.BookSectionsDTO">
+	select * from (
+	select rownum rnum, data.* from (
+	select * from bookSections
+	where categoryId between ${sort1st } and ${sort2nd } and discountRate between ${fromDiscount } and ${toDiscount }
+	) data)
+	<![CDATA[
+	where rnum >= #{start } and rnum <= #{end }
+	]]>
+</select>
+
+<!-- 정가할인도서Sort3  -->
+<select id="dcListsSort3" parameterType="hashMap" resultType="com.spring.webproject.dto.BookSectionsDTO">
+	select * from (
+	select rownum rnum, data.* from (
+	select * from bookSections
+	where categoryId between ${sort1st } and ${sort2nd } and discountRate between ${fromDiscount } and ${toDiscount }
+	order by discountRate desc
+	) data)
+	<![CDATA[
+	where rnum >= #{start } and rnum <= #{end }
+	]]>
+</select>
+
+<!-- 정가할인도서Sort4  -->
+<select id="dcListsSort4" parameterType="hashMap" resultType="com.spring.webproject.dto.BookSectionsDTO">
+	select * from (
+	select rownum rnum, data.* from (
+	select * from bookSections
+	where categoryId between ${sort1st } and ${sort2nd } and discountRate between ${fromDiscount } and ${toDiscount }
+	order by discountedPrice desc
+	) data)
+	<![CDATA[
+	where rnum >= #{start } and rnum <= #{end }
+	]]>
+</select>
+
+<!-- 분야별 할인도서 데이터 갯수  -->
+<select id="dcDataCount" parameterType="hashMap" resultType="Integer">
+	select nvl(count(*),0) from bookSections 
+	where categoryId between ${sort1st } and ${sort2nd } and discountRate between ${fromDiscount } and ${toDiscount }
+</select>
+
+
+<!-- 이달의 신규등록된 할인 도서  -->
+<select id="dcListsOfTheMonth" parameterType="hashMap" resultType="com.spring.webproject.dto.BookSectionsDTO">
+	select * from (
+	select rownum rnum, data.* from (
+	select * from bookSections
+	where categoryId between ${sort1st } and ${sort2nd } 
+	and inputDCDate between (trunc(sysdate,'MM')) and (LAST_DAY (TRUNC (SYSDATE)) + 1 / 24)
+	and discountRate between ${fromDiscount } and ${toDiscount }
+	order by soldBookCnt desc
+	) data)
+	<![CDATA[
+	where rnum >= #{start } and rnum <= #{end }
+	]]>
+</select>
+
+<!-- 신규등록된 할인 도서 sort1  -->
+<select id="dcListsOfTheMonthSort1" parameterType="hashMap" resultType="com.spring.webproject.dto.BookSectionsDTO">
+	select * from (
+	select rownum rnum, data.* from (
+	select * from bookSections
+	where categoryId between ${sort1st } and ${sort2nd } 
+	and inputDCDate between (trunc(sysdate,'MM')) and (LAST_DAY (TRUNC (SYSDATE)) + 1 / 24)
+	and discountRate between ${fromDiscount } and ${toDiscount }
+	order by publishDate desc
+	) data)
+	<![CDATA[
+	where rnum >= #{start } and rnum <= #{end }
+	]]>
+</select>
+
+<!-- 이달의 신규등록된 할인 도서 sort2  -->
+<select id="dcListsOfTheMonthSort2" parameterType="hashMap" resultType="com.spring.webproject.dto.BookSectionsDTO">
+	select * from (
+	select rownum rnum, data.* from (
+	select * from bookSections
+	where categoryId between ${sort1st } and ${sort2nd } 
+	and inputDCDate between (trunc(sysdate,'MM')) and (LAST_DAY (TRUNC (SYSDATE)) + 1 / 24)
+	and discountRate between ${fromDiscount } and ${toDiscount }
+	) data)
+	<![CDATA[
+	where rnum >= #{start } and rnum <= #{end }
+	]]>
+</select>
+
+<!-- 이달의 신규등록된 할인 도서 sort3 -->
+<select id="dcListsOfTheMonthSort3" parameterType="hashMap" resultType="com.spring.webproject.dto.BookSectionsDTO">
+	select * from (
+	select rownum rnum, data.* from (
+	select * from bookSections
+	where categoryId between ${sort1st } and ${sort2nd } 
+	and inputDCDate between (trunc(sysdate,'MM')) and (LAST_DAY (TRUNC (SYSDATE)) + 1 / 24)
+	and discountRate between ${fromDiscount } and ${toDiscount }
+	order by discountRate desc
+	) data)
+	<![CDATA[
+	where rnum >= #{start } and rnum <= #{end }
+	]]>
+</select>
+
+<!-- 이달의 신규등록된 할인 도서 sort4  -->
+<select id="dcListsOfTheMonthSort4" parameterType="hashMap" resultType="com.spring.webproject.dto.BookSectionsDTO">
+	select * from (
+	select rownum rnum, data.* from (
+	select * from bookSections
+	where categoryId between ${sort1st } and ${sort2nd } 
+	and inputDCDate between (trunc(sysdate,'MM')) and (LAST_DAY (TRUNC (SYSDATE)) + 1 / 24)
+	and discountRate between ${fromDiscount } and ${toDiscount }
+	order by discountedPrice desc
+	) data)
+	<![CDATA[
+	where rnum >= #{start } and rnum <= #{end }
+	]]>
+</select>
+
+<!-- 이달의 할인도서 데이터 갯수  -->
+<select id="dcDataCountOfTheMonth" parameterType="hashMap" resultType="Integer">
+	select nvl(count(*),0) from bookSections 
+	where categoryId between ${sort1st } and ${sort2nd } 
+	and discountRate between ${fromDiscount } and ${toDiscount } 
+	and inputDCDate between (trunc(sysdate,'MM')) and (LAST_DAY (TRUNC (SYSDATE)) + 1 / 24)
+</select>
+
+
+
+
+
+
+
+</mapper>

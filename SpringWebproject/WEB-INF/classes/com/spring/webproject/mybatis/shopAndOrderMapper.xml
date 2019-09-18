@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="shopAndOrderMapper">
+
+	<!-- 전체데이터  -->
+	<select id="cartLists" parameterType="java.lang.String" resultType="com.spring.webproject.dto.BookSectionsDTO">
+		select * from bookSections where isbn = #{isbn}
+	</select>
+	
+	<!-- in order.jsp, 유저 별 남은포인트 가져오기  -->
+	<select id="leftPoint" parameterType="java.lang.String" resultType="Integer">
+		select sum(leftValue) from point where userId = #{userId}
+	</select>
+
+	<!-- orderId(maxNum)  -->
+	
+	<select id="maxOrderId" resultType="Integer">
+		select nvl(max(orderId),0) from orders
+	</select>
+	
+	<!-- orders 테이블 데이터 입력  -->
+	<!-- 데이터 입력  -->
+	<insert id="ordersInsertData" parameterType="com.spring.webproject.dto.OrdersDTO">
+		insert into orders (orderId, userId, orderStatusCode, orderPrice, handlingDate, zipCode, address1, address2, recipientName) values 
+		(#{orderId}, #{userId}, 1, #{orderPrice}, to_date(to_char(sysdate,'YYYY-MM-DD ') || '23:59:59','YYYY-MM-DD HH24:MI:SS'), #{zipCode}, #{address1}, #{address2}, #{recipientName})
+	</insert>
+	
+	<!-- orderBooks 테이블 데이터 입력  -->
+	<!-- 데이터 입력  -->
+	<insert id="orderBooksInsertData" parameterType="com.spring.webproject.dto.OrderBooksDTO">
+		insert into orderBooks (orderId, quantity, price, isbn) values 
+		(${orderId}, ${quantity}, ${price}, ${isbn})
+	</insert>
+	
+	<!-- update 책값 warehouse=1에서 빠지게하기  -->
+	<update id="updateBookQuantity" parameterType="hashMap">
+		update booksAtWarehouse set quantity = #{OrderCount} where warehouseid = 1 and isbn = #{isbn}
+	</update>
+	
+	<!-- isbn으로 책값 받아오기  -->
+	<select id="selectBookQuantity" parameterType="java.lang.String" resultType="Integer">
+		select quantity from BOOKSATWAREHOUSE where warehouseid = 1 and isbn = #{isbn}
+	</select>
+	
+
+
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+</mapper>

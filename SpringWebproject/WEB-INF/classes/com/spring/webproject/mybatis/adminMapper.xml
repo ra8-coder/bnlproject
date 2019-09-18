@@ -1,0 +1,599 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="adminMapper">
+
+<!-- user -->
+
+<select id="selectAll" parameterType="map" resultType="com.spring.webproject.dto.AdminUsersDTO">
+
+select 
+  A.userId, A.userPwd, A.userName, A.birth, A.phone, A.email, A.emailReception, A.smsReception,
+	A.nickName, A.ZipCode, A.address1, A.address2, A.addTel, A.memberGrade, A.point
+from
+(select 
+  rownum as rnum, A.userId, A.userPwd, A.userName, A.birth, A.phone, A.email, A.emailReception, A.smsReception,
+	A.nickName, A.ZipCode, A.address1, A.address2, A.addTel, A.memberGrade, A.point
+from
+(select 
+	A.userId, A.userPwd, A.userName, A.birth, A.phone, A.email, A.emailReception, A.smsReception,
+	A.nickName, A.ZipCode, A.address1, A.address2, A.addTel, A.memberGrade, B.point
+from 
+	users A,
+	(select A.userId userId, sum(B.value) point from 
+		(select * from users) A,
+		(select * from point) B
+		where A.userId = B.userId
+		GROUP BY A.USERID) B
+<where>
+	
+	<if test="searchValue==null">
+		A.userId = B.userId(+) 
+	</if>
+	
+	<if test="searchValue==''">
+		A.userId = B.userId(+) 
+	</if>
+	
+	<if test="searchKey=='id'">
+		A.userId = B.userId(+) and A.userId like '%${searchValue}%'
+	</if>
+	
+	<if test="searchKey=='name'">
+		A.userId = B.userId(+) and A.userName like '%${searchValue}%'
+	</if>
+	
+	<if test="searchKey=='email'">
+		A.userId = B.userId(+) and A.email like '%${searchValue}%'
+	</if>
+	
+	<if test="searchKey=='nickname'">
+		A.userId = B.userId(+) and A.nickname like '%${searchValue}%'
+	</if>
+</where>
+
+order by A.userId desc) A
+<![CDATA[ 
+where rownum<=#{end})A
+where A.rnum>=#{start}
+]]>
+
+</select>
+
+<select id="getUserTotalCount" parameterType="map" resultType="int">
+
+	select count(userid) from users
+	
+	<where>
+	
+	<if test="searchKey=='id'">
+		userId like '%${searchValue}%'
+	</if>
+	
+	<if test="searchKey=='name'">
+		userName like '%${searchValue}%'
+	</if>
+	
+	<if test="searchKey=='email'">
+		email like '%${searchValue}%'
+	</if>
+	
+	<if test="searchKey=='nickname'">
+		nickname like '%${searchValue}%'
+	</if>
+</where>
+	
+</select>
+
+<delete id="deleteUser" parameterType="java.lang.String"> 
+	delete 
+	from 
+		users
+	where
+		userId = #{userId}
+</delete>
+
+
+<!-- user end -->
+
+<!-- author -->
+
+<select id="authorList" parameterType="map" resultType="com.spring.webproject.dto.AdminAuthorDTO">
+select authorid,authorname,nationality, category, introduction, image from (
+	select rownum as rnum, authorid, authorname, nationality, category, introduction, image
+	from(
+		select authorid, authorname, nationality, category, introduction, image 
+		from author
+		where authorName like '%${searchValue}%' order by authorName) A
+<![CDATA[
+	where rownum <=#{end})B
+where b.rnum>=#{start}
+]]>
+</select>
+
+<select id="getAuthorTotalCount" parameterType="map" resultType="int">
+	
+	select 
+		count(authorId) 
+	from 
+		author
+	where
+		authorName like '%${searchValue}%'
+	
+</select>
+
+<insert id="insertAuthor" parameterType="map">
+insert
+into
+	author(authorId, authorName, nationality, category, introduction, image)
+values(#{authorId}, #{authorName}, #{nationality}, #{category}, #{introduction}, #{image})
+</insert>
+
+<!-- author end -->
+
+<!-- translator -->
+
+<select id="translatorList" parameterType="map" resultType="com.spring.webproject.dto.AdminTranslatorDTO">
+select translatorid,translatorname,nationality, category, introduction, image from (
+	select rownum as rnum, translatorid, translatorname, nationality, category, introduction, image
+	from(
+		select translatorid, translatorname, nationality, category, introduction, image 
+		from translator
+		where translatorName like '%${searchValue}%' order by translatorName) A
+<![CDATA[
+	where rownum <=#{end})B
+where b.rnum>=#{start}
+]]>
+</select>
+
+<select id="getTranslatorTotalCount" parameterType="map" resultType="int">
+	
+	select 
+		count(translatorId) 
+	from 
+		translator
+	where
+		translatorName like '%${searchValue}%'
+	
+</select>
+
+<insert id="insertTranslator" parameterType="map">
+insert
+into
+	translator(translatorId, translatorName, nationality, category, introduction, image)
+values(#{translatorId}, #{translatorName}, #{nationality}, #{category}, #{introduction}, #{image})
+</insert>
+
+<!-- warehouse -->
+
+
+<select id="warehouseList" parameterType="map" resultType="com.spring.webproject.dto.AdminWarehouseDTO">
+select warehouseId, warehouseName, timestamp, key, addr, time, intro, waybus, waysub, tel from (
+	select rownum as rnum, warehouseId, warehouseName, timestamp, key, addr, time, intro, waybus, waysub, tel
+	from(
+		select warehouseId, warehouseName, timestamp, key, addr, time, intro, waybus, waysub, tel
+		from warehouse
+		where warehouseName like '%${searchValue}%' order by warehouseId) A
+<![CDATA[
+	where rownum <=#{end})B
+where b.rnum>=#{start}
+]]>
+</select>
+
+<select id="getWarehouseTotalCount" parameterType="map" resultType="int">
+	
+	select 
+		count(warehouseId) 
+	from 
+		warehouse
+	where
+		warehouseName like '%${searchValue}%'
+	
+</select>
+
+<insert id="insertWarehouse" parameterType="map">
+insert
+into 
+	warehouse(warehouseId, warehouseName, timestamp, key, addr, time, intro, waybus, waysub, tel)
+values(#{warehouseId}, #{warehouseName}, #{timestamp}, #{key}, #{addr}, #{time}, #{intro}, #{waybus}, #{waysub}, #{tel})
+</insert>
+
+<insert id="insertBooksAtWarehouse" parameterType="map">
+insert
+into
+	booksAtWarehouse(isbn, warehouseId, quantity)
+values(#{isbn}, #{warehouseId}, #{quantity})
+</insert>
+
+<!-- warehouse end -->
+
+<!-- quantity -->
+
+<select id="getQuantityTotalCount" parameterType="map" resultType="int">
+select
+	count(isbn)
+from
+	quantitylist
+<where>
+			
+	<if test="searchKey=='booktitle'">
+		booktitle like '%${searchValue}%'
+	</if>
+			
+	<if test="searchKey=='isbn'">
+		isbn = '${searchValue}'
+	</if>
+</where>
+		
+</select>
+
+<select id="getQuantityList"  parameterType="map" resultType="com.spring.webproject.dto.AdminQuantityDTO">
+
+select a.rnum, a.booktitle, a.isbn, a.total, a.a, a.b, a.c, a.d, a.e, a.f, a.g, a.h, a.i, a.j, a.k, a.l, a.m
+	from (select rownum as rnum, a.booktitle, a.isbn, a.total, a.a, a.b, a.c, a.d, a.e, a.f, a.g, a.h, a.i, a.j, a.k, a.l, a.m
+		from (select booktitle, isbn, total, a,b,c,d,e,f,g,h,i,j,k,l,m 
+		from quantitylist 
+		<where>
+			
+			<if test="searchKey=='booktitle'">
+				booktitle like '%${searchValue}%'
+			</if>
+			
+			<if test="searchKey=='isbn'">
+				isbn = '${searchValue}'
+			</if>
+		</where>
+		order by booktitle) a
+<![CDATA[		
+		where rownum <= #{end}) a
+	where a.rnum>= #{start}
+]]>
+</select>
+
+
+
+<!-- quantity end -->
+<!-- category -->
+
+<select id="categoryList" parameterType="map" resultType="com.spring.webproject.dto.AdminCategoryDTO">
+	select 
+		categoryId, categoryName, parentsId
+	from 
+		booksCategoryList
+	<where>
+		<if test="parentsId == null">
+			parentsId is null
+		</if>
+		<if test="parentsId != null">
+			parentsId = #{parentsId}
+		</if>
+	</where>
+	
+</select>
+
+<!-- category end -->
+
+<!-- books -->
+
+<insert id="insertBook" parameterType="map" >
+insert 
+into 
+	books(authorId,translatorId, publisher, bookTitle, bookPrice, isbn, publishDate, introduction, page, subTitle, bookSize, tableOfContents) 
+values(#{authorId},#{translatorId},#{publisher},#{bookTitle},#{bookPrice},#{isbn},to_date(#{publishDate},'YYYY-MM-DD'),#{introduction},#{page},#{subTitle},#{bookSize},#{tableOfContents})
+</insert>
+
+<select id="getTotalBooksCount" parameterType="map" resultType="int">
+
+	select 
+		count(isbn) 
+	from 
+		books
+	<where>
+		<if test="searchValue!=null">
+			${searchKey} like '%${searchValue}%'
+		</if>
+	</where>
+</select>
+
+<select id="getbookList" parameterType="map" resultType="com.spring.webproject.dto.AdminBooksDTO">
+	
+	select
+		rnum, a.booktitle, a.authorName, a.publisher, a.isbn
+	from(select 
+		rownum as rnum, a.booktitle, a.authorName, a.publisher, a.isbn
+	from(select
+		a.booktitle, a.authorName, a.publisher, a.isbn
+	from(select 
+		a.booktitle, b.authorName, a.publisher, a.isbn
+	from
+		books a,
+		author b
+	where
+		a.authorId = b.authorId) a
+	<where>
+		<if test="searchValue!=null">
+			${searchKey} like '%${searchValue}%'
+		</if>
+	</where>
+	order by a.booktitle) a
+	<![CDATA[		
+		where rownum <= #{end}) a
+	where a.rnum>= #{start}
+	]]>
+</select>
+
+<!-- books end -->
+
+
+<!-- bookSpecial -->
+
+<insert id="insertbookSpecial" parameterType="map">
+insert
+into
+	bookSpecial(isbn,discountRate)
+values(#{isbn},#{discountRate})
+</insert>
+
+<!-- bookSpecial end -->
+
+<!-- bookCategory -->
+<insert id="insertBookCategory" parameterType="map">
+insert
+into
+	bookCategory(isbn,categoryId)
+values(#{isbn},#{categoryId})
+</insert>
+
+<insert id="insertCategory" parameterType="map">
+insert
+into
+	booksCategoryList(categoryId, categoryName, parentsId)
+values(#{categoryId}, #{categoryName}, #{parentsId})
+</insert>
+
+<select id="getCategoryTotalCount" parameterType="map" resultType="int">
+
+select 
+	count(categoryId)
+from
+	bookscategorylist
+<where>
+	<if test="searchValue!=null">
+		${searchKey} like '%${searchValue}%'
+	</if>
+</where>
+	
+</select>
+
+<select id="getCategoryList" parameterType="map" resultType="com.spring.webproject.dto.AdminCategoryDTO">
+	
+	select
+		a.rnum, a.categoryid, a.categoryname, a.parentsid
+	from(select
+		rownum as rnum, a.categoryid, a.categoryname, a.parentsid
+	from(select
+		categoryid, categoryname, parentsid
+	from
+		bookscategorylist
+	<where>
+		<if test="searchValue!=null">
+			${searchKey} like '%${searchValue}%'
+		</if>
+	</where>
+	order by categoryid)a
+	
+	<![CDATA[		
+		where rownum <= #{end}) a
+	where a.rnum>= #{start}
+	]]>
+	
+
+</select>
+
+
+<!-- bookCategory end -->
+
+<!-- bookImage -->
+<insert id="insertBookImage" parameterType="map">
+insert
+into
+	bookImage(isbn,bookImage)
+values(#{isbn},#{bookImage})
+</insert>
+<!-- bookImage end -->
+
+<!-- consultation -->
+
+<select id="getConsultationTotalCount" parameterType="map" resultType="int">
+
+	select 
+		count(consultId)
+	from
+		consultation
+	<where>
+		<if test="searchValue!=null">
+			${searchKey} like '%${searchValue}%'
+		</if>
+		<if test="fromDate!=null">
+			and consultationDate >= to_date(#{fromDate},'YYYY-MM-DD')
+		</if>
+		<if test="toDate!=null">
+			<![CDATA[and consultationDate < to_date(#{toDate},'YYYY-MM-DD')]]>
+		</if>
+		<if test="answerCheck==null">
+			and answercheck is null
+		</if>
+		<if test="answerCheck!=null">
+			and answercheck is not null
+		</if>
+	</where>
+
+</select>
+
+<select id="getCounsultationList" parameterType="map" resultType="com.spring.webproject.dto.AdminCounsultationDTO">
+	select
+		a.rnum, a.consultId, a.userId, a.email, a.subject, a.contents, a.consultationDate, a.answerCheck, a.typeName
+	from
+	(select
+		rownum as rnum, a.consultId, a.userId, a.email, a.subject, a.contents, a.consultationDate, a.answerCheck, a.typeName
+	from
+	(select
+		a.consultId, a.userId, a.email, a.subject, a.contents, a.consultationDate, a.answerCheck, a.typeName
+	from
+		(select a.consultId, a.userId, a.email, a.subject, a.contents, a.consultationDate, a.answerCheck, b.typeName
+		from 
+			consultation a,
+			consultationtype b
+		where a.typeId = b.typeId) a
+	<where>
+		<if test="searchValue!=null">
+			${searchKey} like '%${searchValue}%'
+		</if>
+		<if test="fromDate!=null">
+			and consultationDate >= to_date(#{fromDate},'YYYY-MM-DD')
+		</if>
+		<if test="toDate!=null">
+			<![CDATA[and consultationDate < to_date(#{toDate},'YYYY-MM-DD')]]>
+		</if>
+		<if test="answerCheck==null">
+			and answercheck is null
+		</if>
+		<if test="answerCheck!=null">
+			and answercheck is not null
+		</if>
+	</where>
+	order by consultId)a
+	<![CDATA[		
+		where rownum <= #{end}) a
+	where a.rnum>= #{start}
+]]>
+	 
+	
+</select>
+
+<!-- consultation end -->
+
+<!-- orders -->
+
+<select id="getOrdersTotalcount" parameterType="map" resultType="int">
+	select 
+		count(orderid)
+	from
+		orders
+	<where>
+		<if test="searchValue!=null">
+			${searchKey} like '%${searchValue}%'
+		</if>
+		<if test="fromDate!=null">
+			and handlingDate >= to_date(#{fromDate},'YYYY-MM-DD')
+		</if>
+		<if test="toDate!=null">
+			<![CDATA[and handlingDate < to_date(#{toDate},'YYYY-MM-DD')]]>
+		</if>
+	</where>
+</select>
+
+<select id="getOrderList" parameterType="map" resultType="com.spring.webproject.dto.AdminOrderDTO">
+	select
+		a.rnum, a.orderId, a.userId, a.status, a.orderPrice, a.handlingDate, a.zipcode, a.address1, a.address2
+	from (select
+		rownum as rnum, a.orderId, a.userId, a.status, a.orderPrice, a.handlingDate, a.zipcode, a.address1, a.address2
+	from (select
+		a.orderId, a.userId, b.status, a.orderPrice, a.handlingDate, a.zipcode, a.address1, a.address2
+	from
+		orders a,
+		orderstatus b
+	
+		<where>
+		<if test="searchKey!=null">
+			a.orderstatuscode = b.orderstatuscode
+		</if>
+		<if test="searchValue!=null">
+			and ${searchKey} like '%${searchValue}%'
+		</if>
+		<if test="fromDate!=null">
+			and handlingDate >= to_date(#{fromDate},'YYYY-MM-DD')
+		</if>
+		<if test="toDate!=null">
+			<![CDATA[and handlingDate < to_date(#{toDate},'YYYY-MM-DD')]]>
+		</if>
+		</where>
+		order by handlingDate) a
+	<![CDATA[
+	where 
+		rownum <= #{end}) a
+	where 
+		a.rnum >= #{start}
+	]]>
+</select>
+
+<!-- orders end -->
+
+<!-- shipments -->
+
+<select id="getShipmentsTotalCount" parameterType="map" resultType="int">
+	select 
+		count(a.orderId)
+	from
+		shipments a,
+		orders b
+	<where>
+		<if test="searchKey!=null">
+			a.orderid = b.orderid
+		</if>
+		<if test="searchValue!=null">
+			and userid like '%${searchValue}%'
+		</if>
+	</where>
+</select>
+
+<select id="getShipmentList" parameterType="map" resultType="com.spring.webproject.dto.AdminShipmentsDTO">
+	
+	select 
+		rnum, a.orderId, a.shipmentsid, a.userid, a.status, a.expecteddate
+	from (select
+		rownum as rnum, a.orderId, a.shipmentsid, a.userid, a.status, a.expecteddate
+	from (select
+		a.orderId, a.shipmentsid, c.userid, b.status, a.expecteddate
+	from
+		shipments a,
+		shipmentsstatus b,
+		orders c
+	<where>
+		<if test="searchKey!=null">
+			a.orderId = c.orderId
+			and a.shipmentsstatuscode = b.shipmentsstatuscode
+		</if>
+		<if test="searchValue!=null">
+			and ${searchKey} like '%${searchValue}%'
+		</if>
+	</where>
+		order by userId)a
+	<![CDATA[
+		where
+			rownum <= #{end})a
+		where
+			a.rnum >= #{start}
+	]]>	
+</select>
+
+<!-- shipments end -->
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
